@@ -40,8 +40,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         didSet {
             tweetsTable.dataSource = self
             tweetsTable.delegate = self
-            tweetsTable.estimatedRowHeight = 150
             tweetsTable.rowHeight = UITableViewAutomaticDimension
+            tweetsTable.estimatedRowHeight = 150
         }
     }
     
@@ -64,12 +64,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     // MARK: - tableview delegate
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    /*func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.transform = CGAffineTransform(translationX: -700, y: 0)
         UIView.animate(withDuration: 0.10, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: { () -> Void in
             cell.transform = CGAffineTransform.identity
         }, completion: nil)
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
