@@ -76,7 +76,14 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - actions
     @IBAction func done(_ sender: Any) {
-        navigationController?.dismiss(animated: true, completion: nil)
+        // TODO: save context to coredata
+        
+        let alertVC = UIAlertController(title: "Run", message: "Your run has been saved.", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Great!", style: .default, handler: { (action) in
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }))
+        
+        present(alertVC, animated: true, completion: nil)
     }
     
     // MARK: - helper methods
@@ -84,7 +91,6 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         
         if self.run.locations.count > 0 {
-            print("setting map up")
             mapView.region = mapRegion!
             mapView.add(polyLine!)
         }
@@ -95,8 +101,6 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         guard let overlay = overlay as? MKPolyline else {
             return MKOverlayRenderer()
         }
-        
-        print("adding polyline")
         
         let polyLineRenderer = MKPolylineRenderer(polyline: overlay)
         polyLineRenderer.strokeColor = UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)

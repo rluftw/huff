@@ -66,18 +66,10 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func stopRun(_ sender: Any) {
         self.stopUpdatingLocation()
         
-        let alertVC = UIAlertController(title: "Stop Run", message: "Are you sure you'd like to end this run?", preferredStyle: .actionSheet)
-        // add the action for ending the run
-        alertVC.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
-            // TODO: save the context into core data
-            // TODO: push the results into the run overview controller
+        endRunWithWarning(title: "Stop Run", message: "Are you sure you'd like to end this run?") {
+            (action) in
             self.performSegue(withIdentifier: "showRunOverview", sender: self)
-        }))
-        alertVC.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in
-            self.startUpdatingLocation()
-        }))
-        
-        present(alertVC, animated: true, completion: nil)
+        }
     }
     
     
@@ -92,6 +84,16 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         pauseButton.setTitle(paused ? "RESUME": "PAUSE", for: .normal)
         pauseButton.backgroundColor = paused ? UIColor(red: 0, green: 153/255.0, blue: 0, alpha: 1.0): UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)
     }
+    
+    @IBAction func cancelRun(_ sender: Any) {
+        self.stopUpdatingLocation()
+        
+        endRunWithWarning(title: "Cancel Run", message: "Are you sure you'd like to cancel? All data recorded from this run will be deleted.") {
+            (action) in
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     
     
     // MARK: - location manager delegate
@@ -153,6 +155,17 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         let paceMin = Int(avgPaceSecMeters/60)
         let paceSec = Int(avgPaceSecMeters)-(paceMin*60)
         return String(format: "%02d:%02d ", paceMin, paceSec)
+    }
+    
+    func endRunWithWarning(title: String, message: String, yesAction: @escaping (UIAlertAction) -> Void) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        // add the action for ending the run
+        alertVC.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: yesAction))
+        alertVC.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in
+            self.startUpdatingLocation()
+        }))
+        
+        present(alertVC, animated: true, completion: nil)
     }
     
     // MARK: - navigation
