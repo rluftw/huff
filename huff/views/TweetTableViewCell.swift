@@ -25,8 +25,7 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
     
-    override func draw(_ rect: CGRect) {
-
+    func addBorders() {        
         // make the bottom, left, and right borders
         let bottomBorder = createLayerWithFrame(x: 0, y: frame.height-cellBorderWidth, width: frame.size.width, height: cellBorderWidth)
         let leftBorder = createLayerWithFrame(x: 0, y: 0, width: cellBorderWidth, height: frame.size.height)
@@ -38,9 +37,8 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     // MARK: - helper methods
-    
     func createLayerWithFrame(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) -> CALayer {
-        let borderColor = UIColor(red: 40/255.0, green: 43/255.0, blue: 53/255.0, alpha: 1.0).cgColor
+        let borderColor = UIColor(red: 53/255.0, green: 57/255.0, blue: 69/255.0, alpha: 1.0).cgColor
         let layer = CALayer()
         layer.borderColor = borderColor
         layer.borderWidth = cellBorderWidth

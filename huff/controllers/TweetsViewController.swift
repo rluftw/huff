@@ -16,7 +16,17 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // TEMP - for testing
     var tweets = [
         Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo", username: "someusername", photoURLs: nil),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma", username: "someusername", photoURLs: [UIImage(named: "tweets")!])
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo", username: "someusername", photoURLs: nil),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo", username: "someusername", photoURLs: nil),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
+        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.", username: "someusername", photoURLs: [UIImage(named: "tweets")!])
     ]
     
     
@@ -43,8 +53,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - tableview datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(tweets.count)
-        
         return tweets.count
     }
     
@@ -58,7 +66,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - tableview delegate
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.transform = CGAffineTransform(translationX: -700, y: 0)
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: { () -> Void in
+        UIView.animate(withDuration: 0.10, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: { () -> Void in
             cell.transform = CGAffineTransform.identity
         }, completion: nil)
     }
