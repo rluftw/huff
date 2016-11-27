@@ -73,20 +73,42 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.handleStopSearch()
                 return
             }
-            if let statuses = result["statuses"] as? [[String: AnyObject]] {
-                for status in statuses {
-                    let userDict = status["user"] as? [String: AnyObject]
-                    let user = userDict?["screen_name"] as? String ?? "N/A"
-                    let message = status["text"] as? String ?? "N/A"
-                    
-                    self.tweets.append(Tweet(message: message, username: user, photoURLs: nil))
-                }
-            }
-            self.handleStopSearch()
+            self.extractResults(result: result)
         }
     }
     
-    func handleStopSearch() {
+    fileprivate func extractResults(result: [String: AnyObject]) {
+        if let statuses = result["statuses"] as? [[String: AnyObject]] {
+            for status in statuses {
+                let userDict = status["user"] as? [String: AnyObject]
+                let user = userDict?["screen_name"] as? String ?? "N/A"
+                var message = status["text"] as? String ?? "N/A"
+                var photoURLs: [String]?
+                
+                // remove all photo links from the message text, and add them to an array of photo urls
+                if let entitiesDict = status["entities"] as? [String: AnyObject], let medias = entitiesDict["media"] as? [[String: AnyObject]] {
+                    photoURLs = [String]()
+                    for media in medias {
+                        guard let url = media["url"] as? String, let type = media["type"] as? String, type == "photo" else {
+                            break
+                        }
+                        print("url: \(url)")
+                        
+                        if let range = message.range(of: url) {
+                            message.removeSubrange(range)
+                        }
+                        photoURLs?.append(url)
+                    }
+                }
+                
+                self.tweets.append(Tweet(message: message, username: user, photoURLs: photoURLs))
+            }
+        }
+        self.handleStopSearch()
+    }
+    
+    
+    fileprivate func handleStopSearch() {
         DispatchQueue.main.async {
             self.tweetsTable.reloadData()
             self.activityIndicator.stopAnimating()

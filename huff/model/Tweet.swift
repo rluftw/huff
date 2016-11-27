@@ -12,5 +12,5 @@ import UIKit
 struct Tweet {
     let message: String
     let username: String
-    var photoURLs: [UIImage]?
+    var photoURLs: [String]?
 }

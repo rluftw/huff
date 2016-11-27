@@ -69,7 +69,6 @@ class TwitterService {
     }
     
     fileprivate func performSearch(bearerToken: String?, searchQuery: String = Constants.SearchQuery, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
-        print("bearer token: \(bearerToken ?? "N/A")")
         
         let searchURL = getCompleteURL(parameters: [URLKeys.Query: Constants.SearchQuery as AnyObject], method: MethodPath.Search)
         var urlRequest = URLRequest(url: searchURL)
