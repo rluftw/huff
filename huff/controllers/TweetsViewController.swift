@@ -9,26 +9,14 @@
 import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - properties
-    // var tweets = [Tweet]()
-    
-    // TEMP - for testing
-    var tweets = [
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo", username: "someusername", photoURLs: nil),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo", username: "someusername", photoURLs: nil),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo", username: "someusername", photoURLs: nil),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis", username: "someusername", photoURLs: [UIImage(named: "tweets")!]),
-        Tweet(message: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.", username: "someusername", photoURLs: [UIImage(named: "tweets")!])
-    ]
-    
+    var tweets = [Tweet]()
+    lazy var refreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+        return rc
+    }()
     
     // MARK: - computed properties
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -44,18 +32,16 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tweetsTable.estimatedRowHeight = 150
         }
     }
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TwitterService.sharedInstance().getBearerToken { (resultDict, error) in
-            guard let results = resultDict else {
-                print(error!.localizedDescription)
-                return
-            }
-            print(results[TwitterService.URLResponseValues.AccessToken])
-        }
+        tweetsTable.addSubview(refreshControl)
+        
+        performSearch()
     }
 
     
@@ -79,4 +65,38 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }, completion: nil)
     }
     
+    // MARK: - helper methods
+    
+    fileprivate func performSearch() {
+        TwitterService.sharedInstance().search { (result, error) in
+            guard let result = result else {
+                self.handleStopSearch()
+                return
+            }
+            if let statuses = result["statuses"] as? [[String: AnyObject]] {
+                for status in statuses {
+                    let userDict = status["user"] as? [String: AnyObject]
+                    let user = userDict?["screen_name"] as? String ?? "N/A"
+                    let message = status["text"] as? String ?? "N/A"
+                    
+                    self.tweets.append(Tweet(message: message, username: user, photoURLs: nil))
+                }
+            }
+            self.handleStopSearch()
+        }
+    }
+    
+    func handleStopSearch() {
+        DispatchQueue.main.async {
+            self.tweetsTable.reloadData()
+            self.activityIndicator.stopAnimating()
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
+    func handleRefresh(_ refresh: UIRefreshControl) {
+        self.tweets.removeAll(keepingCapacity: false)
+        performSearch()
+    }
 }
+

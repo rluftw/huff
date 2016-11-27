@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		370677901DE9FF8E007EC3FD /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3706778F1DE9FF8E007EC3FD /* NetworkOperation.swift */; };
 		370677951DEA020B007EC3FD /* TwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370677941DEA020B007EC3FD /* TwitterService.swift */; };
+		370677991DEA7F1A007EC3FD /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 370677981DEA7F1A007EC3FD /* KeychainWrapper.m */; };
 		375686EA1DE4FC82004F2951 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375686E91DE4FC82004F2951 /* AppDelegate.swift */; };
 		375686EF1DE4FC82004F2951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375686ED1DE4FC82004F2951 /* Main.storyboard */; };
 		375686F21DE4FC82004F2951 /* huff.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 375686F01DE4FC82004F2951 /* huff.xcdatamodeld */; };
@@ -26,6 +27,7 @@
 		37714A0F1DE88865002ACB3A /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A0E1DE88865002ACB3A /* TweetTableViewCell.swift */; };
 		37714A111DE89020002ACB3A /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A101DE89020002ACB3A /* Tweet.swift */; };
 		37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */; };
+		37FE51781DEA8A3B00152D35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FE51771DEA8A3B00152D35 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 /* Begin PBXFileReference section */
 		3706778F1DE9FF8E007EC3FD /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkOperation.swift; path = network/NetworkOperation.swift; sourceTree = "<group>"; };
 		370677941DEA020B007EC3FD /* TwitterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwitterService.swift; path = services/TwitterService.swift; sourceTree = "<group>"; };
+		370677961DEA7F1A007EC3FD /* huff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "huff-Bridging-Header.h"; sourceTree = "<group>"; };
+		370677971DEA7F1A007EC3FD /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainWrapper.h; path = "supporting files/KeychainWrapper.h"; sourceTree = "<group>"; };
+		370677981DEA7F1A007EC3FD /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainWrapper.m; path = "supporting files/KeychainWrapper.m"; sourceTree = "<group>"; };
 		375686E61DE4FC82004F2951 /* huff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = huff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375686E91DE4FC82004F2951 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		375686EE1DE4FC82004F2951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +76,8 @@
 		37714A0E1DE88865002ACB3A /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetTableViewCell.swift; path = views/TweetTableViewCell.swift; sourceTree = "<group>"; };
 		37714A101DE89020002ACB3A /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = model/Tweet.swift; sourceTree = "<group>"; };
 		37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunOverviewViewController.swift; path = controllers/RunOverviewViewController.swift; sourceTree = "<group>"; };
+		37FE51751DEA833300152D35 /* huff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = huff.entitlements; sourceTree = "<group>"; };
+		37FE51771DEA8A3B00152D35 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37FE51781DEA8A3B00152D35 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +129,7 @@
 				375687001DE4FC83004F2951 /* huffTests */,
 				3756870B1DE4FC83004F2951 /* huffUITests */,
 				375686E71DE4FC82004F2951 /* Products */,
+				37FE51761DEA8A3B00152D35 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +146,7 @@
 		375686E81DE4FC82004F2951 /* huff */ = {
 			isa = PBXGroup;
 			children = (
+				37FE51751DEA833300152D35 /* huff.entitlements */,
 				375686E91DE4FC82004F2951 /* AppDelegate.swift */,
 				375686ED1DE4FC82004F2951 /* Main.storyboard */,
 				3756871E1DE4FCC7004F2951 /* views */,
@@ -175,6 +185,9 @@
 				375686F31DE4FC82004F2951 /* Assets.xcassets */,
 				375686F51DE4FC82004F2951 /* LaunchScreen.storyboard */,
 				375686F81DE4FC82004F2951 /* Info.plist */,
+				370677971DEA7F1A007EC3FD /* KeychainWrapper.h */,
+				370677981DEA7F1A007EC3FD /* KeychainWrapper.m */,
+				370677961DEA7F1A007EC3FD /* huff-Bridging-Header.h */,
 			);
 			name = "supporting files";
 			sourceTree = "<group>";
@@ -223,6 +236,14 @@
 				375687231DE4FDFD004F2951 /* RobotoMono-Regular.ttf */,
 			);
 			name = other;
+			sourceTree = "<group>";
+		};
+		37FE51761DEA8A3B00152D35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37FE51771DEA8A3B00152D35 /* Security.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,7 +314,14 @@
 				TargetAttributes = {
 					375686E51DE4FC82004F2951 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 9DDBF23Y4C;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					375686FC1DE4FC83004F2951 = {
 						CreatedOnToolsVersion = 8.1;
@@ -369,6 +397,7 @@
 				375687271DE5059E004F2951 /* Run.swift in Sources */,
 				375687291DE508BE004F2951 /* Location.swift in Sources */,
 				375687201DE4FD35004F2951 /* CurrentRunViewController.swift in Sources */,
+				370677991DEA7F1A007EC3FD /* KeychainWrapper.m in Sources */,
 				375686EA1DE4FC82004F2951 /* AppDelegate.swift in Sources */,
 				37714A0B1DE7CFE3002ACB3A /* HomeViewController.swift in Sources */,
 				37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */,
@@ -522,10 +551,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = huff/huff.entitlements;
+				DEVELOPMENT_TEAM = 9DDBF23Y4C;
 				INFOPLIST_FILE = huff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "huff/huff-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -534,10 +568,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = huff/huff.entitlements;
+				DEVELOPMENT_TEAM = 9DDBF23Y4C;
 				INFOPLIST_FILE = huff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "huff/huff-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -536,13 +536,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="qoX-3t-PXT">
+                                <rect key="frame" x="162.5" y="308.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="RRu-Kx-WgD"/>
+                                    <constraint firstAttribute="height" constant="50" id="oqB-f5-mye"/>
+                                </constraints>
+                                <color key="color" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="OGZ-WO-YfB" secondAttribute="trailing" id="Vdw-j9-W6T"/>
+                            <constraint firstItem="qoX-3t-PXT" firstAttribute="centerY" secondItem="DtZ-M2-p9O" secondAttribute="centerY" id="VyZ-3k-mMi"/>
                             <constraint firstItem="VKz-sP-w2n" firstAttribute="leading" secondItem="DtZ-M2-p9O" secondAttribute="leading" id="YwP-Hb-7sd"/>
                             <constraint firstItem="OGZ-WO-YfB" firstAttribute="leading" secondItem="DtZ-M2-p9O" secondAttribute="leading" id="ae7-DO-N0P"/>
                             <constraint firstItem="OGZ-WO-YfB" firstAttribute="top" secondItem="MWf-Sx-oeq" secondAttribute="bottom" id="cOs-HT-k4P"/>
+                            <constraint firstItem="qoX-3t-PXT" firstAttribute="centerX" secondItem="DtZ-M2-p9O" secondAttribute="centerX" id="cqx-IV-A0i"/>
                             <constraint firstItem="VKz-sP-w2n" firstAttribute="top" secondItem="OGZ-WO-YfB" secondAttribute="bottom" id="jIL-iy-oKs"/>
                             <constraint firstItem="1WQ-3s-6am" firstAttribute="top" secondItem="VKz-sP-w2n" secondAttribute="bottom" id="oIT-Ko-3dQ"/>
                             <constraint firstAttribute="trailing" secondItem="VKz-sP-w2n" secondAttribute="trailing" id="vTk-JS-8hI"/>
@@ -550,6 +560,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Community" image="hash" id="fPm-D0-KMg"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="qoX-3t-PXT" id="UUK-2O-5z8"/>
                         <outlet property="tweetsTable" destination="VKz-sP-w2n" id="v2v-sU-1Ja"/>
                     </connections>
                 </viewController>
