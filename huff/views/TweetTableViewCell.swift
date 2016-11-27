@@ -23,4 +23,5 @@ class TweetTableViewCell: UITableViewCell {
             username.text = tweet.username
         }
     }
+    
 }

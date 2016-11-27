@@ -48,6 +48,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        TwitterService.sharedInstance().getBearerToken { (resultDict, error) in
+            guard let results = resultDict else {
+                print(error!.localizedDescription)
+                return
+            }
+            print(results[TwitterService.URLResponseValues.AccessToken])
+        }
     }
 
     
@@ -64,14 +72,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     // MARK: - tableview delegate
-    /*func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.transform = CGAffineTransform(translationX: -700, y: 0)
-        UIView.animate(withDuration: 0.10, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: { () -> Void in
             cell.transform = CGAffineTransform.identity
         }, completion: nil)
-    }*/
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
     }
+    
 }
