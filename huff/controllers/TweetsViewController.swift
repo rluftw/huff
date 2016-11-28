@@ -51,8 +51,16 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath)  as! TweetTableViewCell
-        cell.tweet = self.tweets[indexPath.row]
+        let tweet = self.tweets[indexPath.row]
+        let cell: TweetTableViewCell!
+        
+        if let _ = tweet.photoURLs {
+            cell = tableView.dequeueReusableCell(withIdentifier: "imageTweetCell", for: indexPath)  as! ImageTweetTableViewCell
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "regularTweetCell", for: indexPath)  as! RegularTweetTableViewCell
+        }
+        
+        cell.tweet = tweet
         return cell
     }
     
@@ -65,6 +73,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }, completion: nil)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // create an overylay view with a larger image frame
+        print(indexPath.row)
+    }
+    
     // MARK: - helper methods
     
     fileprivate func performSearch() {
@@ -73,38 +86,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.handleStopSearch()
                 return
             }
-            self.extractResults(result: result)
-        }
-    }
-    
-    fileprivate func extractResults(result: [String: AnyObject]) {
-        if let statuses = result["statuses"] as? [[String: AnyObject]] {
-            for status in statuses {
-                let userDict = status["user"] as? [String: AnyObject]
-                let user = userDict?["screen_name"] as? String ?? "N/A"
-                var message = status["text"] as? String ?? "N/A"
-                var photoURLs: [String]?
-                
-                // remove all photo links from the message text, and add them to an array of photo urls
-                if let entitiesDict = status["entities"] as? [String: AnyObject], let medias = entitiesDict["media"] as? [[String: AnyObject]] {
-                    photoURLs = [String]()
-                    for media in medias {
-                        guard let url = media["url"] as? String, let type = media["type"] as? String, type == "photo" else {
-                            break
-                        }
-                        print("url: \(url)")
-                        
-                        if let range = message.range(of: url) {
-                            message.removeSubrange(range)
-                        }
-                        photoURLs?.append(url)
-                    }
+            // self.extractResults(result: result)
+            if let tweets = result["statuses"] as? [[String: AnyObject]] {
+                for tweet in tweets {
+                    self.tweets.append(Tweet(tweetDict: tweet))
                 }
-                
-                self.tweets.append(Tweet(message: message, username: user, photoURLs: photoURLs))
             }
+            self.handleStopSearch()
         }
-        self.handleStopSearch()
     }
     
     
@@ -118,6 +107,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func handleRefresh(_ refresh: UIRefreshControl) {
         self.tweets.removeAll(keepingCapacity: false)
+        self.tweetsTable.reloadData()
         performSearch()
     }
 }
