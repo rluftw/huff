@@ -12,12 +12,19 @@ import UIKit
 struct Tweet {
     var message: String
     let username: String
+    let dateCreated: TimeInterval
     var photoURLs: [String]?
     
-    init(tweetDict: [String: AnyObject]) {        
+    init(tweetDict: [String: AnyObject]) {
+        // used to extract the date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E MMM dd HH:mm:ss Z yyyy"
+
         let userDict = tweetDict["user"] as? [String: AnyObject]
         self.username = userDict?["screen_name"] as? String ?? "N/A"
         self.message = tweetDict["text"] as? String ?? "N/A"
+        let dateString = tweetDict["created_at"] as! String
+        self.dateCreated = dateFormatter.date(from: dateString)!.timeIntervalSince1970
         
          // remove all photo links from the message text, and add them to an array of photo urls
         if let entitiesDict = tweetDict["extended_entities"] as? [String: AnyObject], let medias = entitiesDict["media"] as? [[String: AnyObject]] {

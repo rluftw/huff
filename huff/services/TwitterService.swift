@@ -49,16 +49,12 @@ class TwitterService {
                     return
                 }
                 bearerToken = results[TwitterService.URLResponseValues.AccessToken] as! String
-                
                 // store the actual bearer token
                 self.MyKeychainWrapper.mySetObject(bearerToken, forKey: kSecValueData)
                 self.MyKeychainWrapper.writeToKeychain()
-                
                 // store the boolean value of whether the bearer token is there
                 UserDefaults.standard.set(true, forKey: StorageKeys.IsBearerStored)
                 UserDefaults.standard.synchronize()
-                
-                
                 self.performSearch(bearerToken: bearerToken, completionHandler: completionHandler)
             }
         } else {

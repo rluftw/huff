@@ -34,13 +34,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tweetsTable.addSubview(refreshControl)
-        
         performSearch()
     }
 
@@ -54,11 +51,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let tweet = self.tweets[indexPath.row]
         let cell: TweetTableViewCell!
         
-        if let _ = tweet.photoURLs {
+        /*if let _ = tweet.photoURLs {
             cell = tableView.dequeueReusableCell(withIdentifier: "imageTweetCell", for: indexPath)  as! ImageTweetTableViewCell
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "regularTweetCell", for: indexPath)  as! RegularTweetTableViewCell
-        }
+        }*/
+        
+        cell = tableView.dequeueReusableCell(withIdentifier: "regularTweetCell", for: indexPath)  as! RegularTweetTableViewCell
         
         cell.tweet = tweet
         return cell

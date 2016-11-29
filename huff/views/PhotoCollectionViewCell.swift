@@ -28,12 +28,10 @@ class PhotoCollectionViewCell: UICollectionViewCell {
                 let request = URLRequest(url: URL(string: photoURL + ":thumb")!)
                 _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
                     DispatchQueue.main.async(execute: {
-                        
                         guard let data = data else {
                             self.photoView.image = UIImage(named: "hash")
                             return
                         }
-                        
                         self.photoView.image = UIImage(data: data)
                         self.activityIndicator.stopAnimating()
                         self.setNeedsDisplay()
