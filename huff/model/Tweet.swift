@@ -31,7 +31,6 @@ struct Tweet {
             self.photoURLs = [String]()
             for media in medias {
                 guard let url = media["url"] as? String, let type = media["type"] as? String, type == "photo", let mediaURL = media["media_url_https"] as? String else {
-                    print("something was not good")
                     break
                 }
                 if let range = message.range(of: url) {

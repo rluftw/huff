@@ -73,8 +73,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // create an overylay view with a larger image frame
-        print(indexPath.row)
+        let tweet = tweets[indexPath.row]
+        guard let photoURLS = tweet.photoURLs else {
+            return
+        }
+        let overlay = OverlayPhotoView(frame: self.view.bounds)
+        overlay.photoURLS = photoURLS
+        self.view.addSubview(overlay)
+        
+        // TODO: decide whether we want to show the tab bar
     }
     
     // MARK: - helper methods
