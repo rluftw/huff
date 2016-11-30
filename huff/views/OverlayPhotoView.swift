@@ -12,7 +12,6 @@ class OverlayPhotoView: UIView {
     
     lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
-        //button.backgroundColor = UIColor(red: 204/255.0, green: 0, blue: 0, alpha: 1.0)
         button.tintColor = .white
         button.setImage(UIImage(named: "cancel"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +27,9 @@ class OverlayPhotoView: UIView {
     
     lazy var photoCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 1
+        flowLayout.minimumInteritemSpacing = 1
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         cv.delegate = self
         cv.dataSource = self
@@ -93,5 +95,9 @@ extension OverlayPhotoView: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoURLS!.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: photoCollectionView.frame.width, height: photoCollectionView.frame.height)
     }
 }

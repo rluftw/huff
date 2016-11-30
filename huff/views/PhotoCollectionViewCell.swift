@@ -13,13 +13,16 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     var photoView: UIImageView = {
         let pv = UIImageView()
         pv.contentMode = .scaleAspectFill
+        pv.translatesAutoresizingMaskIntoConstraints = false
+        pv.clipsToBounds = true
         return pv
     }()
     
-    var activityIndicator: UIActivityIndicatorView = {
+    lazy var activityIndicator: UIActivityIndicatorView = {
         let ai = UIActivityIndicatorView()
         ai.startAnimating()
         ai.hidesWhenStopped = true
+        ai.translatesAutoresizingMaskIntoConstraints = false
         return ai
     }()
     
@@ -60,6 +63,10 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         addSubview(photoView)
         photoView.addSubview(activityIndicator)
         
-        // photoView.addAnchorsTo(topAnchor: topAnchor, rightAnchor: rightAnchor, bottomAnchor: bottomAnchor, leftAnchor: leftAnchor)
+        
+        // constraints management
+        photoView.addAnchorsTo(topAnchor: topAnchor, rightAnchor: rightAnchor, bottomAnchor: bottomAnchor, leftAnchor: leftAnchor)
+        activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 }
