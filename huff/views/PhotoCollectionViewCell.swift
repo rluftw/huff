@@ -8,15 +8,30 @@
 
 import UIKit
 
-protocol PhotoTapDelegate: class {
-    func photoTapped()
-}
 
 class PhotoCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var photoView: UIImageView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var photoView: UIImageView = {
+        let pv = UIImageView()
+        pv.contentMode = .scaleAspectFill
+        return pv
+    }()
     
-    weak var delegate: PhotoTapDelegate?
+    var activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView()
+        ai.startAnimating()
+        ai.hidesWhenStopped = true
+        return ai
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     var photoURL: String? {
         didSet {
@@ -25,7 +40,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
                 return
             }
             DispatchQueue.global(qos: DispatchQoS.userInteractive.qosClass).async {
-                let request = URLRequest(url: URL(string: photoURL + ":thumb")!)
+                let request = URLRequest(url: URL(string: photoURL + ":large")!) // TODO: add the photo size
                 _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
                     DispatchQueue.main.async(execute: {
                         guard let data = data else {
@@ -39,5 +54,12 @@ class PhotoCollectionViewCell: UICollectionViewCell {
                 })
             }
         }
+    }
+    
+    func setupView() {
+        addSubview(photoView)
+        photoView.addSubview(activityIndicator)
+        
+        // photoView.addAnchorsTo(topAnchor: topAnchor, rightAnchor: rightAnchor, bottomAnchor: bottomAnchor, leftAnchor: leftAnchor)
     }
 }

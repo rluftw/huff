@@ -30,6 +30,7 @@
 		37714A111DE89020002ACB3A /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A101DE89020002ACB3A /* Tweet.swift */; };
 		3782605A1DEB3659003C5F13 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378260591DEB3659003C5F13 /* PhotoCollectionViewCell.swift */; };
 		3782605C1DED2A5E003C5F13 /* OverlayPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */; };
+		3782605E1DEDABDF003C5F13 /* UIViewAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */; };
 		37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */; };
 		37FE51781DEA8A3B00152D35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FE51771DEA8A3B00152D35 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		37714A101DE89020002ACB3A /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = model/Tweet.swift; sourceTree = "<group>"; };
 		378260591DEB3659003C5F13 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionViewCell.swift; path = views/PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayPhotoView.swift; path = views/OverlayPhotoView.swift; sourceTree = "<group>"; };
+		3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewAnchor.swift; path = views/UIViewAnchor.swift; sourceTree = "<group>"; };
 		37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunOverviewViewController.swift; path = controllers/RunOverviewViewController.swift; sourceTree = "<group>"; };
 		37FE51751DEA833300152D35 /* huff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = huff.entitlements; sourceTree = "<group>"; };
 		37FE51771DEA8A3B00152D35 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -237,6 +239,7 @@
 				375D318E1DEB2F9900829788 /* RegularTweetTableViewCell.swift */,
 				378260591DEB3659003C5F13 /* PhotoCollectionViewCell.swift */,
 				3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */,
+				3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				37714A0D1DE883F0002ACB3A /* TweetsViewController.swift in Sources */,
 				370677951DEA020B007EC3FD /* TwitterService.swift in Sources */,
 				37714A111DE89020002ACB3A /* Tweet.swift in Sources */,
+				3782605E1DEDABDF003C5F13 /* UIViewAnchor.swift in Sources */,
 				375686F21DE4FC82004F2951 /* huff.xcdatamodeld in Sources */,
 				37714A0F1DE88865002ACB3A /* ImageTweetTableViewCell.swift in Sources */,
 				375687271DE5059E004F2951 /* Run.swift in Sources */,
