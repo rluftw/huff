@@ -19,7 +19,7 @@ class TwitterService: Service {
     }
     
     fileprivate func getBearerToken(completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
-        let requestTokenURL = getCompleteURL(parameters: [URLKeys.GrantType: "client_credentials" as AnyObject], scheme: Constants.Scheme, host: Constants.Host, method: MethodPath.ObtainToken)
+        let requestTokenURL = getCompleteURL(parameters: [URLKeys.GrantType: "client_credentials"], scheme: Constants.Scheme, host: Constants.Host, method: MethodPath.ObtainToken)
         var urlRequest = URLRequest(url: requestTokenURL)
         urlRequest.httpMethod = "POST"
         // create the encoded base64 string
@@ -66,7 +66,7 @@ class TwitterService: Service {
     
     fileprivate func performSearch(bearerToken: String?, searchQuery: String = Constants.SearchQuery, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
         
-        let searchURL = getCompleteURL(parameters: [URLKeys.Query: Constants.SearchQuery as AnyObject], scheme: Constants.Scheme, host: Constants.Host, method: MethodPath.Search)
+        let searchURL = getCompleteURL(parameters: [URLKeys.Query: Constants.SearchQuery], scheme: Constants.Scheme, host: Constants.Host, method: MethodPath.Search)
         var urlRequest = URLRequest(url: searchURL)
         urlRequest.addValue("Bearer \(bearerToken ?? "")", forHTTPHeaderField: NetworkConstants.Authorization)
         _ = NetworkOperation.sharedInstance().request(urlRequest) { (data, error) -> Void in
@@ -115,7 +115,7 @@ extension TwitterService {
     
     struct PrivateKeys {
 
-        /*static let ConsumerKey = "Consumer Key HERE"
-        static let ConsumerSecret = "Consumer Secret HERE"*/
+        static let ConsumerKey = "Consumer Key HERE"
+        static let ConsumerSecret = "Consumer Secret HERE"
     }
 }

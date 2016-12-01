@@ -18,7 +18,22 @@ class ActiveService: Service {
     }
     
     func search(location: CLLocation, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
-        
+        let parameters: [String: Any] = [ParameterKeys.Radius: 50,
+                                               ParameterKeys.Query: "5k",
+                                               ParameterKeys.Location: "\(location.coordinate.latitude),\(location.coordinate.longitude)",
+                                               ParameterKeys.PerPage: 40,
+                                               ParameterKeys.APIKey: ParameterValues.APIKey]
+        let searchURL = getCompleteURL(parameters: parameters, scheme: Constants.Scheme, host: Constants.Host, method: Constants.Method)
+        let urlRequest = URLRequest(url: searchURL)
+        _ = NetworkOperation.sharedInstance().request(urlRequest) { (data, error) -> Void in
+            guard let data = data else {
+                completionHandler(nil, error!)
+                return
+            }
+            // TODO: this return may be in xml format instead of json.
+            self.parseJSON(data: data, completionHandler: completionHandler)
+        }
+
     }
 }
 

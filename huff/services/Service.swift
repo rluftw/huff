@@ -9,7 +9,7 @@
 import Foundation
 
 class Service {
-    func getCompleteURL(parameters: [String: AnyObject], scheme: String, host: String, method: String) -> URL {
+    func getCompleteURL(parameters: [String: Any], scheme: String, host: String, method: String) -> URL {
         var urlComponent = URLComponents()
         urlComponent.scheme = scheme
         urlComponent.host = host
