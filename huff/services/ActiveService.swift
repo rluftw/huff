@@ -33,7 +33,6 @@ class ActiveService: Service {
             // TODO: this return may be in xml format instead of json.
             self.parseJSON(data: data, completionHandler: completionHandler)
         }
-
     }
 }
 

@@ -100,7 +100,7 @@ extension OverlayPhotoView: UICollectionViewDelegate, UICollectionViewDataSource
         let width = collectionView.bounds.width
         let cellWidth = collectionView.bounds.width*0.80
         let leftInset = (width-cellWidth)/2
-        
+
         return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: 20)
     }
     
