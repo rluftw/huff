@@ -37,6 +37,7 @@ class OverlayPhotoView: UIView {
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.backgroundColor = .clear //UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)
         cv.heightAnchor.constraint(equalToConstant: self.bounds.height*0.6).isActive = true
+        cv.showsHorizontalScrollIndicator = false
         return cv
     }()
     
@@ -71,9 +72,8 @@ class OverlayPhotoView: UIView {
         vibrancyView.contentView.addSubview(cancelButton)
         blurView.addSubview(vibrancyView)
         vibrancyView.addAnchorsTo(topAnchor: blurView.topAnchor, rightAnchor: blurView.rightAnchor, bottomAnchor: blurView.bottomAnchor, leftAnchor: blurView.leftAnchor)
-        cancelButton.addAnchorsTo(topAnchor: vibrancyView.topAnchor, rightAnchor: nil, bottomAnchor: nil, leftAnchor: vibrancyView.leftAnchor, topConstant: 16, rightConstant: 0, bottomConstant: 0, leftConstant: 8)
+        cancelButton.addAnchorsTo(topAnchor: vibrancyView.topAnchor, rightAnchor: nil, bottomAnchor: nil, leftAnchor: vibrancyView.leftAnchor, topConstant: 24, rightConstant: 0, bottomConstant: 0, leftConstant: 8)
     
-        
         // add the photo collection view
         blurView.addSubview(photoCollectionView)
         photoCollectionView.centerYAnchor.constraint(equalTo: blurView.centerYAnchor).isActive = true
@@ -97,11 +97,15 @@ extension OverlayPhotoView: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let width = collectionView.bounds.width
+        let cellWidth = collectionView.bounds.width*0.80
+        let leftInset = (width-cellWidth)/2
+        
+        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth: CGFloat = 280
+        let cellWidth: CGFloat = collectionView.bounds.width*0.80
         let cellHeight = collectionView.bounds.size.height
         
         return CGSize(width: cellWidth, height: cellHeight-20)
