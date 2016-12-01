@@ -28,15 +28,14 @@ class OverlayPhotoView: UIView {
     lazy var photoCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 1
-        flowLayout.minimumInteritemSpacing = 1
+        flowLayout.minimumLineSpacing = 20
+        flowLayout.minimumInteritemSpacing = 10
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         cv.delegate = self
         cv.dataSource = self
         cv.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell")
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)
-        cv.widthAnchor.constraint(equalToConstant: self.bounds.width*0.8).isActive = true
+        cv.backgroundColor = .clear //UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)
         cv.heightAnchor.constraint(equalToConstant: self.bounds.height*0.6).isActive = true
         return cv
     }()
@@ -77,8 +76,8 @@ class OverlayPhotoView: UIView {
         
         // add the photo collection view
         blurView.addSubview(photoCollectionView)
-        photoCollectionView.centerXAnchor.constraint(equalTo: blurView.centerXAnchor).isActive = true
         photoCollectionView.centerYAnchor.constraint(equalTo: blurView.centerYAnchor).isActive = true
+        photoCollectionView.addAnchorsTo(topAnchor: nil, rightAnchor: rightAnchor, bottomAnchor: nil, leftAnchor: leftAnchor)
     }
     
     func cancel() {
@@ -96,8 +95,15 @@ extension OverlayPhotoView: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoURLS!.count
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: photoCollectionView.frame.width, height: photoCollectionView.frame.height)
+        let cellWidth: CGFloat = 280
+        let cellHeight = collectionView.bounds.size.height
+        
+        return CGSize(width: cellWidth, height: cellHeight-20)
     }
 }
