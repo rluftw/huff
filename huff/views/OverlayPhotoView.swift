@@ -97,7 +97,14 @@ extension OverlayPhotoView: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let width = collectionView.bounds.width
+        let cellWidth: CGFloat = 280
+        
+        let leftInset = (width-cellWidth)/2
+        
+        print("left inset: \(leftInset)")
+        
+        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
