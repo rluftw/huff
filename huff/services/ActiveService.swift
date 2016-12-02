@@ -26,7 +26,7 @@ class ActiveService: Service {
         // build the parameters dict
         let parameters: [String: Any] = [ParameterKeys.Radius: 50,
                                             ParameterKeys.CurrentPage: 1,
-                                            ParameterKeys.Query: "5K run",
+                                            ParameterKeys.Query: "5K",
                                             ParameterKeys.Location: "\(location.coordinate.latitude), \(location.coordinate.longitude)",
                                             ParameterKeys.PerPage: 40,
                                             ParameterKeys.APIKey: ParameterValues.APIKey,
@@ -58,7 +58,7 @@ extension ActiveService {
     fileprivate struct ParameterKeys {
         static let Location = "lat_lon"
         static let Radius = "radius"
-        static let Query = "q"
+        static let Query = "query"
         static let PerPage = "per_page"
         static let APIKey = "api_key"
         static let ExcludeChildren = "exclude_children"
