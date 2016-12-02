@@ -18,7 +18,7 @@ class Service {
         for (key, value) in parameters {
             let queryItem = URLQueryItem(name: key, value: "\(value)")
             urlComponent.queryItems?.append(queryItem)
-        }
+        }        
         return urlComponent.url!
     }
     
@@ -37,4 +37,5 @@ class Service {
         }
         completionHandler(nil, error)
     }
+    
 }

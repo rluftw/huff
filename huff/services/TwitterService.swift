@@ -115,7 +115,7 @@ extension TwitterService {
     
     struct PrivateKeys {
 
-        static let ConsumerKey = "Consumer Key HERE"
-        static let ConsumerSecret = "Consumer Secret HERE"
+        static let ConsumerKey = "Vz97ogzl5E4kzwDVBijBoSByH"
+        static let ConsumerSecret = "EEDPFF8zPFCdfVqoTajwavaqjQPdw1SNKreaUKPKY52KzTyZiV"
     }
 }

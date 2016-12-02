@@ -18,11 +18,24 @@ class ActiveService: Service {
     }
     
     func search(location: CLLocation, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
+        // find todays date and convert to string
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateString = formatter.string(from: Date())
+        
+        // build the parameters dict
         let parameters: [String: Any] = [ParameterKeys.Radius: 50,
-                                               ParameterKeys.Query: "5k",
-                                               ParameterKeys.Location: "\(location.coordinate.latitude),\(location.coordinate.longitude)",
-                                               ParameterKeys.PerPage: 40,
-                                               ParameterKeys.APIKey: ParameterValues.APIKey]
+                                            ParameterKeys.CurrentPage: 1,
+                                            ParameterKeys.Query: "5K run",
+                                            ParameterKeys.Location: "\(location.coordinate.latitude), \(location.coordinate.longitude)",
+                                            ParameterKeys.PerPage: 40,
+                                            ParameterKeys.APIKey: ParameterValues.APIKey,
+                                            ParameterKeys.Sort: "distance",
+                                            ParameterKeys.ExcludeChildren: "true",
+                                            ParameterKeys.StartDate: dateString+".."]
+        
+        print(parameters)
+        
         let searchURL = getCompleteURL(parameters: parameters, scheme: Constants.Scheme, host: Constants.Host, method: Constants.Method)
         let urlRequest = URLRequest(url: searchURL)
         _ = NetworkOperation.sharedInstance().request(urlRequest) { (data, error) -> Void in
@@ -30,7 +43,6 @@ class ActiveService: Service {
                 completionHandler(nil, error!)
                 return
             }
-            // TODO: this return may be in xml format instead of json.
             self.parseJSON(data: data, completionHandler: completionHandler)
         }
     }
@@ -38,9 +50,9 @@ class ActiveService: Service {
 
 extension ActiveService {
     fileprivate struct Constants {
-        static let Scheme = "http"
-        static let Host = "developer.active.com"
-        static let Method = "/docs/v2_activity_api_search"
+        static let Scheme = "https"
+        static let Host = "api.amp.active.com"
+        static let Method = "/v2/search/"
     }
     
     fileprivate struct ParameterKeys {
@@ -49,9 +61,13 @@ extension ActiveService {
         static let Query = "q"
         static let PerPage = "per_page"
         static let APIKey = "api_key"
+        static let ExcludeChildren = "exclude_children"
+        static let Sort = "sort"
+        static let CurrentPage = "current_page"
+        static let StartDate = "start_date"
     }
     
     fileprivate struct ParameterValues {
-        static let APIKey = "API Key Here"
+        static let APIKey = "API KEY HERE"
     }
 }
