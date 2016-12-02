@@ -19,9 +19,11 @@ class ActiveService: Service {
     
     func search(location: CLLocation, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
         // find todays date and convert to string
+        let todaysDate = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        let dateString = formatter.string(from: Date())
+        let dateString = formatter.string(from: todaysDate)
+        let after1WeekString = formatter.string(from: todaysDate.addingTimeInterval(60*60*24*14))
         
         // build the parameters dict
         let parameters: [String: Any] = [ParameterKeys.Radius: 50,
@@ -32,7 +34,7 @@ class ActiveService: Service {
                                             ParameterKeys.APIKey: ParameterValues.APIKey,
                                             ParameterKeys.Sort: "distance",
                                             ParameterKeys.ExcludeChildren: "true",
-                                            ParameterKeys.StartDate: dateString+".."]
+                                            ParameterKeys.StartDate: dateString+".."+after1WeekString]
         
         print(parameters)
         
@@ -68,6 +70,6 @@ extension ActiveService {
     }
     
     fileprivate struct ParameterValues {
-        static let APIKey = "API KEY HERE"
+        static let APIKey = "API KEY"
     }
 }
