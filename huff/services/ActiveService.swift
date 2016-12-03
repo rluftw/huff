@@ -23,7 +23,7 @@ class ActiveService: Service {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: todaysDate)
-        let after1WeekString = formatter.string(from: todaysDate.addingTimeInterval(60*60*24*14))
+        let after2WeekString = formatter.string(from: todaysDate.addingTimeInterval(60*60*24*14))
         
         // build the parameters dict
         let parameters: [String: Any] = [ParameterKeys.Radius: 50,
@@ -34,9 +34,9 @@ class ActiveService: Service {
                                             ParameterKeys.APIKey: ParameterValues.APIKey,
                                             ParameterKeys.Sort: "distance",
                                             ParameterKeys.ExcludeChildren: "true",
-                                            ParameterKeys.StartDate: dateString+".."+after1WeekString]
+                                            ParameterKeys.StartDate: dateString+".."+after2WeekString,
+                                            ParameterKeys.Topic: "running"]
         
-        print(parameters)
         
         let searchURL = getCompleteURL(parameters: parameters, scheme: Constants.Scheme, host: Constants.Host, method: Constants.Method)
         let urlRequest = URLRequest(url: searchURL)
@@ -67,9 +67,10 @@ extension ActiveService {
         static let Sort = "sort"
         static let CurrentPage = "current_page"
         static let StartDate = "start_date"
+        static let Topic = "topic"
     }
     
     fileprivate struct ParameterValues {
-        static let APIKey = "API KEY"
+        static let APIKey = "API KEY HERE"
     }
 }
