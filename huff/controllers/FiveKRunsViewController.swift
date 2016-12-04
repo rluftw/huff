@@ -61,14 +61,11 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
                         continue
                     }
                     
+                    // create the array of runs available
                     if let run = ActiveRun(result: result) {
                         self.activeRuns.append(run)
-                        print("\(run)\n\n")
                     }
                 }
-                
-                print("\(self.activeRuns.count) runs")
-                
                 DispatchQueue.main.async {
                     self.fiveKTable.reloadData()
                     self.activityIndicator.stopAnimating()
@@ -89,9 +86,11 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
         default: break
         }
     }
+    
 }
 
 extension FiveKRunsViewController: UITableViewDelegate, UITableViewDataSource {
+    // MARK: - table view delegates/datasource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "activeRunCell", for: indexPath) as! ActiveRunTableViewCell
         cell.run = activeRuns[indexPath.row]
@@ -103,6 +102,21 @@ extension FiveKRunsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        // use the cell as the sender - used later to extract the active run object
+        let cell = tableView.cellForRow(at: indexPath)
+        performSegue(withIdentifier: "showRunDetail", sender: cell)
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+}
+
+extension FiveKRunsViewController {
+    // MARK: - navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showRunDetail" {
+            let cell = sender as? ActiveRunTableViewCell
+            let detailVC = segue.destination as! ActiveRunDetailViewController
+            detailVC.run = cell?.run
+        }
     }
 }

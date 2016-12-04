@@ -7,14 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 class ActiveRun: CustomStringConvertible {
     let organization: RunOrganization!
     let location: RunLocation!
     let name: String?
     let logoURL: String?
+    var registrationURL: String?
     var runDate: Date?
     var registrationDeadlineDate: Date?
+    var runDescription: String?
+    
     
     var description: String {
         guard let location = location, let organization = organization else {
@@ -44,7 +48,6 @@ class ActiveRun: CustomStringConvertible {
         
         // extract the dates
         let formatter = DateFormatter()
-        // let calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         if let rawRunDate = result["activityStartDate"] as? String {
@@ -52,6 +55,29 @@ class ActiveRun: CustomStringConvertible {
         }
         if let rawRegistrationDeadline = result["salesEndDate"] as? String {
             registrationDeadlineDate = formatter.date(from: rawRegistrationDeadline)
+        }
+        if let descriptionArray = result["assetDescriptions"] as? [AnyObject] {
+            for descriptionDict in descriptionArray {
+                let htmlDescription = descriptionDict["description"] as? String
+                let description = self.htmlToAttributedString(htmlString: htmlDescription)?.string
+                if let trimmedDescription = description?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                    self.runDescription = trimmedDescription
+                }
+            }
+        }
+        
+        registrationURL = result["urlAdr"] as? String
+    }
+    
+    // MARK: - helper methods
+    func htmlToAttributedString(htmlString: String?) -> NSAttributedString? {
+        guard let htmlString = htmlString else { return nil }
+        guard let data = htmlString.data(using: .utf8) else { return nil }
+        do {
+            return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch let error {
+            print(error.localizedDescription)
+            return nil
         }
     }
 }
