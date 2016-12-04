@@ -611,7 +611,7 @@
             </objects>
             <point key="canvasLocation" x="-991.20000000000005" y="-1740.1799100449775"/>
         </scene>
-        <!--5k Runs-->
+        <!--5k Events-->
         <scene sceneID="q4l-Yc-H0W">
             <objects>
                 <viewController id="1gP-Dm-Rrl" customClass="FiveKRunsViewController" customModule="huff" customModuleProvider="target" sceneMemberID="viewController">
@@ -748,7 +748,7 @@
                             <constraint firstAttribute="trailing" secondItem="Pcb-1H-Y5U" secondAttribute="trailing" id="mf6-LR-BUg"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="5k Runs" image="runs" id="E6k-yk-jnz"/>
+                    <tabBarItem key="tabBarItem" title="5k Events" image="runs" id="E6k-yk-jnz"/>
                     <connections>
                         <outlet property="activityIndicator" destination="oZF-nr-iiU" id="i9G-IF-elc"/>
                         <outlet property="fiveKTable" destination="Hxd-eg-Aig" id="k3A-20-EVT"/>

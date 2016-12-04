@@ -44,16 +44,17 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - CLLocationDelegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // prevents anymore updates from firing
+        manager.stopUpdatingLocation()
+        manager.delegate = nil
+        
+        fiveKTable.isUserInteractionEnabled = false
         if let location = locations.last {
             ActiveService.sharedInstance().search(location: location, completionHandler: { (result, error) in
                 guard let results = result?["results"] as? [[String: AnyObject]] else {
                     print("there was a problem with the active service results")
                     return
                 }
-                
-                // remove previous results
-                self.activeRuns.removeAll(keepingCapacity: false)
-                
                 for result in results {
                     // check registration status - only include runs that are still open for registration.
                     guard let registrationStatus = result["salesStatus"] as? String, registrationStatus == "registration-open" else {
@@ -66,9 +67,12 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
                     }
                 }
                 
+                print("\(self.activeRuns.count) runs")
+                
                 DispatchQueue.main.async {
                     self.fiveKTable.reloadData()
                     self.activityIndicator.stopAnimating()
+                    self.fiveKTable.isUserInteractionEnabled = true
                 }
             })
         }
@@ -96,5 +100,9 @@ extension FiveKRunsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return activeRuns.count
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
     }
 }
