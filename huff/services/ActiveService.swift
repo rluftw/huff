@@ -23,7 +23,7 @@ class ActiveService: Service {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: todaysDate)
-        let after2WeekString = formatter.string(from: todaysDate.addingTimeInterval(60*60*24*14))
+        let after4WeekString = formatter.string(from: todaysDate.addingTimeInterval(60*60*24*28))
         
         // build the parameters dict
         let parameters: [String: Any] = [ParameterKeys.Radius: 50,
@@ -32,9 +32,9 @@ class ActiveService: Service {
                                             ParameterKeys.Location: "\(location.coordinate.latitude), \(location.coordinate.longitude)",
                                             ParameterKeys.PerPage: 40,
                                             ParameterKeys.APIKey: ParameterValues.APIKey,
-                                            ParameterKeys.Sort: "distance",
+                                            ParameterKeys.Sort: "date_asc", //"distance",
                                             ParameterKeys.ExcludeChildren: "true",
-                                            ParameterKeys.StartDate: dateString+".."+after2WeekString,
+                                            ParameterKeys.StartDate: dateString+".."+after4WeekString,
                                             ParameterKeys.Topic: "running"]
         
         
@@ -71,6 +71,6 @@ extension ActiveService {
     }
     
     fileprivate struct ParameterValues {
-        static let APIKey = "API KEY HERE"
+        static let APIKey = "API KEY"
     }
 }

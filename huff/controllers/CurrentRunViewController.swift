@@ -98,14 +98,18 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - location manager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last!
-        if location.horizontalAccuracy < 20 {
-            // update the distance is at least 1 location logged
-            if self.locations.count > 0 {
-                run.distance += location.distance(from: self.locations.last!)
-                run.locations.append(Location(location: location.coordinate))
+        for newLocation in locations {
+            if newLocation.horizontalAccuracy < 20 {
+                // update the distance if at least 1 location logged
+                if self.locations.count > 0 {
+                    print("distance: \(newLocation.distance(from: self.locations.last!))\naccuracy: \(newLocation.horizontalAccuracy)\n")
+                    run.distance += newLocation.distance(from: self.locations.last!)
+                    run.locations.append(Location(location: newLocation.coordinate))
+                }
+                self.locations.append(newLocation)
+            } else {
+                print("accuracy: \(newLocation.horizontalAccuracy)\n")
             }
-            self.locations.append(location)
         }
     }
     

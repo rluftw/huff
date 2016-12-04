@@ -9,23 +9,29 @@
 import Foundation
 
 class RunOrganization: CustomStringConvertible {
-    let organizationPrimaryContact: String?
-    let organizationName: String?
-    let organizationAddress1: String?
-    let organizationCity: String?
-    let organizationState: String?
-    let organizationPhone: String?
+    let primaryContact: String?
+    let name: String?
+    let address1: String?
+    let city: String?
+    let state: String?
+    let phone: String?
     
     var description: String {
-        return "Primary Contact: \(organizationPrimaryContact ?? "N/A")\nOrganization: \(organizationName ?? "N/A")\nAddress:\n\(organizationAddress1 ?? "N/A")\n\(organizationCity ?? "N/A"), \(organizationState ?? "N/A")\nPhone: \(organizationPhone ?? "N/A")"
+        return "Primary Contact: \(primaryContact ?? "N/A")\nOrganization: \(name ?? "N/A")\nAddress:\n\t\(address1 ?? "N/A")\n\t\(city ?? "N/A"), \(state ?? "N/A")\n\tPhone: \(phone ?? "N/A")"
     }
     
-    init(organizationDict: [String: AnyObject]?) {
-        organizationPrimaryContact = organizationDict?["primaryContactName"] as? String
-        organizationName = organizationDict?["organizationName"] as? String
-        organizationAddress1 = organizationDict?["addressLine1Txt"] as? String
-        organizationCity = organizationDict?["addressCityName"] as? String
-        organizationState = organizationDict?["addressStateProvinceCode"] as? String
-        organizationPhone = organizationDict?["primaryContactPhone"] as? String
+    init?(result: [String: AnyObject]) {
+        // there must be an organization dictionary
+        guard let organizationDict = result["organization"] as? [String: AnyObject] else {
+            print("there was a problem with the active service results")
+            return nil
+        }
+        
+        primaryContact = organizationDict["primaryContactName"] as? String
+        name = organizationDict["organizationName"] as? String
+        address1 = organizationDict["addressLine1Txt"] as? String
+        city = organizationDict["addressCityName"] as? String
+        state = organizationDict["addressStateProvinceCode"] as? String
+        phone = organizationDict["primaryContactPhone"] as? String
     }
 }

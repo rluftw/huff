@@ -36,6 +36,8 @@
 		3782605C1DED2A5E003C5F13 /* OverlayPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */; };
 		3782605E1DEDABDF003C5F13 /* UIViewAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */; };
 		37B249ED1DF279F80052E5BA /* RunOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B249EC1DF279F80052E5BA /* RunOrganization.swift */; };
+		37C323AF1DF31841002A93B6 /* RunLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C323AE1DF31841002A93B6 /* RunLocation.swift */; };
+		37C323B11DF33007002A93B6 /* ActiveRunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */; };
 		37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */; };
 		37FE51781DEA8A3B00152D35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FE51771DEA8A3B00152D35 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,8 @@
 		3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayPhotoView.swift; path = views/OverlayPhotoView.swift; sourceTree = "<group>"; };
 		3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewAnchor.swift; path = views/UIViewAnchor.swift; sourceTree = "<group>"; };
 		37B249EC1DF279F80052E5BA /* RunOrganization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunOrganization.swift; path = model/RunOrganization.swift; sourceTree = "<group>"; };
+		37C323AE1DF31841002A93B6 /* RunLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunLocation.swift; path = model/RunLocation.swift; sourceTree = "<group>"; };
+		37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActiveRunTableViewCell.swift; path = views/ActiveRunTableViewCell.swift; sourceTree = "<group>"; };
 		37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunOverviewViewController.swift; path = controllers/RunOverviewViewController.swift; sourceTree = "<group>"; };
 		37FE51751DEA833300152D35 /* huff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = huff.entitlements; sourceTree = "<group>"; };
 		37FE51771DEA8A3B00152D35 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -242,6 +246,7 @@
 				37714A101DE89020002ACB3A /* Tweet.swift */,
 				3730D6B71DF1AC350065F3B7 /* ActiveRun.swift */,
 				37B249EC1DF279F80052E5BA /* RunOrganization.swift */,
+				37C323AE1DF31841002A93B6 /* RunLocation.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				378260591DEB3659003C5F13 /* PhotoCollectionViewCell.swift */,
 				3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */,
 				3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */,
+				37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -420,7 +426,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				37714A0D1DE883F0002ACB3A /* TweetsViewController.swift in Sources */,
+				37C323B11DF33007002A93B6 /* ActiveRunTableViewCell.swift in Sources */,
 				3730D6B81DF1AC350065F3B7 /* ActiveRun.swift in Sources */,
+				37C323AF1DF31841002A93B6 /* RunLocation.swift in Sources */,
 				370677951DEA020B007EC3FD /* TwitterService.swift in Sources */,
 				37714A111DE89020002ACB3A /* Tweet.swift in Sources */,
 				37B249ED1DF279F80052E5BA /* RunOrganization.swift in Sources */,

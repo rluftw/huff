@@ -19,9 +19,11 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
             fiveKTable.estimatedRowHeight = 150
         }
     }
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     // MARK: - properties
-    var ActiveRuns = [ActiveRun]()
+    var activeRuns = [ActiveRun]()
     lazy var locationManager: CLLocationManager = {
         let lm = CLLocationManager()
         lm.delegate = self
@@ -40,7 +42,6 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    
     // MARK: - CLLocationDelegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
@@ -50,11 +51,24 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
                     return
                 }
                 
+                // remove previous results
+                self.activeRuns.removeAll(keepingCapacity: false)
+                
                 for result in results {
-                    let organizationDict = result["organization"] as? [String: AnyObject]
+                    // check registration status - only include runs that are still open for registration.
+                    guard let registrationStatus = result["salesStatus"] as? String, registrationStatus == "registration-open" else {
+                        continue
+                    }
                     
-                    let organization = RunOrganization(organizationDict: organizationDict)
-                    print("\(organization)\n\n")
+                    if let run = ActiveRun(result: result) {
+                        self.activeRuns.append(run)
+                        print("\(run)\n\n")
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    self.fiveKTable.reloadData()
+                    self.activityIndicator.stopAnimating()
                 }
             })
         }
@@ -75,11 +89,12 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
 
 extension FiveKRunsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "activeRunCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activeRunCell", for: indexPath) as! ActiveRunTableViewCell
+        cell.run = activeRuns[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return activeRuns.count
     }
 }
