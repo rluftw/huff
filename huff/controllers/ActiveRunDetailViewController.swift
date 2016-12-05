@@ -23,6 +23,8 @@ class ActiveRunDetailViewController: UIViewController {
     @IBOutlet weak var runName: UILabel!
     @IBOutlet weak var runDescription: UITextView!
     @IBOutlet weak var runDate: UILabel!
+    @IBOutlet weak var contactButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -39,15 +41,15 @@ class ActiveRunDetailViewController: UIViewController {
         let formatter = DateFormatter()
         
         formatter.dateStyle = .short
-        formatter.timeStyle = .long
         
         if let dateRun = run.runDate {
             runDate?.text = "Run on: " + formatter.string(from: dateRun)
         }
         
-        organizationName?.sizeToFit()
-        runName?.sizeToFit()
-        runDate?.sizeToFit()
+        if let _ = run.organization.phone, UIDevice.current.model == "iPhone" {
+            contactButton.isHidden = false
+        }
+        
     }
     
     // MARK: - actions
@@ -57,7 +59,14 @@ class ActiveRunDetailViewController: UIViewController {
     }
     
     @IBAction func register(_ sender: Any) {
-        guard let registrationLink = run.registrationURL, let registrationURL = URL(string: registrationLink) else { return }
+        guard let registrationLink = run.registrationURL, let registrationURL = URL(string: registrationLink) else {
+            registerButton.setTitle("NOT AVAILABLE", for: .normal)
+            return
+        }
         UIApplication.shared.open(registrationURL, options: [:], completionHandler: nil)
+    }
+    @IBAction func contactOrganizer(_ sender: Any) {
+        guard let phone = run.organization.phone, let phoneURL = URL(string: "telprompt://" + phone) else { return }
+        UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
     }
 }

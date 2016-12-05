@@ -15,6 +15,7 @@ class RunOrganization: CustomStringConvertible {
     let city: String?
     let state: String?
     let phone: String?
+    let zip: String?
     
     var description: String {
         return "Primary Contact: \(primaryContact ?? "N/A")\nOrganization: \(name ?? "N/A")\nAddress:\n\t\(address1 ?? "N/A")\n\t\(city ?? "N/A"), \(state ?? "N/A")\n\tPhone: \(phone ?? "N/A")"
@@ -33,5 +34,6 @@ class RunOrganization: CustomStringConvertible {
         city = organizationDict["addressCityName"] as? String
         state = organizationDict["addressStateProvinceCode"] as? String
         phone = organizationDict["primaryContactPhone"] as? String
+        zip = organizationDict["addressPostalCd"] as? String
     }
 }

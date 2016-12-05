@@ -21,7 +21,10 @@ class HomeViewController: UIViewController {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         // TODO: populate quoteLabel based on the remote config on firebase
+        quoteLabel?.sizeToFit()
     }
 
     // MARK: - actions
@@ -32,5 +35,6 @@ class HomeViewController: UIViewController {
     @IBAction func showRunHistory(_ sender: Any) {
         // TODO: show run history view
     }
+    
     
 }

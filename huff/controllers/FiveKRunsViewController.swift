@@ -64,6 +64,7 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
                     // create the array of runs available
                     if let run = ActiveRun(result: result) {
                         self.activeRuns.append(run)
+                        print("\(run)\n\n")
                     }
                 }
                 DispatchQueue.main.async {
