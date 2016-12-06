@@ -13,11 +13,6 @@ class ActiveRunDetailViewController: UIViewController {
     // MARK: - properties
     var run: ActiveRun!
     
-    // MARK: - computed properties
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     // MARK: - outlets
     @IBOutlet weak var organizationName: UILabel!
     @IBOutlet weak var runName: UILabel!
@@ -37,17 +32,21 @@ class ActiveRunDetailViewController: UIViewController {
     func updateLabels() {
         organizationName?.text = run.organization.name
         runName?.text = run.name
+        
+        // set description and have scroll position to the top
         runDescription?.text = run.runDescription
-        let formatter = DateFormatter()
+        runDescription?.scrollRangeToVisible(NSMakeRange(0, 0))
         
-        formatter.dateStyle = .short
-        
+        // calculate how many days are left till run
         if let dateRun = run.runDate {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
             runDate?.text = "Run on: " + formatter.string(from: dateRun)
         }
         
+        // check if theres a number for the organization and the device is an iphone
         if let _ = run.organization.phone, UIDevice.current.model == "iPhone" {
-            contactButton.isHidden = false
+            contactButton?.isHidden = false
         }
         
     }

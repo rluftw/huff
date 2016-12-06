@@ -39,6 +39,10 @@
 		37B371BB1DF3D38200EB719F /* ActiveRunDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B371BA1DF3D38200EB719F /* ActiveRunDetailViewController.swift */; };
 		37C323AF1DF31841002A93B6 /* RunLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C323AE1DF31841002A93B6 /* RunLocation.swift */; };
 		37C323B11DF33007002A93B6 /* ActiveRunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */; };
+		37CEB4261DF65BCA00CF4446 /* RobotoMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37CEB4251DF65BBB00CF4446 /* RobotoMono-Bold.ttf */; };
+		37CEB4281DF6604200CF4446 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB4271DF6604200CF4446 /* ProfileHeaderView.swift */; };
+		37CEB42A1DF666C800CF4446 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB4291DF666C800CF4446 /* Profile.swift */; };
+		37CEB42C1DF6670A00CF4446 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */; };
 		37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */; };
 		37FE51781DEA8A3B00152D35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FE51771DEA8A3B00152D35 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -101,6 +105,10 @@
 		37B371BA1DF3D38200EB719F /* ActiveRunDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActiveRunDetailViewController.swift; path = controllers/ActiveRunDetailViewController.swift; sourceTree = "<group>"; };
 		37C323AE1DF31841002A93B6 /* RunLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunLocation.swift; path = model/RunLocation.swift; sourceTree = "<group>"; };
 		37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActiveRunTableViewCell.swift; path = views/ActiveRunTableViewCell.swift; sourceTree = "<group>"; };
+		37CEB4251DF65BBB00CF4446 /* RobotoMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoMono-Bold.ttf"; path = "other/RobotoMono-Bold.ttf"; sourceTree = "<group>"; };
+		37CEB4271DF6604200CF4446 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileHeaderView.swift; path = views/ProfileHeaderView.swift; sourceTree = "<group>"; };
+		37CEB4291DF666C800CF4446 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = model/Profile.swift; sourceTree = "<group>"; };
+		37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyProfileViewController.swift; path = controllers/MyProfileViewController.swift; sourceTree = "<group>"; };
 		37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunOverviewViewController.swift; path = controllers/RunOverviewViewController.swift; sourceTree = "<group>"; };
 		37FE51751DEA833300152D35 /* huff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = huff.entitlements; sourceTree = "<group>"; };
 		37FE51771DEA8A3B00152D35 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -237,6 +245,7 @@
 				37714A0C1DE883F0002ACB3A /* TweetsViewController.swift */,
 				3730D6B51DF113560065F3B7 /* FiveKRunsViewController.swift */,
 				37B371BA1DF3D38200EB719F /* ActiveRunDetailViewController.swift */,
+				37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -250,6 +259,7 @@
 				3730D6B71DF1AC350065F3B7 /* ActiveRun.swift */,
 				37B249EC1DF279F80052E5BA /* RunOrganization.swift */,
 				37C323AE1DF31841002A93B6 /* RunLocation.swift */,
+				37CEB4291DF666C800CF4446 /* Profile.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -264,6 +274,7 @@
 				3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */,
 				3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */,
 				37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */,
+				37CEB4271DF6604200CF4446 /* ProfileHeaderView.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -273,6 +284,7 @@
 			children = (
 				375687221DE4FDFD004F2951 /* Roboto-Regular.ttf */,
 				375687231DE4FDFD004F2951 /* RobotoMono-Regular.ttf */,
+				37CEB4251DF65BBB00CF4446 /* RobotoMono-Bold.ttf */,
 			);
 			name = other;
 			sourceTree = "<group>";
@@ -399,6 +411,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37CEB4261DF65BCA00CF4446 /* RobotoMono-Bold.ttf in Resources */,
 				375687241DE4FE44004F2951 /* Roboto-Regular.ttf in Resources */,
 				375687251DE4FE44004F2951 /* RobotoMono-Regular.ttf in Resources */,
 				375686F71DE4FC82004F2951 /* LaunchScreen.storyboard in Resources */,
@@ -443,13 +456,16 @@
 				375687291DE508BE004F2951 /* Location.swift in Sources */,
 				375687201DE4FD35004F2951 /* CurrentRunViewController.swift in Sources */,
 				375D31911DEB332100829788 /* TweetTableViewCell.swift in Sources */,
+				37CEB42C1DF6670A00CF4446 /* MyProfileViewController.swift in Sources */,
 				3782605A1DEB3659003C5F13 /* PhotoCollectionViewCell.swift in Sources */,
 				3730D6B61DF113560065F3B7 /* FiveKRunsViewController.swift in Sources */,
+				37CEB42A1DF666C800CF4446 /* Profile.swift in Sources */,
 				370677991DEA7F1A007EC3FD /* KeychainWrapper.m in Sources */,
 				375686EA1DE4FC82004F2951 /* AppDelegate.swift in Sources */,
 				37714A0B1DE7CFE3002ACB3A /* HomeViewController.swift in Sources */,
 				3782605C1DED2A5E003C5F13 /* OverlayPhotoView.swift in Sources */,
 				37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */,
+				37CEB4281DF6604200CF4446 /* ProfileHeaderView.swift in Sources */,
 				3730D6B21DEFD1B70065F3B7 /* ActiveService.swift in Sources */,
 				3730D6B41DEFD24C0065F3B7 /* Service.swift in Sources */,
 				375D318F1DEB2F9900829788 /* RegularTweetTableViewCell.swift in Sources */,

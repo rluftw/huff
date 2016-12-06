@@ -29,12 +29,7 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
         lm.delegate = self
         return lm
     }()
-    
-    // MARK: - computed properties
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+        
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

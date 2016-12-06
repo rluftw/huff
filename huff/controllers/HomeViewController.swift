@@ -13,15 +13,9 @@ class HomeViewController: UIViewController {
     // MARK: - outlets
     @IBOutlet weak var quoteLabel: UILabel!
     
-    // MARK: - computed properties
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // TODO: populate quoteLabel based on the remote config on firebase
         quoteLabel?.sizeToFit()

@@ -17,12 +17,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         rc.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
         return rc
     }()
-    
-    // MARK: - computed properties
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+        
     // MARK: - outlets
     @IBOutlet weak var tweetsTable: UITableView! {
         didSet {

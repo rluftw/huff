@@ -24,6 +24,7 @@
 	<string>Location used for tracking movement</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>RobotoMono-Bold.ttf</string>
 		<string>Roboto-Regular.ttf</string>
 		<string>RobotoMono-Regular.ttf</string>
 	</array>
@@ -35,9 +36,13 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

@@ -57,13 +57,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         
         return MKPolyline(coordinates: coordinates, count: coordinates.count)
     }()
-    
-    
-    // MARK: - computed properties
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+        
     // MARK: - outlets
     @IBOutlet weak var mapView: MKMapView!
     

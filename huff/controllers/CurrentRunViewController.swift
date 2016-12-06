@@ -39,10 +39,6 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         return lm
     }()
     
-    // MARK: - computed properties
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     // MARK: - life cycle
     override func viewDidLoad() {
