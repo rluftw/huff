@@ -114,7 +114,6 @@ extension TwitterService {
     }
     
     struct PrivateKeys {
-
         static let ConsumerKey = "API KEY"
         static let ConsumerSecret = "API KEY"
     }

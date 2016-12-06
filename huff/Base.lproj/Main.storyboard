@@ -443,7 +443,7 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PuN-9a-0hy">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PuN-9a-0hy">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="GiD-Mq-1Wr" customClass="ProfileHeaderView" customModule="huff" customModuleProvider="target">
@@ -487,6 +487,7 @@
                                         </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="PFB-nb-jJ2" secondAttribute="trailing" constant="8" id="1be-Ys-uvy"/>
                                         <constraint firstItem="vXw-eN-Mht" firstAttribute="top" secondItem="uaO-FY-7MX" secondAttribute="top" id="Beg-gr-ct2"/>
@@ -502,10 +503,12 @@
                                         <constraint firstItem="wc0-Rp-d7V" firstAttribute="leading" secondItem="uaO-FY-7MX" secondAttribute="trailing" constant="16" id="tJc-7d-eGY"/>
                                     </constraints>
                                     <connections>
+                                        <outlet property="activityIndicator" destination="bli-wR-vAe" id="fD8-qM-g2U"/>
                                         <outlet property="memberSince" destination="wc0-Rp-d7V" id="mOQ-9a-sXZ"/>
                                         <outlet property="name" destination="vXw-eN-Mht" id="jtA-rZ-Q6i"/>
                                         <outlet property="profileDescription" destination="PFB-nb-jJ2" id="lpY-n5-RO0"/>
                                         <outlet property="profilePhoto" destination="uaO-FY-7MX" id="37O-YN-aMF"/>
+                                        <outletCollection property="gestureRecognizers" destination="8PQ-LW-3IP" appends="YES" id="ySp-nk-WLP"/>
                                     </connections>
                                 </view>
                                 <sections/>
@@ -523,9 +526,11 @@
                     <connections>
                         <outlet property="profileInfoHeader" destination="GiD-Mq-1Wr" id="opq-EF-9LL"/>
                         <outlet property="profileInfoTable" destination="PuN-9a-0hy" id="B1s-nA-a7h"/>
+                        <outlet property="tapGesture" destination="8PQ-LW-3IP" id="joo-NH-gHl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hDf-Ak-ivm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8PQ-LW-3IP"/>
             </objects>
             <point key="canvasLocation" x="1380" y="-1397.4512743628186"/>
         </scene>
@@ -704,7 +709,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="118" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hxd-eg-Aig">
-                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="EzY-Ez-2aW">
@@ -823,7 +828,7 @@
                             <constraint firstItem="oZF-nr-iiU" firstAttribute="centerY" secondItem="v1E-7n-Yq2" secondAttribute="centerY" id="ErP-Ae-nNW"/>
                             <constraint firstItem="Pcb-1H-Y5U" firstAttribute="leading" secondItem="v1E-7n-Yq2" secondAttribute="leading" id="RKO-Y4-RQW"/>
                             <constraint firstItem="Hxd-eg-Aig" firstAttribute="leading" secondItem="v1E-7n-Yq2" secondAttribute="leading" id="Vuh-pi-H7O"/>
-                            <constraint firstItem="Hxd-eg-Aig" firstAttribute="top" secondItem="Pcb-1H-Y5U" secondAttribute="bottom" constant="8" id="e9B-m9-1Et"/>
+                            <constraint firstItem="Hxd-eg-Aig" firstAttribute="top" secondItem="Pcb-1H-Y5U" secondAttribute="bottom" id="e9B-m9-1Et"/>
                             <constraint firstItem="oZF-nr-iiU" firstAttribute="centerX" secondItem="v1E-7n-Yq2" secondAttribute="centerX" id="fr0-TG-cb7"/>
                             <constraint firstAttribute="trailing" secondItem="Pcb-1H-Y5U" secondAttribute="trailing" id="mf6-LR-BUg"/>
                         </constraints>

@@ -16,7 +16,8 @@ class MyProfileViewController: UIViewController {
     // MARK: - outlets
     @IBOutlet weak var profileInfoTable: UITableView!
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
-    
+    @IBOutlet weak var tapGesture: UITapGestureRecognizer!
+
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -24,5 +25,12 @@ class MyProfileViewController: UIViewController {
 
         // send this information into the header
         profileInfoHeader.profile = profile
+        
+        tapGesture.addTarget(self, action: #selector(editProfile))
+        profileInfoTable.backgroundColor = UIColor(patternImage: UIImage(named: "brickwall")!)
+    }
+    
+    func editProfile() {
+        print("TEST")
     }
 }

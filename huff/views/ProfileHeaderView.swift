@@ -12,7 +12,7 @@ class ProfileHeaderView: UIView {
 
     var profile: Profile! {
         didSet {
-            
+            // TODO: fill out labels after defining the profile
         }
     }
     
