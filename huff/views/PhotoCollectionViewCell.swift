@@ -10,6 +10,8 @@ import UIKit
 
 
 class PhotoCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - outlets
     var photoView: UIImageView = {
         let pv = UIImageView()
         pv.contentMode = .scaleAspectFill
@@ -36,28 +38,31 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
+    
+    // MARK: - the model
     var photoURL: String? {
         didSet {
             guard let photoURL = photoURL else {
                 photoView.image = UIImage(named: "hash")
                 return
             }
+
             DispatchQueue.global(qos: DispatchQoS.userInteractive.qosClass).async {
                 let request = URLRequest(url: URL(string: photoURL + ":large")!) // TODO: add the photo size
                 _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
                     DispatchQueue.main.async(execute: {
-                        guard let data = data else {
+                        guard let data = data, let image = UIImage(data: data) else {
                             self.photoView.image = UIImage(named: "hash")
                             return
                         }
-                        self.photoView.image = UIImage(data: data)
-                        self.activityIndicator.stopAnimating()
-                        self.setNeedsDisplay()
+                        self.stopLoadingAndUpdateDisplay(image: image)
                     })
                 })
             }
         }
     }
+    
+    // MARK: - helper methods
     
     func setupView() {
         addSubview(photoView)
@@ -68,5 +73,11 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         photoView.addAnchorsTo(topAnchor: topAnchor, rightAnchor: rightAnchor, bottomAnchor: bottomAnchor, leftAnchor: leftAnchor)
         activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+    
+    func stopLoadingAndUpdateDisplay(image: UIImage) {
+        self.photoView.image = image
+        self.activityIndicator.stopAnimating()
+        self.setNeedsDisplay()
     }
 }

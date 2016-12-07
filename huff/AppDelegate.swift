@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // assign global appearance options
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Roboto", size:10)!], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Roboto", size:14)!], for: .normal)
         UIApplication.shared.statusBarStyle = .lightContent
 
         return true

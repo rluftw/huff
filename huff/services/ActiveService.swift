@@ -69,6 +69,6 @@ extension ActiveService {
     }
     
     fileprivate struct ParameterValues {
-        static let APIKey = "API KEY"
+        static let APIKey = "***REMOVED***"
     }
 }
