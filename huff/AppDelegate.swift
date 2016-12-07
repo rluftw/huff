@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Firebase
+import FirebaseAuthUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        FIRApp.configure()
+        
         // assign global appearance options
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Roboto", size:10)!], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Roboto", size:14)!], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Roboto", size:14)!,
+                                                             NSForegroundColorAttributeName: UIColor.white], for: .normal)
         UIApplication.shared.statusBarStyle = .lightContent
 
         return true
@@ -49,6 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
 
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication ?? "") ?? false
+    }
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
