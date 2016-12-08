@@ -38,6 +38,7 @@ class TwitterService: Service {
         }
     }
     
+    // *** NOTE *** the twitter search api only searched for tweets in the past 7 days
     func search(searchQuery: String = Constants.SearchQuery, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
         var bearerToken: String!
         // check if we have a bearer token in keychain

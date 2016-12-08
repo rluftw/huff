@@ -30,7 +30,15 @@ class MyProfileViewController: UIViewController {
         profileInfoTable.backgroundColor = UIColor(patternImage: UIImage(named: "brickwall")!)
     }
     
+    // MARK: - action
+    
+    @IBAction func logout(_ sender: Any) {
+        tabBarController?.dismiss(animated: true, completion: nil)
+    }
+    
     func editProfile() {
         print("TEST")
     }
+    
+    
 }

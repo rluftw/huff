@@ -19,11 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // configure firebase
         FIRApp.configure()
         
+        
+        for font in UIFont.fontNames(forFamilyName: "Roboto Mono") {
+            print(font)
+        }
+        
         // assign global appearance options
-        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Roboto", size:10)!], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Roboto", size:14)!,
+        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Regular", size:10)!], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:17)!,
                                                              NSForegroundColorAttributeName: UIColor.white], for: .normal)
         UIApplication.shared.statusBarStyle = .lightContent
 
