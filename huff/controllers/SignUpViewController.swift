@@ -100,7 +100,7 @@ extension SignUpViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("enter text field should return")
         let tag = textField.tag
-        guard let nextTextField = UIView().viewWithTag(tag+1) as? UITextField else {
+        guard let nextTextField = self.view.viewWithTag(tag+1) as? UITextField else {
             print("no next text field with tag \(tag+1) - returning true")
             return textField.resignFirstResponder()
         }
