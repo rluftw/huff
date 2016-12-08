@@ -22,11 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // configure firebase
         FIRApp.configure()
         
-        
-        for font in UIFont.fontNames(forFamilyName: "Roboto Mono") {
-            print(font)
-        }
-        
         // assign global appearance options
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Regular", size:10)!], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:17)!,
