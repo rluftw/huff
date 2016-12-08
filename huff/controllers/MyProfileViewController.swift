@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MyProfileViewController: UIViewController {
 
@@ -33,6 +34,9 @@ class MyProfileViewController: UIViewController {
     // MARK: - action
     
     @IBAction func logout(_ sender: Any) {
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch _ {}
         tabBarController?.dismiss(animated: true, completion: nil)
     }
     

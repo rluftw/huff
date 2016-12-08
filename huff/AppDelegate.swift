@@ -21,13 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // configure firebase
         FIRApp.configure()
-        
+
         // assign global appearance options
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Regular", size:10)!], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:17)!,
                                                              NSForegroundColorAttributeName: UIColor.white], for: .normal)
         UIApplication.shared.statusBarStyle = .lightContent
 
+        
+
+        
         return true
     }
 
