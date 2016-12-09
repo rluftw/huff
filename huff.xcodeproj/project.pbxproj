@@ -48,6 +48,7 @@
 		37CEB42A1DF666C800CF4446 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB4291DF666C800CF4446 /* Profile.swift */; };
 		37CEB42C1DF6670A00CF4446 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */; };
 		37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */; };
+		37DD92F21DFA5DBB00CD8D15 /* LoginOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DD92F11DFA5DBB00CD8D15 /* LoginOverlayView.swift */; };
 		37FE51781DEA8A3B00152D35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FE51771DEA8A3B00152D35 /* Security.framework */; };
 		F8DF945FB864627E096D82DC /* Pods_huff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5D1E3936C8DB0FCF1E3A56 /* Pods_huff.framework */; };
 /* End PBXBuildFile section */
@@ -121,6 +122,7 @@
 		37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyProfileViewController.swift; path = controllers/MyProfileViewController.swift; sourceTree = "<group>"; };
 		37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunOverviewViewController.swift; path = controllers/RunOverviewViewController.swift; sourceTree = "<group>"; };
 		37DD92F01DF8FF8C00CD8D15 /* huff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = huff.entitlements; sourceTree = "<group>"; };
+		37DD92F11DFA5DBB00CD8D15 /* LoginOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginOverlayView.swift; path = views/LoginOverlayView.swift; sourceTree = "<group>"; };
 		37FE51771DEA8A3B00152D35 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4B5D1E3936C8DB0FCF1E3A56 /* Pods_huff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_huff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2517DA2D62DE6BF8128C91 /* Pods-huff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-huff/Pods-huff.debug.xcconfig"; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */,
 				37CEB4271DF6604200CF4446 /* ProfileHeaderView.swift */,
 				373DBDEC1DF8D5FB00DB3698 /* UnderlinerTextField.swift */,
+				37DD92F11DFA5DBB00CD8D15 /* LoginOverlayView.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				37CEB4281DF6604200CF4446 /* ProfileHeaderView.swift in Sources */,
 				3730D6B21DEFD1B70065F3B7 /* ActiveService.swift in Sources */,
 				3730D6B41DEFD24C0065F3B7 /* Service.swift in Sources */,
+				37DD92F21DFA5DBB00CD8D15 /* LoginOverlayView.swift in Sources */,
 				375D318F1DEB2F9900829788 /* RegularTweetTableViewCell.swift in Sources */,
 				370677901DE9FF8E007EC3FD /* NetworkOperation.swift in Sources */,
 			);

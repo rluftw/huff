@@ -11,24 +11,18 @@ import FirebaseAuth
 
 class SignUpViewController: UIViewController {
 
-    @IBOutlet weak var firstName: UnderlinerTextField!
-    @IBOutlet weak var lastName: UnderlinerTextField!
+    // MARK: - outlets
     @IBOutlet weak var email: UnderlinerTextField!
     @IBOutlet weak var password: UnderlinerTextField!
     @IBOutlet weak var confirmPassword: UnderlinerTextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var textfieldContainerStack: UIStackView!
     
+    // MARK: - computed properties
     var readyToContinue: Bool {
         // check if they all have values
-        guard let firstName = self.firstName.text, let lastName = self.lastName.text, let email = self.email.text, let password = self.password.text, let confirmPassword = self.confirmPassword.text else {
-            self.giveWarning(title: "Sign Up", message: "It looks like one of the fields are empty")
-            return false
-        }
-        // verify the name values
-        guard firstName.characters.count > 0 && lastName.characters.count > 0 else {
-            // TODO: show an alert controller - mention that name fields must be filled
-            self.giveWarning(title: "Sign Up", message: "It looks like one of the name fields are empty")
+        guard let email = self.email.text, let password = self.password.text, let confirmPassword = self.confirmPassword.text else {
+            self.giveWarning(title: "Sign Up", message: "It looks like one or more fields are empty")
             return false
         }
         // verify the email
@@ -54,30 +48,32 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        firstName.delegate = self
-        lastName.delegate = self
         email.delegate = self
         password.delegate = self
         confirmPassword.delegate = self
+        
+        let endKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(endKeyboardTap)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
+    // MARK: - actions
     @IBAction func goToHome(_ sender: Any) {
         if readyToContinue {
             userInteraction(halt: true)
-            FIRAuth.auth()?.createUser(withEmail: email.text!, password: password.text!, completion: { (user, error) in
+            FIRAuth.auth()?.createUser(withEmail: email.text!, password: password.text!, completion: { (user: FIRUser?, error: Error?) in
                 guard error == nil else {
                     self.giveWarning(title: "Sign Up", message: error!.localizedDescription)
                     self.userInteraction(halt: false)
                     return
                 }
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "finishSignup", sender: self)
-                    self.userInteraction(halt: false)
-                }
+                
+                // dismiss this view controller
+                let window = (UIApplication.shared.delegate as? AppDelegate)?.window
+                window?.rootViewController?.dismiss(animated: false, completion: nil)
             })
         }
     }
@@ -99,22 +95,25 @@ class SignUpViewController: UIViewController {
         halt ? self.activityIndicator.startAnimating(): self.activityIndicator.stopAnimating()
         self.textfieldContainerStack.isUserInteractionEnabled = !halt
     }
+    
+    func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+
+    func getKeyboardHeight() -> CGSize {
+        return .zero
+    }
 }
 
 
 extension SignUpViewController: UITextFieldDelegate {
+    // MARK: - textfield delegate methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let tag = textField.tag
         guard let nextTextField = self.view.viewWithTag(tag+1) as? UITextField else {
-            // Since this is the last text field, initiate the go to home method
-            self.goToHome(self)
+            // Since this is the last text field
             return textField.resignFirstResponder()
         }
         return nextTextField.becomeFirstResponder()
-    }
-    
-    // helper method for keyboard shifting
-    func getKeyboardHeight() -> CGSize {
-        return .zero
     }
 }

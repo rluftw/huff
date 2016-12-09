@@ -15,20 +15,22 @@ import FirebaseAuthUI
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var authHandle: FIRAuthStateDidChangeListenerHandle!
+    var user: FIRUser?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // configure firebase
         FIRApp.configure()
+        
+        // configure the authorization
+        configureAuth()
 
         // assign global appearance options
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Regular", size:10)!], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:17)!,
                                                              NSForegroundColorAttributeName: UIColor.white], for: .normal)
         UIApplication.shared.statusBarStyle = .lightContent
-
-        
 
         
         return true
@@ -56,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+        
+        FIRAuth.auth()?.removeStateDidChangeListener(authHandle)
     }
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -109,3 +113,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate {
+    func configureAuth() {
+        self.authHandle = FIRAuth.auth()?.addStateDidChangeListener({ (auth: FIRAuth, user: FIRUser?) in
+            // check if there's a user
+            if let activeUser = user {
+                if self.user != activeUser {
+                    self.user = activeUser
+                    // home view controller will be the first screen the user sees
+                    let homeTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "home") as? UITabBarController
+
+                    DispatchQueue.main.async {
+                        self.deallocCurrentAndDisplayNew(vc: homeTabController!)
+                    }
+                }
+            } else {
+                // if no user - present the login home
+                let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginHome") as? UINavigationController
+                DispatchQueue.main.async {
+                    self.deallocCurrentAndDisplayNew(vc: loginVC!)
+                }
+            }
+        })
+    }
+    
+    // MARK: - helper method
+    
+    func deallocCurrentAndDisplayNew(vc: UIViewController) {
+        self.window?.rootViewController?.dismiss(animated: false, completion: nil)
+        self.window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
+    }
+}

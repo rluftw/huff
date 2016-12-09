@@ -18,6 +18,7 @@ class MyProfileViewController: UIViewController {
     @IBOutlet weak var profileInfoTable: UITableView!
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     
     // MARK: - lifecycle
@@ -28,21 +29,29 @@ class MyProfileViewController: UIViewController {
         profileInfoHeader.profile = profile
         
         tapGesture.addTarget(self, action: #selector(editProfile))
-        profileInfoTable.backgroundColor = UIColor(patternImage: UIImage(named: "brickwall")!)
     }
     
     // MARK: - action
     
     @IBAction func logout(_ sender: Any) {
-        do {
-            try FIRAuth.auth()?.signOut()
-        } catch _ {}
-        tabBarController?.dismiss(animated: true, completion: nil)
+        giveWarning(title: "Logout", message: "Are you sure you'd like to log off?") { (action) -> Void in
+            do {
+                try FIRAuth.auth()?.signOut()
+            } catch _ {}
+            self.tabBarController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     func editProfile() {
         print("TEST")
     }
     
+    // MARK: - helper methods
+    func giveWarning(title: String, message: String, yesAction: @escaping (UIAlertAction)->Void) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        alertVC.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: yesAction))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
     
 }

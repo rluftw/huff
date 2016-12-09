@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
     // MARK: - outlets
     @IBOutlet weak var quoteLabel: UILabel!
-    
+
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Email verified: \(FIRAuth.auth()?.currentUser?.isEmailVerified ?? false)")
         
         // TODO: populate quoteLabel based on the remote config on firebase
         quoteLabel?.sizeToFit()
@@ -29,6 +32,6 @@ class HomeViewController: UIViewController {
     @IBAction func showRunHistory(_ sender: Any) {
         // TODO: show run history view
     }
-    
-    
+ 
+
 }

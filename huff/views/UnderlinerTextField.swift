@@ -8,14 +8,25 @@
 
 import UIKit
 
+/*
+ color palette
+ =============
+ red - 204, 0, 0
+ yellow - 255, 193, 0
+ green - 0, 153, 0
+ blue - 0,102,204
+ */
+
+
 @IBDesignable
 class UnderlinerTextField: UITextField {
 
-    @IBInspectable var underlineColor: UIColor = .black
-    @IBInspectable var placeholderColor: UIColor = .black
+    @IBInspectable var underlineColor: UIColor = UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1)
+    @IBInspectable var placeholderColor: UIColor = UIColor(white: 1, alpha: 0.5)
 
     
-    override func draw(_ rect: CGRect) {
+    override func draw(_ rect: CGRect) {        
+        // set the underline
         let bottomBorder = CALayer()
         bottomBorder.borderWidth = 2.0
         bottomBorder.frame = CGRect(x: 0, y: bounds.size.height-2.0, width: bounds.size.width, height: 2.0)
