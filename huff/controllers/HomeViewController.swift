@@ -8,22 +8,32 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
 
 class HomeViewController: UIViewController {
 
     // MARK: - outlets
     @IBOutlet weak var quoteLabel: UILabel!
+    @IBOutlet weak var quoteAuthor: UILabel!
+    
+    // MARK: - properties
+    var remoteConfig: FIRRemoteConfig!
 
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Email verified: \(FIRAuth.auth()?.currentUser?.isEmailVerified ?? false)")
+        // configure the remote configuration
+        configureRemoteConfig()
         
-        // TODO: populate quoteLabel based on the remote config on firebase
-        quoteLabel?.sizeToFit()
+        // fetch the remote configurations
+        fetchConfigurations()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     // MARK: - actions
     @IBAction func startARun(_ sender: Any) {
         performSegue(withIdentifier: "beginRun", sender: self)
@@ -33,5 +43,41 @@ class HomeViewController: UIViewController {
         // TODO: show run history view
     }
  
+    
+    // MARK: - configurations for firebase
+    func configureRemoteConfig() {
+        let settings = FIRRemoteConfigSettings(developerModeEnabled: true)
+        remoteConfig = FIRRemoteConfig.remoteConfig()
+        remoteConfig.configSettings = settings!
+    }
 
+    func fetchConfigurations() {
+        var expirtationDuration: TimeInterval!
+        if remoteConfig.configSettings.isDeveloperModeEnabled == true {
+            expirtationDuration = 0
+        }
+        
+        remoteConfig.fetch(withExpirationDuration: expirtationDuration) { (status: FIRRemoteConfigFetchStatus, error:Error?) in
+            if status == .success {
+                print("remote fetch successful")
+                
+                self.remoteConfig.activateFetched()
+                let quote = self.remoteConfig["quote"]
+                let author = self.remoteConfig["author"]
+                
+                if quote.source != .static && author.source != .static {
+                    DispatchQueue.main.async(execute: {
+                        self.quoteLabel.text = quote.stringValue
+                        self.quoteAuthor.text = author.stringValue
+                        
+                        print("applying the quote: \(quote.stringValue)\nwith the author as: \(author.stringValue)")
+                        
+                        
+                        self.quoteLabel.sizeToFit()
+                        self.quoteAuthor.sizeToFit()
+                    })
+                }
+            }
+        }
+    }
 }
