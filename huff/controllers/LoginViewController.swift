@@ -38,7 +38,6 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
         loginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             guard error == nil, let accessToken = result?.token else {
                 self.giveWarning(title: "Facebook Login", message: "Uh-oh, looks like there was an error logging in with your Facebook account")
-                print("error: \(error!.localizedDescription)")
                 self.userInteraction(halt: false)
                 return
             }
@@ -48,7 +47,6 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
             FIRAuth.auth()?.signIn(with: credential, completion: { (user: FIRUser?, error: Error?) in
                 guard error == nil else {
                     self.giveWarning(title: "Facebook Login", message: "Snaps! looks like there was an error logging in with your Facebook account")
-                    print("error: \(error!.localizedDescription)")
                     self.userInteraction(halt: false)
                     return
                 }
@@ -113,7 +111,6 @@ extension LoginViewController: GIDSignInUIDelegate, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         guard error == nil else {
             self.giveWarning(title: "Login", message: "Uh-oh, looks like there was an error logging in with your Google account")
-            print("error: \(error!.localizedDescription)")
             self.userInteraction(halt: false)
             return
         }
@@ -126,16 +123,11 @@ extension LoginViewController: GIDSignInUIDelegate, GIDSignInDelegate {
         FIRAuth.auth()?.signIn(with: credentials, completion: { (user: FIRUser?, error: Error?) in
             guard error == nil else {
                 self.giveWarning(title: "Login", message: "Snaps! looks like there was an error logging in with your Google account")
-                print("error: \(error!.localizedDescription)")
                 self.userInteraction(halt: false)
                 return
             }
             self.userInteraction(halt: false)
         })
         
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        print("Google account disconnected")
     }
 }

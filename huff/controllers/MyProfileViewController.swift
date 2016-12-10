@@ -10,9 +10,9 @@ import UIKit
 import FirebaseAuth
 
 class MyProfileViewController: UIViewController {
-
-    // MARK: - properties
-    var profile: Profile!
+    
+    // TODO: change this profile into a custom profile model
+    var profile: FIRUser!
     
     // MARK: - outlets
     @IBOutlet weak var profileInfoTable: UITableView!
@@ -24,7 +24,11 @@ class MyProfileViewController: UIViewController {
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // there should always be a current user, otherwise 
+        // app delegate would automaticlly sign this app off
+        profile = FIRAuth.auth()!.currentUser!
+        
         // send this information into the header
         profileInfoHeader.profile = profile
         

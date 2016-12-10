@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 
 class SignUpViewController: UIViewController {
@@ -17,6 +18,10 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var confirmPassword: UnderlinerTextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var textfieldContainerStack: UIStackView!
+
+    // MARK: - properties
+    
+    var userRefHandle: FIRDatabaseReference!
     
     // MARK: - computed properties
     var readyToContinue: Bool {
@@ -80,6 +85,12 @@ class SignUpViewController: UIViewController {
         }
     }
 
+    // MARK: - firebase database configurations
+    func configureDB() {
+        
+    }
+    
+    
     // MARK: - helper methods
     func isValidEmail(testStr: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
@@ -102,9 +113,7 @@ class SignUpViewController: UIViewController {
         self.view.endEditing(true)
     }
 
-    func getKeyboardHeight() -> CGSize {
-        return .zero
-    }
+    
 }
 
 

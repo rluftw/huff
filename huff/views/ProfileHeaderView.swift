@@ -7,12 +7,35 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileHeaderView: UIView {
 
-    var profile: Profile! {
+    var profile: FIRUser! {
         didSet {
-            // TODO: fill out labels after defining the profile
+            name.text = profile.displayName ?? profile.email?.components(separatedBy: "@")[0] ?? profile.uid
+            
+            if let photoURL = profile.photoURL{
+                let request = URLRequest(url: photoURL)
+                _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
+                    guard error == nil else {
+                        self.activityIndicator.stopAnimating()
+                        return
+                    }
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.profilePhoto.image = UIImage(data: data!)
+                        self.activityIndicator.stopAnimating()
+                    })
+                })
+            } else {
+                self.activityIndicator.stopAnimating()
+            }
+            
+            isUserInteractionEnabled = true
+        }
+        willSet {
+            isUserInteractionEnabled = false
         }
     }
     
@@ -21,5 +44,4 @@ class ProfileHeaderView: UIView {
     @IBOutlet weak var profileDescription: UILabel!
     @IBOutlet weak var memberSince: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
 }
