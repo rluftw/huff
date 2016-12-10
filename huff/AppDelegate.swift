@@ -76,12 +76,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firebaseHandledURL = FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication ?? "") ?? false
         let facebookHandledURL = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
         let googleHandleURL = GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
-
+        
+        // if anyone of the services handled the url, return yes
         return firebaseHandledURL || facebookHandledURL || googleHandleURL
-    }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
     }
     
     // MARK: - Core Data stack
