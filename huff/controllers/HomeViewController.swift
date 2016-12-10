@@ -30,10 +30,6 @@ class HomeViewController: UIViewController {
         fetchConfigurations()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     // MARK: - actions
     @IBAction func startARun(_ sender: Any) {
         performSegue(withIdentifier: "beginRun", sender: self)
@@ -42,7 +38,6 @@ class HomeViewController: UIViewController {
     @IBAction func showRunHistory(_ sender: Any) {
         // TODO: show run history view
     }
- 
     
     // MARK: - configurations for firebase
     func configureRemoteConfig() {
@@ -52,12 +47,9 @@ class HomeViewController: UIViewController {
     }
 
     func fetchConfigurations() {
-        var expirtationDuration: TimeInterval!
-        if remoteConfig.configSettings.isDeveloperModeEnabled == true {
-            expirtationDuration = 0
-        }
-        
-        remoteConfig.fetch(withExpirationDuration: expirtationDuration) { (status: FIRRemoteConfigFetchStatus, error:Error?) in
+        /*
+         reenable this for non developer mode
+         remoteConfig.fetch { (status: FIRRemoteConfigFetchStatus, error: Error?) in
             if status == .success {
                 print("remote fetch successful")
                 
@@ -67,17 +59,40 @@ class HomeViewController: UIViewController {
                 
                 if quote.source != .static && author.source != .static {
                     DispatchQueue.main.async(execute: {
-                        self.quoteLabel.text = quote.stringValue
-                        self.quoteAuthor.text = author.stringValue
+                        self.quoteLabel.text = "\"" + (quote.stringValue ?? "") + "\""
+                        self.quoteAuthor.text = "- " + (author.stringValue ?? "")
                         
-                        print("applying the quote: \(quote.stringValue)\nwith the author as: \(author.stringValue)")
+                        self.quoteLabel.frame = self.quoteLabel.bounds.insetBy(dx: 10, dy: 10)
+                        // self.quoteLabel.setNeedsDisplay()
                         
-                        
-                        self.quoteLabel.sizeToFit()
-                        self.quoteAuthor.sizeToFit()
+                        print("applying the quote: \(quote.stringValue ?? "")\nwith the author as: \(author.stringValue ?? "")")
                     })
                 }
             }
+        }*/
+        
+        var expirationDuration: TimeInterval!
+        if remoteConfig.configSettings.isDeveloperModeEnabled {
+            expirationDuration = 0
+        }
+        
+        remoteConfig.fetch(withExpirationDuration: expirationDuration) { (status, error) in
+            print("remote fetch successful")
+            
+            self.remoteConfig.activateFetched()
+            let quote = self.remoteConfig["quote"]
+            let author = self.remoteConfig["author"]
+            
+            if quote.source != .static && author.source != .static {
+                DispatchQueue.main.async(execute: {
+                    self.quoteLabel.text = "\"" + (quote.stringValue ?? "") + "\""
+                    self.quoteAuthor.text = "- " + (author.stringValue ?? "")
+                    
+                    print("applying the quote: \(quote.stringValue ?? "")\nwith the author as: \(author.stringValue ?? "")")
+                })
+            }
+
         }
     }
+    
 }

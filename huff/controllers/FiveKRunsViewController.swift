@@ -62,6 +62,8 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
                         print("\(run)\n\n")
                     }
                 }
+                
+                print("Thread: \(Thread().isMainThread ? "Main": "Not main")")
                 DispatchQueue.main.async {
                     self.fiveKTable.reloadData()
                     self.activityIndicator.stopAnimating()

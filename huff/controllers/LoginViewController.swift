@@ -8,9 +8,21 @@
 
 import UIKit
 import FirebaseAuth
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 class LoginViewController: UIViewController, LoginOverlayViewDelegate {
 
+    // MARK: - outlets
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    lazy var loginOverlay: LoginOverlayView = {
+        let overlay = LoginOverlayView(frame: self.view.bounds)
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        overlay.delegate = self
+        return overlay
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,20 +30,36 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     }
 
     @IBAction func facebookLogin(_ sender: Any) {
+        self.userInteraction(halt: true)
+        let loginManager = FBSDKLoginManager()
+        loginManager.logIn(withReadPermissions: ["public_profile"], from: self) { (result, error) in
+            guard error == nil, let accessToken = result?.token else {
+                self.giveWarning(title: "Facebook Login", message: "Uh-oh, looks like there was an error logging in with your Facebook account")
+                self.userInteraction(halt: false)
+                return
+            }
+ 
+            // use the token to log in with firebase
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            FIRAuth.auth()?.signIn(with: credential, completion: { (user: FIRUser?, error: Error?) in
+                guard error == nil else {
+                    self.giveWarning(title: "Facebook Login", message: "Snaps! looks like there was an error logging in with your Facebook account")
+                    self.userInteraction(halt: false)
+                    return
+                }
+                self.userInteraction(halt: false)
+            })
+        }
     }
     
     @IBAction func googleLogin(_ sender: Any) {
+        
     }
 
     @IBAction func emailSignup(_ sender: Any) {
     }
     
     @IBAction func emailLogin(_ sender: Any) {
-        let loginOverlay = LoginOverlayView(frame: self.view.bounds)
-        loginOverlay.translatesAutoresizingMaskIntoConstraints = false
-        loginOverlay.layer.cornerRadius = 5
-        loginOverlay.delegate = self
-        
         self.view.addSubview(loginOverlay)
         
         loginOverlay.addAnchorsTo(topAnchor: self.view.topAnchor, rightAnchor: self.view.rightAnchor, bottomAnchor: self.view.bottomAnchor, leftAnchor: self.view.leftAnchor, topConstant: 0, rightConstant: 0, bottomConstant: 0, leftConstant: 0)
@@ -45,6 +73,7 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     }
     
     func login(email: String?, password: String?) {
+        self.userInteraction(halt: true)
         guard let email = email else {
             self.giveWarning(title: "Login", message: "That's a funny looking email you have there")
             return
@@ -56,8 +85,10 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
             guard error == nil else {
                 self.giveWarning(title: "Login", message: error!.localizedDescription)
+                self.userInteraction(halt: false)
                 return
             }
+            self.userInteraction(halt: false)
         })
     }
     
@@ -66,5 +97,10 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alertVC, animated: true, completion: nil)
+    }
+    
+    func userInteraction(halt: Bool) {
+        halt ? activityIndicator.startAnimating():  self.activityIndicator.stopAnimating()
+        self.view.isUserInteractionEnabled = !halt
     }
 }

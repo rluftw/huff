@@ -36,6 +36,7 @@
 		37714A0D1DE883F0002ACB3A /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A0C1DE883F0002ACB3A /* TweetsViewController.swift */; };
 		37714A0F1DE88865002ACB3A /* ImageTweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A0E1DE88865002ACB3A /* ImageTweetTableViewCell.swift */; };
 		37714A111DE89020002ACB3A /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A101DE89020002ACB3A /* Tweet.swift */; };
+		3775204A1DFB9C5300027D89 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377520491DFB9C5300027D89 /* FBSDKLoginKit.framework */; };
 		3782605A1DEB3659003C5F13 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378260591DEB3659003C5F13 /* PhotoCollectionViewCell.swift */; };
 		3782605C1DED2A5E003C5F13 /* OverlayPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */; };
 		3782605E1DEDABDF003C5F13 /* UIViewAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */; };
@@ -109,6 +110,7 @@
 		37714A0C1DE883F0002ACB3A /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetsViewController.swift; path = controllers/TweetsViewController.swift; sourceTree = "<group>"; };
 		37714A0E1DE88865002ACB3A /* ImageTweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageTweetTableViewCell.swift; path = views/ImageTweetTableViewCell.swift; sourceTree = "<group>"; };
 		37714A101DE89020002ACB3A /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = model/Tweet.swift; sourceTree = "<group>"; };
+		377520491DFB9C5300027D89 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		378260591DEB3659003C5F13 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionViewCell.swift; path = views/PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		3782605B1DED2A5E003C5F13 /* OverlayPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverlayPhotoView.swift; path = views/OverlayPhotoView.swift; sourceTree = "<group>"; };
 		3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewAnchor.swift; path = views/UIViewAnchor.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			files = (
 				37FE51781DEA8A3B00152D35 /* Security.framework in Frameworks */,
 				F8DF945FB864627E096D82DC /* Pods_huff.framework in Frameworks */,
+				3775204A1DFB9C5300027D89 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +317,7 @@
 		37FE51761DEA8A3B00152D35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				377520491DFB9C5300027D89 /* FBSDKLoginKit.framework */,
 				373DBDEE1DF8F8B500DB3698 /* Photos.framework */,
 				37FE51771DEA8A3B00152D35 /* Security.framework */,
 				4B5D1E3936C8DB0FCF1E3A56 /* Pods_huff.framework */,
@@ -712,6 +716,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = huff/huff.entitlements;
 				DEVELOPMENT_TEAM = 9DDBF23Y4C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = huff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huff;
@@ -730,6 +738,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = huff/huff.entitlements;
 				DEVELOPMENT_TEAM = 9DDBF23Y4C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = huff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huff;

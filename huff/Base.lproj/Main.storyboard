@@ -99,24 +99,23 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jcX-7t-fUn">
                                         <rect key="frame" x="10" y="82" width="355" height="105"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vx5-Id-9Bt">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A quote belongs here, but I'm not sure what happened." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vx5-Id-9Bt">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="90"/>
                                                 <color key="backgroundColor" red="0.0" green="0.40000000000000002" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="hVj-3n-wr7"/>
                                                 </constraints>
-                                                <string key="text">"The ultimate measure of a man is not where he stands in moments of comfort and convenience, but where he stands at times of challenge and controversy."</string>
                                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-Martin Luther King Jr." textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="srv-lW-K7F">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-Richard Lu" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="srv-lW-K7F">
                                                 <rect key="frame" x="0.0" y="90" width="355" height="15"/>
                                                 <color key="backgroundColor" red="0.0" green="0.40000000000000002" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="6ym-Yf-q0E"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="RobotoMono-Bold" family="Roboto Mono" pointSize="22"/>
+                                                <fontDescription key="fontDescription" name="RobotoMono-Bold" family="Roboto Mono" pointSize="11"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -126,6 +125,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="jcX-7t-fUn" secondAttribute="trailing" constant="10" id="CbT-vB-JXc"/>
+                                    <constraint firstItem="jcX-7t-fUn" firstAttribute="centerX" secondItem="YUc-0Y-Ir4" secondAttribute="centerX" id="WSe-qI-aky"/>
                                     <constraint firstItem="jcX-7t-fUn" firstAttribute="leading" secondItem="YUc-0Y-Ir4" secondAttribute="leading" constant="10" id="WkS-jc-0l1"/>
                                     <constraint firstItem="jcX-7t-fUn" firstAttribute="centerY" secondItem="YUc-0Y-Ir4" secondAttribute="centerY" id="xPN-3u-Nhs"/>
                                 </constraints>
@@ -850,6 +850,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hCZ-Pr-ejc">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.zPosition">
+                                        <integer key="value" value="9999"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -858,6 +866,7 @@
                             <constraint firstItem="R6F-cG-Jmt" firstAttribute="trailing" secondItem="uEn-AP-EV5" secondAttribute="trailing" constant="10" id="6Y5-Fb-yim"/>
                             <constraint firstItem="ARR-oq-ICu" firstAttribute="leading" secondItem="2fk-cU-Y9E" secondAttribute="leadingMargin" id="8Ca-CL-LgF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="C1h-Tk-zGc" secondAttribute="trailing" id="B7h-RL-zGA"/>
+                            <constraint firstItem="hCZ-Pr-ejc" firstAttribute="centerY" secondItem="2fk-cU-Y9E" secondAttribute="centerY" id="MVz-jI-pWa"/>
                             <constraint firstItem="Tn6-Ff-CxG" firstAttribute="top" secondItem="ARR-oq-ICu" secondAttribute="bottom" constant="17" id="Neu-xO-qi0"/>
                             <constraint firstItem="uEn-AP-EV5" firstAttribute="centerY" secondItem="2fk-cU-Y9E" secondAttribute="centerY" constant="-100" id="QNz-6U-xCR"/>
                             <constraint firstItem="eQ1-62-m0D" firstAttribute="top" secondItem="FYW-rK-QXQ" secondAttribute="bottom" constant="8" id="RtL-uK-fNk"/>
@@ -869,6 +878,7 @@
                             <constraint firstItem="Tn6-Ff-CxG" firstAttribute="leading" secondItem="2fk-cU-Y9E" secondAttribute="leadingMargin" id="aSh-LL-6B3"/>
                             <constraint firstItem="eQ1-62-m0D" firstAttribute="top" secondItem="C1h-Tk-zGc" secondAttribute="bottom" constant="17" id="arE-yB-Psl"/>
                             <constraint firstItem="C1h-Tk-zGc" firstAttribute="leading" secondItem="FYW-rK-QXQ" secondAttribute="trailing" constant="8" id="fS7-Ef-0UT"/>
+                            <constraint firstItem="hCZ-Pr-ejc" firstAttribute="centerX" secondItem="2fk-cU-Y9E" secondAttribute="centerX" id="gUO-M5-Y9S"/>
                             <constraint firstItem="eQ1-62-m0D" firstAttribute="leading" secondItem="2fk-cU-Y9E" secondAttribute="leadingMargin" id="ioF-FR-Mv3"/>
                             <constraint firstItem="FYW-rK-QXQ" firstAttribute="centerX" secondItem="2fk-cU-Y9E" secondAttribute="centerX" id="npV-Ao-R8b"/>
                             <constraint firstItem="bti-E0-Aj8" firstAttribute="top" secondItem="eQ1-62-m0D" secondAttribute="bottom" constant="17" id="quN-jJ-LAp"/>
@@ -883,6 +893,9 @@
                             <color key="tintColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="hCZ-Pr-ejc" id="bTI-I8-Rsu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1j-mv-Ejs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1304,7 +1317,7 @@
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qye-i5-HOL">
-                                <rect key="frame" x="69.5" y="553" width="236.5" height="36"/>
+                                <rect key="frame" x="70" y="553" width="236.5" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up, you agree to the " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekf-hw-XEh">
                                         <rect key="frame" x="0.0" y="0.0" width="236.5" height="16"/>
