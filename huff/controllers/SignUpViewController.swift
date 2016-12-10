@@ -71,6 +71,8 @@ class SignUpViewController: UIViewController {
                     return
                 }
                 
+                user?.sendEmailVerification(completion: nil)
+                
                 // dismiss this view controller
                 let window = (UIApplication.shared.delegate as? AppDelegate)?.window
                 window?.rootViewController?.dismiss(animated: false, completion: nil)

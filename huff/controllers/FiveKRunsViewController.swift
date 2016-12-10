@@ -59,13 +59,15 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
                     // create the array of runs available
                     if let run = ActiveRun(result: result) {
                         self.activeRuns.append(run)
-                        print("\(run)\n\n")
+                        print(run)
+                        DispatchQueue.main.async {
+                            // use this instead of reload table to balance out ui update
+                            self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .none)
+                        }
                     }
                 }
-                
-                print("Thread: \(Thread().isMainThread ? "Main": "Not main")")
                 DispatchQueue.main.async {
-                    self.fiveKTable.reloadData()
+                    // self.fiveKTable.reloadData()
                     self.activityIndicator.stopAnimating()
                     self.fiveKTable.isUserInteractionEnabled = true
                 }

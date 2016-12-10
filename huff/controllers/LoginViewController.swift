@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
 import FBSDKCoreKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController, LoginOverlayViewDelegate {
 
@@ -26,13 +27,15 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
         view.backgroundColor = UIColor(patternImage: UIImage(named: "smooth_wall")!)
     }
 
     @IBAction func facebookLogin(_ sender: Any) {
         self.userInteraction(halt: true)
         let loginManager = FBSDKLoginManager()
-        loginManager.logIn(withReadPermissions: ["public_profile"], from: self) { (result, error) in
+        loginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             guard error == nil, let accessToken = result?.token else {
                 self.giveWarning(title: "Facebook Login", message: "Uh-oh, looks like there was an error logging in with your Facebook account")
                 self.userInteraction(halt: false)
@@ -53,7 +56,8 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     }
     
     @IBAction func googleLogin(_ sender: Any) {
-        
+        self.userInteraction(halt: true)
+        GIDSignIn.sharedInstance().signIn()
     }
 
     @IBAction func emailSignup(_ sender: Any) {
@@ -102,5 +106,33 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     func userInteraction(halt: Bool) {
         halt ? activityIndicator.startAnimating():  self.activityIndicator.stopAnimating()
         self.view.isUserInteractionEnabled = !halt
+    }
+}
+
+extension LoginViewController: GIDSignInUIDelegate, GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        guard error == nil else {
+            self.giveWarning(title: "Login", message: "Uh-oh, looks like there was an error logging in with your Google account")
+            self.userInteraction(halt: false)
+            return
+        }
+        
+        let authentication = user!.authentication
+        let idToken = authentication?.idToken ?? ""
+        let accessToken = authentication?.accessToken ?? ""
+        
+        let credentials = FIRGoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+        FIRAuth.auth()?.signIn(with: credentials, completion: { (user: FIRUser?, error: Error?) in
+            guard error == nil else {
+                self.giveWarning(title: "Login", message: "Snaps! looks like there was an error logging in with your Google account")
+                self.userInteraction(halt: false)
+                return
+            }
+            self.userInteraction(halt: false)
+        })
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("Google account disconnected")
     }
 }

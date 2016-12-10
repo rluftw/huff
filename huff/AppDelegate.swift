@@ -11,6 +11,7 @@ import CoreData
 import Firebase
 import FirebaseAuthUI
 import FBSDKLoginKit
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,12 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // configure firebase
-        FIRApp.configure()
-        
-        // configure the authorization
-        configureAuth()
-
         // assign global appearance options
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Regular", size:10)!], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:17)!,
@@ -34,8 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
 
         
+        // configure firebase
+        FIRApp.configure()
+        
+        // configure the authorization
+        configureAuth()
+
+        
         // configure facebook login for the native fb app
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // configure google login
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         
         return true
     }
@@ -70,8 +75,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let firebaseHandledURL = FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication ?? "") ?? false
         let facebookHandledURL = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        
-        return firebaseHandledURL || facebookHandledURL
+        let googleHandleURL = GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+
+        return firebaseHandledURL || facebookHandledURL || googleHandleURL
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
     }
     
     // MARK: - Core Data stack
@@ -121,7 +131,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
 extension AppDelegate {
+    // MARK: - firebase account state listener
+    
     func configureAuth() {
         self.authHandle = FIRAuth.auth()?.addStateDidChangeListener({ (auth: FIRAuth, user: FIRUser?) in
             // check if there's a user
@@ -153,3 +166,4 @@ extension AppDelegate {
         self.window?.makeKeyAndVisible()
     }
 }
+

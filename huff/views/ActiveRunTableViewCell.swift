@@ -21,7 +21,7 @@ class ActiveRunTableViewCell: UITableViewCell {
                 let components = calendar.dateComponents([.day], from: today, to: runDate)
                 let day = components.day ?? 0
                 
-                dateLabel.text = day == 0 ? "tomorrow": "\(day) days till run"
+                dateLabel.text = day == 0 ? "tomorrow": "\(day) day(s) till run"
             } else {
                 dateLabel.text = ""
             }

@@ -154,7 +154,11 @@
                             <constraint firstItem="4Z2-DA-6tc" firstAttribute="trailing" secondItem="XuC-Lb-5d0" secondAttribute="trailingMargin" id="rNu-4q-JTv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="TWH-Nq-L36"/>
+                    <navigationItem key="navigationItem" title="Home" id="TWH-Nq-L36">
+                        <barButtonItem key="rightBarButtonItem" image="mailbox" id="kcf-7v-5hQ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="quoteAuthor" destination="srv-lW-K7F" id="WKq-G3-Wwm"/>
                         <outlet property="quoteLabel" destination="Vx5-Id-9Bt" id="89c-Bf-cuM"/>
@@ -516,11 +520,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Profile" id="atA-sy-OSv">
-                        <barButtonItem key="rightBarButtonItem" image="logout" id="3Nc-fM-ZvV">
+                        <barButtonItem key="leftBarButtonItem" image="logout" id="3Nc-fM-ZvV">
                             <color key="tintColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="logout:" destination="72t-Up-pdD" id="Gly-YQ-e2f"/>
                             </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="settings" id="Jiz-Y9-uX3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -601,26 +608,26 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZd-k7-93Q">
-                                                            <rect key="frame" x="8" y="37" width="343" height="63.5"/>
+                                                            <rect key="frame" x="8" y="37" width="343" height="42"/>
                                                             <string key="text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</string>
                                                             <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hFb-cD-S6S">
-                                                            <rect key="frame" x="8" y="129" width="343" height="16"/>
+                                                            <rect key="frame" x="8" y="131" width="343" height="14"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrw-5M-3fF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="14"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap for photos" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bm3-bM-OgV">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="171.5" height="16"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="171.5" height="14"/>
                                                                             <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="9"/>
                                                                             <color key="textColor" red="1" green="0.75686274509999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5XC-zD-sit">
-                                                                            <rect key="frame" x="171.5" y="0.0" width="171.5" height="16"/>
+                                                                            <rect key="frame" x="171.5" y="0.0" width="171.5" height="14"/>
                                                                             <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
@@ -852,6 +859,7 @@
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hCZ-Pr-ejc">
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.zPosition">
                                         <integer key="value" value="9999"/>
@@ -1450,9 +1458,11 @@
         <image name="home" width="21" height="21"/>
         <image name="huff logo" width="200" height="200"/>
         <image name="logout" width="21" height="21"/>
+        <image name="mailbox" width="21" height="21"/>
         <image name="profile" width="21" height="21"/>
         <image name="run" width="85" height="85"/>
         <image name="runs" width="21" height="21"/>
+        <image name="settings" width="21" height="21"/>
         <image name="tweets" width="21" height="21"/>
     </resources>
 </document>
