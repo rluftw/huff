@@ -21,8 +21,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let ai = UIActivityIndicatorView()
-        ai.startAnimating()
+        let ai = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        ai.color = UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1)
         ai.hidesWhenStopped = true
         ai.translatesAutoresizingMaskIntoConstraints = false
         return ai
@@ -38,21 +38,21 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
-    
     // MARK: - the model
     var photoURL: String? {
         didSet {
+            setImage(image: nil)
+            activityIndicator.startAnimating()
             guard let photoURL = photoURL else {
-                photoView.image = UIImage(named: "hash")
                 return
             }
 
             DispatchQueue.global(qos: DispatchQoS.userInteractive.qosClass).async {
-                let request = URLRequest(url: URL(string: photoURL + ":large")!) // TODO: add the photo size
+                let request = URLRequest(url: URL(string: photoURL + ":large")!) 
                 _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
                     DispatchQueue.main.async(execute: {
                         guard let data = data, let image = UIImage(data: data) else {
-                            self.photoView.image = UIImage(named: "hash")
+                            self.setImage(image: nil)
                             return
                         }
                         self.stopLoadingAndUpdateDisplay(image: image)
@@ -76,8 +76,22 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }
     
     func stopLoadingAndUpdateDisplay(image: UIImage) {
-        self.photoView.image = image
-        self.activityIndicator.stopAnimating()
-        self.setNeedsDisplay()
+        setImage(image: image)
+        activityIndicator.stopAnimating()
+        setNeedsDisplay()
+    }
+    
+    
+    // sets up the image, defaults if the image is nil
+    func setImage(image: UIImage?) {
+        activityIndicator.stopAnimating()
+        guard let image = image else {
+            photoView.contentMode = .center
+            photoView.image = UIImage(named: "hash")
+            return
+        }
+        
+        photoView.contentMode = .scaleAspectFill
+        photoView.image = image
     }
 }

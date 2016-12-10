@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OverlayPhotoViewDelegate: class {
+    func close()
+}
+
 class OverlayPhotoView: UIView {
     
     lazy var cancelButton: UIButton = {
@@ -17,13 +21,18 @@ class OverlayPhotoView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
         button.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        button.addTarget(self, action: #selector(exitView), for: .touchUpInside)
         return button
     }()
     
     
     // MARK: - properties
-    var photoURLS: [String]?
+    var photoURLS: [String]? {
+        didSet {
+            photoCollectionView.reloadData()
+        }
+    }
+    weak var delegate: OverlayPhotoViewDelegate?
     
     lazy var photoCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -50,7 +59,6 @@ class OverlayPhotoView: UIView {
         super.init(coder: aDecoder)
         setupView()
     }
-    
     
     // MARK: - helper methods
     func setupView() {
@@ -80,14 +88,19 @@ class OverlayPhotoView: UIView {
         photoCollectionView.addAnchorsTo(topAnchor: nil, rightAnchor: rightAnchor, bottomAnchor: nil, leftAnchor: leftAnchor)
     }
     
-    func cancel() {
-        removeFromSuperview()
+    func exitView() {
+        photoURLS?.removeAll(keepingCapacity: false)
+        
+        // ensures that the next time overlay is shown, it'll be empty
+        delegate?.close()
     }
+    
 }
 
 extension OverlayPhotoView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+        
         cell.photoURL = photoURLS![indexPath.row]
         return cell
     }

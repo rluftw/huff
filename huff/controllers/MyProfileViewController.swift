@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
 
 class MyProfileViewController: UIViewController {
     
@@ -39,10 +40,17 @@ class MyProfileViewController: UIViewController {
     
     @IBAction func logout(_ sender: Any) {
         giveWarning(title: "Logout", message: "Are you sure you'd like to log off?") { (action) -> Void in
+            let providerID = FIRAuth.auth()?.currentUser?.providerID ?? "N/A"
             do {
                 try FIRAuth.auth()?.signOut()
-            } catch _ {}
-            self.tabBarController?.dismiss(animated: true, completion: nil)
+            } catch let error {
+                print("there was an error signing this user out: \(error.localizedDescription)")
+            }
+            
+            if providerID == "Firebase" {
+                print("Revoking current google login")
+                GIDSignIn.sharedInstance().disconnect()
+            }
         }
     }
     
@@ -58,4 +66,16 @@ class MyProfileViewController: UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
+}
+
+extension MyProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myProfileTableCell", for: indexPath)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
 }

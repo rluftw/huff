@@ -23,6 +23,10 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO: delete
+        
+        print("Provider ID: \(FIRAuth.auth()?.currentUser?.providerID ?? "Provider ID N/A")")
+        
         // configure the remote configuration
         configureRemoteConfig()
         
