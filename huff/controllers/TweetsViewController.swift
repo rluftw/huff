@@ -36,6 +36,12 @@ class TweetsViewController: UIViewController {
         tweetsTable.addSubview(refreshControl)
         performSearch()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
+    }
 
     // MARK: - helper methods
     
@@ -98,13 +104,24 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         let tweet = tweets[indexPath.row]
         guard let photoURLS = tweet.photoURLs else {
             return
         }
 
-        performSegue(withIdentifier: "showPhotos", sender: self)
-        // TODO: pass the photoURLS to tweet images view controller
+        // send the photoURLS as the sender
+        performSegue(withIdentifier: "showPhotos", sender: photoURLS)
     }
-    
+}
+
+extension TweetsViewController {
+    // MARK: - navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPhotos" {            
+            let photoURLS = sender as! [String]
+            let destinationVC = segue.destination as! TweetPhotosViewController
+            destinationVC.photoURLs = photoURLS
+        }
+    }
 }

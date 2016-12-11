@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
+class FiveKRunsViewController: UIViewController {
     // MARK: - outlets
     @IBOutlet weak var fiveKTable: UITableView! {
         didSet {
@@ -36,7 +36,10 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
 
         locationManager.requestWhenInUseAuthorization()
     }
-    
+
+}
+
+extension FiveKRunsViewController: CLLocationManagerDelegate {
     // MARK: - CLLocationDelegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // prevents anymore updates from firing
@@ -86,7 +89,6 @@ class FiveKRunsViewController: UIViewController, CLLocationManagerDelegate {
         default: break
         }
     }
-    
 }
 
 extension FiveKRunsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -102,10 +104,11 @@ extension FiveKRunsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+
         // use the cell as the sender - used later to extract the active run object
         let cell = tableView.cellForRow(at: indexPath)
         performSegue(withIdentifier: "showRunDetail", sender: cell)
-        tableView.deselectRow(at: indexPath, animated: false)
     }
     
 }

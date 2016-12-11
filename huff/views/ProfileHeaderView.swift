@@ -21,7 +21,7 @@ class ProfileHeaderView: UIView {
                         self.activityIndicator.stopAnimating()
                         return
                     }
-                    
+                                        
                     DispatchQueue.main.async(execute: {
                         self.profilePhoto.image = UIImage(data: data!)
                         self.activityIndicator.stopAnimating()
