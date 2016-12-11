@@ -29,9 +29,12 @@ class MyProfileViewController: UIViewController {
         // there should always be a current user, otherwise 
         // app delegate would automaticlly sign this app off
         profile = FIRAuth.auth()!.currentUser!
-        
+                
         // send this information into the header
         profileInfoHeader.profile = profile
+        
+        profileInfoTable.delegate = self
+        profileInfoTable.dataSource = self
         
         tapGesture.addTarget(self, action: #selector(editProfile))
     }
@@ -55,7 +58,7 @@ class MyProfileViewController: UIViewController {
     }
     
     func editProfile() {
-        print("TEST")
+        print("Attempting to edit profile")
     }
     
     // MARK: - helper methods
@@ -76,6 +79,6 @@ extension MyProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 1
     }
 }

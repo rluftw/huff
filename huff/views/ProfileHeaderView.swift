@@ -14,8 +14,7 @@ class ProfileHeaderView: UIView {
     var profile: FIRUser! {
         didSet {
             name.text = profile.displayName ?? profile.email?.components(separatedBy: "@")[0] ?? profile.uid
-            
-            if let photoURL = profile.photoURL{
+            if let photoURL = profile.photoURL {
                 let request = URLRequest(url: photoURL)
                 _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
                     guard error == nil else {
@@ -31,7 +30,6 @@ class ProfileHeaderView: UIView {
             } else {
                 self.activityIndicator.stopAnimating()
             }
-            
             isUserInteractionEnabled = true
         }
         willSet {

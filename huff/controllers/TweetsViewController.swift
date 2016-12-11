@@ -29,15 +29,10 @@ class TweetsViewController: UIViewController {
     }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    lazy var overlay: OverlayPhotoView =  {
-        let overlay = OverlayPhotoView(frame: self.view.bounds)
-        overlay.delegate = self
-        return overlay
-    }()
-    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.isUserInteractionEnabled = false
         tweetsTable.addSubview(refreshControl)
         performSearch()
     }
@@ -65,10 +60,12 @@ class TweetsViewController: UIViewController {
             self.tweetsTable.reloadData()
             self.activityIndicator.stopAnimating()
             self.refreshControl.endRefreshing()
+            self.view.isUserInteractionEnabled = true
         }
     }
     
     func handleRefresh(_ refresh: UIRefreshControl) {
+        self.view.isUserInteractionEnabled = false
         self.tweets.removeAll(keepingCapacity: false)
         self.tweetsTable.reloadData()
         performSearch()
@@ -105,20 +102,9 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let photoURLS = tweet.photoURLs else {
             return
         }
-        overlay.photoURLS = photoURLS
-        self.view.addSubview(overlay)
-        
-        // hide the tab bar upon tapping cell
-        tabBarController?.tabBar.isHidden = true
+
+        performSegue(withIdentifier: "showPhotos", sender: self)
+        // TODO: pass the photoURLS to tweet images view controller
     }
     
-}
-
-
-extension TweetsViewController: OverlayPhotoViewDelegate {
-    // MARK: - overlay photo view delegate
-    func close() {
-        overlay.removeFromSuperview()
-        self.tabBarController?.tabBar.isHidden = false
-    }
 }

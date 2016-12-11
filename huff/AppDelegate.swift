@@ -45,9 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    @available(iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+
+        
+        return googleDidHandle || facebookDidHandle
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -76,16 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRAuth.auth()?.removeStateDidChangeListener(authHandle)
     }
 
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        
-        let firebaseHandledURL = FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication ?? "") ?? false
-        let facebookHandledURL = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        let googleHandleURL = GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
-        
-        // if anyone of the services handled the url, return yes
-        return firebaseHandledURL || facebookHandledURL || googleHandleURL
-    }
-    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
