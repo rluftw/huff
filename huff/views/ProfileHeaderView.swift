@@ -18,17 +18,13 @@ class ProfileHeaderView: UIView {
                 let request = URLRequest(url: photoURL)
                 _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
                     guard error == nil else {
-                        self.activityIndicator.stopAnimating()
                         return
                     }
                                         
                     DispatchQueue.main.async(execute: {
                         self.profilePhoto.image = UIImage(data: data!)
-                        self.activityIndicator.stopAnimating()
                     })
                 })
-            } else {
-                self.activityIndicator.stopAnimating()
             }
             isUserInteractionEnabled = true
         }
@@ -41,5 +37,4 @@ class ProfileHeaderView: UIView {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var profileDescription: UILabel!
     @IBOutlet weak var memberSince: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 }

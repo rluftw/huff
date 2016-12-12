@@ -16,7 +16,6 @@ class MyProfileViewController: UIViewController {
     var profile: FIRUser!
     
     // MARK: - outlets
-    @IBOutlet weak var profileInfoTable: UITableView!
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -33,10 +32,6 @@ class MyProfileViewController: UIViewController {
         // send this information into the header
         profileInfoHeader.profile = profile
         
-        profileInfoTable.delegate = self
-        profileInfoTable.dataSource = self
-        
-        tapGesture.addTarget(self, action: #selector(editProfile))
     }
     
     // MARK: - action
@@ -71,14 +66,3 @@ class MyProfileViewController: UIViewController {
     
 }
 
-extension MyProfileViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myProfileTableCell", for: indexPath)
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-}
