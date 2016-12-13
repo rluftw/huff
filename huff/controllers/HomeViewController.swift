@@ -47,7 +47,9 @@ class HomeViewController: UIViewController {
     }
 
     func fetchConfigurations() {
-         remoteConfig.fetch { (status: FIRRemoteConfigFetchStatus, error: Error?) in
+        
+        // fetch the quote and the author
+        remoteConfig.fetch(withExpirationDuration: 0) { (status: FIRRemoteConfigFetchStatus, error: Error?) in
             if status == .success {
                 print("remote fetch successful")
                 
@@ -64,6 +66,7 @@ class HomeViewController: UIViewController {
                     })
                 }
             }
+
         }
     }
     
