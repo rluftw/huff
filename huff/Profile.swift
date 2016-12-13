@@ -16,12 +16,16 @@ class Profile {
     var accountCreationDate: TimeInterval?
     var uid: String!
     var email: String?
+    var status: String?
     
-    init(user: FIRUser) {
-        photoURL = user.photoURL
-        displayName = user.displayName ?? user.email?.components(separatedBy: "@")[0] ?? user.uid
-        accountStatus = user.isEmailVerified
-        uid = user.uid
-        email = user.email
+    init(user: FIRUser, status: String?, dateJoined: TimeInterval?) {
+        self.photoURL = user.photoURL
+        self.displayName = user.displayName ?? user.email?.components(separatedBy: "@")[0] ?? user.uid
+        self.accountStatus = user.isEmailVerified
+        self.uid = user.uid
+        self.email = user.email
+     
+        self.status = status
+        self.accountCreationDate = dateJoined
     }
 }

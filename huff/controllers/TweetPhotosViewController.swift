@@ -48,12 +48,14 @@ extension TweetPhotosViewController: UICollectionViewDelegate, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! TweetPhotoCollectionViewCell
         
         // load the photo
-        let urlString = photoURLs[indexPath.row] + ":large"
+        let urlString = photoURLs[indexPath.row]
 
         // check if the photo is cached
-        if let image = imageCache.object(forKey: NSString(string: urlString)) {
-            print("image key found - attempting to load from cache")
-            cell.photo = image
+        if let image = imageCache.object(forKey: NSString(string: urlString + ":large")) {
+            // checks to see if the visible cell is still there, if not do not assign the image
+            if collectionView.cellForItem(at: indexPath) == cell {
+                cell.photo = image
+            }
         }else {
             operationQueue.addOperation({
                 let request = URLRequest(url: URL(string: urlString)!)
@@ -64,20 +66,23 @@ extension TweetPhotosViewController: UICollectionViewDelegate, UICollectionViewD
                     if let image = UIImage(data: data!) {
                         self.imageCache.setObject(image, forKey: NSString(string: urlString))
                         
-                        DispatchQueue.main.async(execute: {
-                            cell.photo = image
-                        })
+                        // checks to see if the visible cell is still there, if not do not assign the image
+                        if collectionView.cellForItem(at: indexPath) == cell {
+                            DispatchQueue.main.async(execute: {
+                                cell.photo = image
+                            })
+                        }
                     }
                 })
             })
         }
         return cell
     }
+
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        // reset the image
-        let tweetCell = cell as! TweetPhotoCollectionViewCell
-        tweetCell.photoView.image = nil
+        let cell = cell as? TweetPhotoCollectionViewCell
+        cell?.photoView.image = nil
     }
     
     // MARK: - cell layout

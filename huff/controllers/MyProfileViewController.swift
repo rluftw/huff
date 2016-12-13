@@ -9,29 +9,28 @@
 import UIKit
 import FirebaseAuth
 import GoogleSignIn
+import Firebase
 
 class MyProfileViewController: UIViewController {
     
     // TODO: change this profile into a custom profile model
-    var profile: FIRUser!
+    var profile: Profile?
+    var databaseRef: FIRDatabaseReference?
+    var addStatusHandle: FIRDatabaseHandle?
+    var changeStatusHandle: FIRDatabaseHandle?
     
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // there should always be a current user, otherwise 
-        // app delegate would automaticlly sign this app off
-        profile = FIRAuth.auth()!.currentUser!
-                
-        // send this information into the header
-        profileInfoHeader.profile = profile
         
+        
+        configureDatabase()
     }
     
     // MARK: - action
@@ -64,5 +63,27 @@ class MyProfileViewController: UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
+    func configureDatabase() {
+        databaseRef = FIRDatabase.database().reference()
+        addStatusHandle = databaseRef!.child("users/" + FIRAuth.auth()!.currentUser!.uid + "/status").observe(.childAdded, with: { (localSnapshot) in
+            guard let localSnapshot = localSnapshot.value as? [String: Any] else {
+                return
+            }
+            let status = localSnapshot["status"] as? String
+            self.profile?.status = status
+        })
+        
+        changeStatusHandle = databaseRef!.child("users/" + FIRAuth.auth()!.currentUser!.uid + "/status").observe(.childChanged, with: { (localSnapshot) in
+            guard let localSnapshot = localSnapshot.value as? [String: Any] else {
+                return
+            }
+            let status = localSnapshot["status"] as? String
+            self.profile?.status = status
+
+        })
+        
+        
+
+    }
 }
 
