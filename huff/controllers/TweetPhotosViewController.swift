@@ -46,43 +46,37 @@ extension TweetPhotosViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! TweetPhotoCollectionViewCell
-        
-        // load the photo
         let urlString = photoURLs[indexPath.row]
 
-        // check if the photo is cached
-        if let image = imageCache.object(forKey: NSString(string: urlString + ":large")) {
-            // checks to see if the visible cell is still there, if not do not assign the image
-            if collectionView.cellForItem(at: indexPath) == cell {
-                cell.photo = image
-            }
+        // check if the photo is cached (quick operation)
+        if let image = imageCache.object(forKey: NSString(string: urlString)) {
+            cell.photo = image
         }else {
+            print("image cache not found - \(urlString)")
+
             operationQueue.addOperation({
-                let request = URLRequest(url: URL(string: urlString)!)
+                // load the large version of the image (slow operation)
+                let request = URLRequest(url: URL(string: urlString + ":large")!)
                 _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
-                    guard error == nil else {
+                    guard error == nil, let data = data else {
                         return
                     }
-                    if let image = UIImage(data: data!) {
+                    if let image = UIImage(data: data) {
                         self.imageCache.setObject(image, forKey: NSString(string: urlString))
-                        
                         // checks to see if the visible cell is still there, if not do not assign the image
-                        if collectionView.cellForItem(at: indexPath) == cell {
-                            DispatchQueue.main.async(execute: {
-                                cell.photo = image
-                            })
-                        }
+                        DispatchQueue.main.async(execute: {
+                            cell.photo = image
+                        })
                     }
                 })
             })
         }
         return cell
     }
-
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let cell = cell as? TweetPhotoCollectionViewCell
-        cell?.photoView.image = nil
+        cell?.photo = nil
     }
     
     // MARK: - cell layout

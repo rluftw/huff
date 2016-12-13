@@ -11,7 +11,7 @@ import UIKit
 class TweetPhotoCollectionViewCell: UICollectionViewCell {
     
     // MARK: - properties
-    var photo: UIImage! {
+    var photo: UIImage? {
         didSet {
             photoView.image = photo
         }

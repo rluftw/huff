@@ -10,16 +10,16 @@ import Foundation
 import Firebase
 
 class Profile {
-    var photoURL: URL?
+    var photo: UIImage?
     var displayName: String?
-    var accountStatus: Bool!
+    var accountStatus: Bool?
     var accountCreationDate: TimeInterval?
-    var uid: String!
+    var uid: String?
     var email: String?
     var status: String?
     
-    init(user: FIRUser, status: String?, dateJoined: TimeInterval?) {
-        self.photoURL = user.photoURL
+    init(user: FIRUser, photo: UIImage?, status: String?, dateJoined: TimeInterval?) {
+        self.photo = photo
         self.displayName = user.displayName ?? user.email?.components(separatedBy: "@")[0] ?? user.uid
         self.accountStatus = user.isEmailVerified
         self.uid = user.uid

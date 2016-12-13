@@ -16,8 +16,7 @@ class MyProfileViewController: UIViewController {
     // TODO: change this profile into a custom profile model
     var profile: Profile?
     var databaseRef: FIRDatabaseReference?
-    var addStatusHandle: FIRDatabaseHandle?
-    var changeStatusHandle: FIRDatabaseHandle?
+    var valueRef: FIRDatabaseHandle?
     
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
@@ -27,8 +26,21 @@ class MyProfileViewController: UIViewController {
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let firUser = FIRAuth.auth()!.currentUser!
+        profile = Profile(user: firUser, photo: nil, status: nil, dateJoined: nil)
         
-        
+        // fetch the profile picture
+        if let photoURL = firUser.photoURL {
+            let request = URLRequest(url: photoURL)
+            _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
+                guard let data = data else {
+                    return
+                }
+                let image = UIImage(data: data)
+                self.profile?.photo = image
+            })
+        }
         
         configureDatabase()
     }
@@ -65,25 +77,15 @@ class MyProfileViewController: UIViewController {
     
     func configureDatabase() {
         databaseRef = FIRDatabase.database().reference()
-        addStatusHandle = databaseRef!.child("users/" + FIRAuth.auth()!.currentUser!.uid + "/status").observe(.childAdded, with: { (localSnapshot) in
-            guard let localSnapshot = localSnapshot.value as? [String: Any] else {
+        
+        valueRef = databaseRef?.child("users").observe(.value, with: { (snapshot) in
+            guard let snap = snapshot.value as? [String: Any] else {
+                print("data format incorrect")
                 return
             }
-            let status = localSnapshot["status"] as? String
-            self.profile?.status = status
+            self.profile?.status = snap["status"] as? String
         })
-        
-        changeStatusHandle = databaseRef!.child("users/" + FIRAuth.auth()!.currentUser!.uid + "/status").observe(.childChanged, with: { (localSnapshot) in
-            guard let localSnapshot = localSnapshot.value as? [String: Any] else {
-                return
-            }
-            let status = localSnapshot["status"] as? String
-            self.profile?.status = status
-
-        })
-        
-        
-
     }
+
 }
 
