@@ -27,10 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:17)!,
                                                              NSForegroundColorAttributeName: UIColor.white], for: .normal)
         UIApplication.shared.statusBarStyle = .lightContent
-
         
         // configure firebase
         FIRApp.configure()
+        
         
         // configure the authorization
         configureAuth()
@@ -136,6 +136,7 @@ extension AppDelegate {
             if let activeUser = user {
                 if self.user != activeUser {
                     self.user = activeUser
+                    
                     // home view controller will be the first screen the user sees
                     let homeTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "home") as? UITabBarController
 

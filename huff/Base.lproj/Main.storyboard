@@ -469,24 +469,13 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to edit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGc-oH-nxZ">
-                                        <rect key="frame" x="287" y="8" width="79.5" height="16"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="16" id="4Ss-U3-Mi3"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
-                                        <color key="textColor" red="0.0" green="0.59999999999999998" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.75686274509999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="PFB-nb-jJ2" secondAttribute="trailing" constant="8" id="1be-Ys-uvy"/>
                                     <constraint firstItem="PFB-nb-jJ2" firstAttribute="top" secondItem="vXw-eN-Mht" secondAttribute="bottom" constant="4" id="CXM-VL-FDM"/>
-                                    <constraint firstItem="pGc-oH-nxZ" firstAttribute="top" secondItem="GiD-Mq-1Wr" secondAttribute="top" constant="8" id="Hen-I4-8RF"/>
                                     <constraint firstAttribute="trailing" secondItem="wc0-Rp-d7V" secondAttribute="trailing" constant="8" id="ML5-aF-1KK"/>
-                                    <constraint firstAttribute="trailing" secondItem="pGc-oH-nxZ" secondAttribute="trailing" constant="8.5" id="TC2-xX-rKd"/>
                                     <constraint firstItem="uaO-FY-7MX" firstAttribute="centerY" secondItem="GiD-Mq-1Wr" secondAttribute="centerY" id="Ybu-lH-haj"/>
                                     <constraint firstItem="vXw-eN-Mht" firstAttribute="top" secondItem="GiD-Mq-1Wr" secondAttribute="top" constant="8" id="c45-oh-J79"/>
                                     <constraint firstItem="uaO-FY-7MX" firstAttribute="leading" secondItem="GiD-Mq-1Wr" secondAttribute="leading" constant="16" id="cFG-9y-pZ9"/>
@@ -530,13 +519,43 @@
                                     <constraint firstItem="hbJ-hB-E2E" firstAttribute="leading" secondItem="Gzg-um-JhH" secondAttribute="leading" constant="8" id="xtu-fA-TnS"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ErM-5K-Q7u">
+                                <rect key="frame" x="0.0" y="182" width="375" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEST DISTANCE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCU-MX-Fas">
+                                        <rect key="frame" x="8" y="0.0" width="157" height="44"/>
+                                        <fontDescription key="fontDescription" name="RobotoMono-Bold" family="Roboto Mono" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N/A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2X9-YW-z81">
+                                        <rect key="frame" x="330" y="0.0" width="29" height="44"/>
+                                        <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="16"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qCU-MX-Fas" secondAttribute="bottom" id="2Oj-af-RM2"/>
+                                    <constraint firstItem="2X9-YW-z81" firstAttribute="top" secondItem="ErM-5K-Q7u" secondAttribute="top" id="9Hb-IV-RJz"/>
+                                    <constraint firstItem="qCU-MX-Fas" firstAttribute="top" secondItem="ErM-5K-Q7u" secondAttribute="top" id="An9-Hf-kVs"/>
+                                    <constraint firstAttribute="trailing" secondItem="2X9-YW-z81" secondAttribute="trailing" constant="16" id="Diy-yF-Ixp"/>
+                                    <constraint firstAttribute="height" constant="44" id="QXr-h1-sjv"/>
+                                    <constraint firstAttribute="bottom" secondItem="2X9-YW-z81" secondAttribute="bottom" id="kbQ-fx-EPZ"/>
+                                    <constraint firstItem="qCU-MX-Fas" firstAttribute="leading" secondItem="ErM-5K-Q7u" secondAttribute="leading" constant="8" id="xtk-lG-5s7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Gzg-um-JhH" firstAttribute="leading" secondItem="wkL-VN-gaq" secondAttribute="leading" id="0cz-n4-sIh"/>
                             <constraint firstAttribute="trailing" secondItem="Gzg-um-JhH" secondAttribute="trailing" id="2nx-cY-eY5"/>
+                            <constraint firstItem="ErM-5K-Q7u" firstAttribute="top" secondItem="Gzg-um-JhH" secondAttribute="bottom" constant="-1" id="4ul-ys-fNG"/>
+                            <constraint firstAttribute="trailing" secondItem="ErM-5K-Q7u" secondAttribute="trailing" id="5IQ-Ph-PmL"/>
                             <constraint firstItem="GiD-Mq-1Wr" firstAttribute="top" secondItem="eF6-2i-gqA" secondAttribute="bottom" id="IcS-30-9Vh"/>
                             <constraint firstItem="Gzg-um-JhH" firstAttribute="top" secondItem="GiD-Mq-1Wr" secondAttribute="bottom" id="aFB-0y-Apl"/>
+                            <constraint firstItem="ErM-5K-Q7u" firstAttribute="leading" secondItem="wkL-VN-gaq" secondAttribute="leading" id="eaK-4B-UeL"/>
                             <constraint firstItem="GiD-Mq-1Wr" firstAttribute="leading" secondItem="wkL-VN-gaq" secondAttribute="leading" id="vjc-O9-iGP"/>
                             <constraint firstAttribute="trailing" secondItem="GiD-Mq-1Wr" secondAttribute="trailing" id="ySp-5y-fUi"/>
                         </constraints>

@@ -18,10 +18,14 @@ class HomeViewController: UIViewController {
     
     // MARK: - properties
     var remoteConfig: FIRRemoteConfig!
-
+    var ref: FIRDatabaseReference!
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // first step is check if this is the users first time logging in
+        configureDatabase()
         
         // configure the remote configuration
         configureRemoteConfig()
@@ -29,7 +33,8 @@ class HomeViewController: UIViewController {
         // fetch the remote configurations
         fetchConfigurations()
     }
-
+    
+    
     // MARK: - actions
     @IBAction func startARun(_ sender: Any) {
         performSegue(withIdentifier: "beginRun", sender: self)
@@ -68,6 +73,20 @@ class HomeViewController: UIViewController {
             }
 
         }
+    }
+    
+    func configureDatabase() {
+        ref = FIRDatabase.database().reference()
+        
+        let userReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
+        userReference.observeSingleEvent(of: .value, with: { (localSnapshot) in
+            guard let snapshot = localSnapshot.value as? [String: Any], let _ = snapshot["creation_date"] as? TimeInterval else {
+                print("no creation date found - attempting to set a creation date")
+                
+                userReference.setValue(["creation_date": Date().timeIntervalSince1970])
+                return
+            }
+        })
     }
     
 }

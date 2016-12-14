@@ -79,7 +79,6 @@ class SignUpViewController: UIViewController {
                 
                 let values: [String: Any] = [
                     "creation_date": Date().timeIntervalSince1970,
-                    "first_login": false
                 ]
                 
                 self.ref.child("users/\(user!.uid)").setValue(values)

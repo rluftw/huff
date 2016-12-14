@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
 import FBSDKCoreKit
 import GoogleSignIn
 
 class LoginViewController: UIViewController, LoginOverlayViewDelegate {
-
+    
     // MARK: - outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -26,12 +27,14 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         view.backgroundColor = UIColor(patternImage: UIImage(named: "smooth_wall")!)
     }
 
+    // MARK: - actions
+    
     @IBAction func facebookLogin(_ sender: Any) {
         self.userInteraction(halt: true)
         let loginManager = FBSDKLoginManager()
