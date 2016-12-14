@@ -81,3 +81,10 @@ class ActiveRun: CustomStringConvertible {
         }
     }
 }
+
+extension ActiveRun: Equatable {
+    static func ==(lhs: ActiveRun, rhs: ActiveRun) -> Bool {
+        return lhs.organization == rhs.organization && lhs.location == rhs.location && lhs.name == rhs.name && lhs.logoURL == rhs.logoURL &&
+        lhs.registrationURL == rhs.registrationURL && lhs.runDate == rhs.runDate && lhs.registrationDeadlineDate == rhs.registrationDeadlineDate && lhs.runDescription == rhs.runDescription
+    }
+}

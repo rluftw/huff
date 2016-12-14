@@ -37,3 +37,9 @@ class RunOrganization: CustomStringConvertible {
         zip = organizationDict["addressPostalCd"] as? String
     }
 }
+
+extension RunOrganization: Equatable {
+    static func ==(lhs: RunOrganization, rhs: RunOrganization) -> Bool {
+        return lhs.primaryContact == rhs.primaryContact && lhs.name == rhs.name && lhs.address1 == rhs.address1 && lhs.city == rhs.city && lhs.state == rhs.state && lhs.phone == rhs.phone && lhs.zip == rhs.zip
+    }
+}

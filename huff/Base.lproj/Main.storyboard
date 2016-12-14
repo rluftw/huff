@@ -198,7 +198,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrZ-1O-zJZ">
-                                <rect key="frame" x="65" y="300.5" width="245" height="67.5"/>
+                                <rect key="frame" x="65.5" y="300.5" width="245" height="67.5"/>
                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="51"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -523,7 +523,7 @@
                                 <rect key="frame" x="0.0" y="182" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEST DISTANCE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCU-MX-Fas">
-                                        <rect key="frame" x="8" y="0.0" width="157" height="44"/>
+                                        <rect key="frame" x="8" y="0.0" width="156.5" height="44"/>
                                         <fontDescription key="fontDescription" name="RobotoMono-Bold" family="Roboto Mono" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1311,6 +1311,20 @@
                                                 </textView>
                                             </subviews>
                                         </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBb-wL-zAq">
+                                            <rect key="frame" x="309" y="601" width="50" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="eY1-Sm-Tcn"/>
+                                                <constraint firstAttribute="height" constant="50" id="jm7-Td-zwM"/>
+                                            </constraints>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                            <state key="normal" image="unlike"/>
+                                            <connections>
+                                                <action selector="like:" destination="MuZ-26-mXO" eventType="touchUpInside" id="b5I-Bs-Lr1"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="ydL-pU-VnC" firstAttribute="centerX" secondItem="QSD-5v-HrO" secondAttribute="centerX" id="1Sc-B5-4Tb"/>
@@ -1318,9 +1332,11 @@
                                         <constraint firstItem="MZF-yv-ISc" firstAttribute="top" secondItem="QSD-5v-HrO" secondAttribute="top" constant="30" id="AMu-yh-tX9"/>
                                         <constraint firstItem="b2s-Z5-GG0" firstAttribute="leading" secondItem="QSD-5v-HrO" secondAttribute="leading" constant="16" id="Bcz-zQ-pxh"/>
                                         <constraint firstItem="HLs-zE-snc" firstAttribute="leading" secondItem="QSD-5v-HrO" secondAttribute="leading" constant="8" id="Joh-UO-O0I"/>
+                                        <constraint firstItem="aBb-wL-zAq" firstAttribute="trailing" secondItem="kM3-Lr-jtS" secondAttribute="trailing" id="OPM-2U-gB0"/>
                                         <constraint firstItem="FvT-09-YqS" firstAttribute="leading" secondItem="QSD-5v-HrO" secondAttribute="leading" constant="16" id="YIg-Y1-9Th"/>
                                         <constraint firstAttribute="trailing" secondItem="MZF-yv-ISc" secondAttribute="trailing" constant="8" id="ZQe-Iw-jxi"/>
                                         <constraint firstAttribute="trailing" secondItem="b2s-Z5-GG0" secondAttribute="trailing" constant="16" id="cmt-Yg-6KH"/>
+                                        <constraint firstAttribute="bottom" secondItem="aBb-wL-zAq" secondAttribute="bottom" constant="16" id="gNn-4d-fVg"/>
                                         <constraint firstAttribute="bottom" secondItem="ydL-pU-VnC" secondAttribute="bottom" constant="16" id="hrm-g3-CNd"/>
                                         <constraint firstItem="ydL-pU-VnC" firstAttribute="top" secondItem="Ufd-6S-STR" secondAttribute="bottom" constant="16" id="p3s-uV-dDt"/>
                                         <constraint firstItem="Ufd-6S-STR" firstAttribute="top" secondItem="b2s-Z5-GG0" secondAttribute="bottom" constant="8" id="r2O-pL-btQ"/>
@@ -1353,7 +1369,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYf-vU-ewA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="822" y="-2825"/>
+            <point key="canvasLocation" x="821.60000000000002" y="-2825.0374812593705"/>
         </scene>
         <!--My Profile-->
         <scene sceneID="anB-vL-F7r">
@@ -1471,7 +1487,7 @@
                                 <color key="color" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qye-i5-HOL">
-                                <rect key="frame" x="70" y="553" width="236.5" height="36"/>
+                                <rect key="frame" x="69.5" y="553" width="236.5" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up, you agree to the " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekf-hw-XEh">
                                         <rect key="frame" x="0.0" y="0.0" width="236.5" height="16"/>
@@ -1609,5 +1625,6 @@
         <image name="run" width="85" height="85"/>
         <image name="runs" width="21" height="21"/>
         <image name="tweets" width="21" height="21"/>
+        <image name="unlike" width="42" height="42"/>
     </resources>
 </document>

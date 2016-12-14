@@ -62,35 +62,39 @@ class MyProfileViewController: UIViewController {
     }
     
     
+    // MARK: - firebase methods
+    
     // step 1: grab information from the database
     func configureDatabase(completionHandler: (()->Void)?) {
         databaseRef = FIRDatabase.database().reference()
         accountRef = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)").observe(.value, with: { (localSnapshot) in
-            if let snap = localSnapshot.value as? [String: Any] {
-                self.profile?.status = snap["status"] as? String
-                self.profile?.accountCreationDate = snap["creation_date"] as? TimeInterval
-            }
+            let snap = localSnapshot.value as? [String: Any]
+            self.profile?.status = snap?["status"] as? String
+            self.profile?.accountCreationDate = snap?["creation_date"] as? TimeInterval
+            
             completionHandler?()
         })
     }
 
     // step 2: fetch the image
     func fetchProfilePhoto(profilePhotoUrl: URL?) {
-        guard let url = profilePhotoUrl else {
-            return
-        }
-        let request = URLRequest(url: url)
-        _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
-            if let data = data, let image = UIImage(data: data) {
-                self.profile?.photo = image
-            }
-            
-            DispatchQueue.main.async(execute: {
-                // step 3: assign the profile header view a profile object
-                self.profileInfoHeader.profile = self.profile
+        if let url = profilePhotoUrl {
+            let request = URLRequest(url: url)
+            _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
+                if let data = data, let image = UIImage(data: data) {
+                    self.profile?.photo = image
+                }
+                self.updateProfile()
             })
-        })
+        } else {
+            self.updateProfile()
+        }
     }
     
-    
+    fileprivate func updateProfile() {
+        DispatchQueue.main.async(execute: {
+            // step 3: assign the profile header view a new profile object
+            self.profileInfoHeader.profile = self.profile
+        })
+    }
 }

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class ActiveRunDetailViewController: UIViewController {
 
     // MARK: - properties
     var run: ActiveRun!
+    var ref: FIRDatabaseReference!
     
     // MARK: - outlets
     @IBOutlet weak var organizationName: UILabel!
@@ -25,7 +27,12 @@ class ActiveRunDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref = FIRDatabase.database().reference()
         updateLabels()
+    }
+    
+    deinit {
+        
     }
     
     // MARK: - helper methods
@@ -67,5 +74,18 @@ class ActiveRunDetailViewController: UIViewController {
     @IBAction func contactOrganizer(_ sender: Any) {
         guard let phone = run.organization.phone, let phoneURL = URL(string: "telprompt://" + phone) else { return }
         UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func like(_ sender: Any) {
+        
+    }
+ 
+    
+    // MARK: - firebase configurations
+    func configDatabase() {
+        ref = FIRDatabase.database().reference()
+        ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/likes").observeSingleEvent(of: .childAdded, with: { (snapshot) in
+            
+        })
     }
 }

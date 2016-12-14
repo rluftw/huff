@@ -31,3 +31,9 @@ class RunLocation: CustomStringConvertible {
         zip = runLocation["postalCode"] as? String
     }
 }
+
+extension RunLocation: Equatable {
+    static func ==(lhs: RunLocation, rhs: RunLocation) -> Bool {
+        return lhs.placeName == rhs.placeName && lhs.address1 == rhs.address1 && lhs.city == rhs.city && lhs.state == rhs.state && lhs.zip == rhs.zip
+    }
+}
