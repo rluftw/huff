@@ -62,7 +62,6 @@ extension FiveKRunsViewController: CLLocationManagerDelegate {
                     // create the array of runs available
                     if let run = ActiveRun(result: result) {
                         self.activeRuns.append(run)
-                        print(run)
                         DispatchQueue.main.async {
                             // use this instead of reload table to balance out ui update
                             self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .none)

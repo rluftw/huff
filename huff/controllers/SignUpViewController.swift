@@ -20,8 +20,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var textfieldContainerStack: UIStackView!
 
     // MARK: - properties
-    
-    var userRefHandle: FIRDatabaseReference!
+    var ref: FIRDatabaseReference!
     
     // MARK: - computed properties
     var readyToContinue: Bool {
@@ -53,6 +52,8 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref = FIRDatabase.database().reference()
+        
         email.delegate = self
         password.delegate = self
         confirmPassword.delegate = self
@@ -76,6 +77,12 @@ class SignUpViewController: UIViewController {
                     return
                 }
                 
+                let values: [String: Any] = [
+                    "creation_date": Date().timeIntervalSince1970,
+                    "first_login": false
+                ]
+                
+                self.ref.child("users/\(user!.uid)").setValue(values)
                 user?.sendEmailVerification(completion: nil)
                 
                 // dismiss this view controller
@@ -83,11 +90,6 @@ class SignUpViewController: UIViewController {
                 window?.rootViewController?.dismiss(animated: false, completion: nil)
             })
         }
-    }
-
-    // MARK: - firebase database configurations
-    func configureDB() {
-        
     }
     
     

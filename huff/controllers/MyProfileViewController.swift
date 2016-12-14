@@ -16,33 +16,22 @@ class MyProfileViewController: UIViewController {
     // TODO: change this profile into a custom profile model
     var profile: Profile?
     var databaseRef: FIRDatabaseReference?
-    var valueRef: FIRDatabaseHandle?
+    var accountRef: FIRDatabaseHandle?
     
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
-    @IBOutlet weak var tapGesture: UITapGestureRecognizer!
 
     
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let firUser = FIRAuth.auth()!.currentUser!
-        profile = Profile(user: firUser, photo: nil, status: nil, dateJoined: nil)
-        
-        // fetch the profile picture
-        if let photoURL = firUser.photoURL {
-            let request = URLRequest(url: photoURL)
-            _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
-                guard let data = data else {
-                    return
-                }
-                let image = UIImage(data: data)
-                self.profile?.photo = image
-            })
+        let firebaseUser = FIRAuth.auth()!.currentUser!
+        self.profile = Profile(user: firebaseUser, photo: nil, status: nil, dateJoined: nil)
+     
+        configureDatabase { 
+            self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL)
         }
-        
-        configureDatabase()
     }
     
     // MARK: - action
@@ -56,17 +45,14 @@ class MyProfileViewController: UIViewController {
                 print("there was an error signing this user out: \(error.localizedDescription)")
             }
             
+            // it seems that googles sdk remembers the users, and logs in automatically with their oauth screen
             if providerID == "Firebase" {
                 print("Revoking current google login")
                 GIDSignIn.sharedInstance().disconnect()
             }
         }
     }
-    
-    func editProfile() {
-        print("Attempting to edit profile")
-    }
-    
+
     // MARK: - helper methods
     func giveWarning(title: String, message: String, yesAction: @escaping (UIAlertAction)->Void) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
@@ -75,17 +61,36 @@ class MyProfileViewController: UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
-    func configureDatabase() {
+    
+    // step 1: grab information from the database
+    func configureDatabase(completionHandler: (()->Void)?) {
         databaseRef = FIRDatabase.database().reference()
-        
-        valueRef = databaseRef?.child("users").observe(.value, with: { (snapshot) in
-            guard let snap = snapshot.value as? [String: Any] else {
-                print("data format incorrect")
-                return
+        accountRef = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)").observe(.value, with: { (localSnapshot) in
+            if let snap = localSnapshot.value as? [String: Any] {
+                self.profile?.status = snap["status"] as? String
+                self.profile?.accountCreationDate = snap["creation_date"] as? TimeInterval
             }
-            self.profile?.status = snap["status"] as? String
+            completionHandler?()
         })
     }
 
+    // step 2: fetch the image
+    func fetchProfilePhoto(profilePhotoUrl: URL?) {
+        guard let url = profilePhotoUrl else {
+            return
+        }
+        let request = URLRequest(url: url)
+        _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
+            if let data = data, let image = UIImage(data: data) {
+                self.profile?.photo = image
+            }
+            
+            DispatchQueue.main.async(execute: {
+                // step 3: assign the profile header view a profile object
+                self.profileInfoHeader.profile = self.profile
+            })
+        })
+    }
+    
+    
 }
-

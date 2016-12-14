@@ -11,10 +11,20 @@ import Firebase
 
 class ProfileHeaderView: UIView {
 
-    var profile: FIRUser! {
+    var profile: Profile? {
         didSet {
-            name.text = profile.displayName ?? profile.email?.components(separatedBy: "@")[0] ?? profile.uid
+            if let photo = profile?.photo {
+                profilePhoto.image = photo
+            }
+            name.text = profile?.displayName ?? profile?.email ?? profile?.uid
             
+            if let accountCreationDate = profile?.accountCreationDate {
+                let formatter = DateFormatter()
+                formatter.dateStyle = .short
+                memberSince.text = "member since: \(formatter.string(from: Date(timeIntervalSince1970: accountCreationDate)))"
+            }
+            
+            profileDescription.text = profile?.status ?? "Tap here to change your status"
         }
     }
     
@@ -22,4 +32,5 @@ class ProfileHeaderView: UIView {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var profileDescription: UILabel!
     @IBOutlet weak var memberSince: UILabel!
+    
 }
