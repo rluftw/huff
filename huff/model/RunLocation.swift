@@ -30,6 +30,18 @@ class RunLocation: CustomStringConvertible {
         state = runLocation["stateProvinceCode"] as? String
         zip = runLocation["postalCode"] as? String
     }
+    
+    func toDict() -> [String: Any] {
+        var dict = [String: Any]()
+        
+        if let runPlaceName = self.placeName { dict["run_location_name"] = runPlaceName }
+        if let runAddress1 = self.address1 { dict["run_address1"] = runAddress1 }
+        if let runCity = self.city { dict["run_city"] = runCity }
+        if let runState = self.state { dict["run_state"] = runState }
+        if let runZip = self.zip { dict["run_zip"] = runZip }
+        
+        return dict
+    }
 }
 
 extension RunLocation: Equatable {

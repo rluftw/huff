@@ -36,6 +36,20 @@ class RunOrganization: CustomStringConvertible {
         phone = organizationDict["primaryContactPhone"] as? String
         zip = organizationDict["addressPostalCd"] as? String
     }
+    
+    func toDict() -> [String: Any] {
+        var dict = [String: Any]()
+        
+        if let name = self.name { dict["organization_name"] = name }
+        if let address1 = self.address1 { dict["organization_address1"] = address1 }
+        if let contact = self.primaryContact { dict["primary_contact"] = contact }
+        if let city = self.city { dict["organization_city"] = city }
+        if let state = self.state { dict["organization_state"] = state }
+        if let phone = self.phone { dict["organization_phone"] = phone }
+        if let zip = self.zip { dict["organization_zip"] = zip }
+        
+        return dict
+    }
 }
 
 extension RunOrganization: Equatable {

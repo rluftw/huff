@@ -14,6 +14,7 @@ class ActiveRun: CustomStringConvertible {
     let location: RunLocation!
     let name: String?
     let logoURL: String?
+    let assetID: String!
     var registrationURL: String?
     var runDate: Date?
     var registrationDeadlineDate: Date?
@@ -56,6 +57,9 @@ class ActiveRun: CustomStringConvertible {
         if let rawRegistrationDeadline = result["salesEndDate"] as? String {
             registrationDeadlineDate = formatter.date(from: rawRegistrationDeadline)
         }
+        
+        self.assetID = result["assetGuid"] as! String
+        
         if let descriptionArray = result["assetDescriptions"] as? [AnyObject] {
             for descriptionDict in descriptionArray {
                 let htmlDescription = descriptionDict["description"] as? String
@@ -66,7 +70,7 @@ class ActiveRun: CustomStringConvertible {
             }
         }
         
-        registrationURL = result["urlAdr"] as? String
+        self.registrationURL = result["urlAdr"] as? String
     }
     
     // MARK: - helper methods
@@ -80,11 +84,50 @@ class ActiveRun: CustomStringConvertible {
             return nil
         }
     }
+    
+    func toDict() -> [String: Any] {
+        var dict = [String: Any]()
+        
+        let locationDict = self.location.toDict()
+        let organizationDict = self.organization.toDict()
+        
+        if let runName = name { dict["run_name"] = runName }
+        if let logoLink = logoURL { dict["run_logo"] = logoLink }
+        if let id = assetID { dict["run_id"] = id }
+        if let registrationLink = registrationURL { dict["registration_link"] = registrationLink }
+        if let run_date = runDate?.timeIntervalSince1970 { dict["run_date"] = run_date }
+        if let run_deadline = registrationDeadlineDate?.timeIntervalSince1970 { dict["run_deadline"] = run_deadline }
+        if let run_description = runDescription { dict["run_description"] = run_description }
+
+        
+        locationDict.forEach { (key, value) in
+            dict[key] = value
+        }
+        
+        organizationDict.forEach { (key, value) in
+            dict[key] = value
+        }
+        
+        return dict
+    }
 }
 
 extension ActiveRun: Equatable {
+    // MARK: - allow the usage of identity operators
     static func ==(lhs: ActiveRun, rhs: ActiveRun) -> Bool {
         return lhs.organization == rhs.organization && lhs.location == rhs.location && lhs.name == rhs.name && lhs.logoURL == rhs.logoURL &&
-        lhs.registrationURL == rhs.registrationURL && lhs.runDate == rhs.runDate && lhs.registrationDeadlineDate == rhs.registrationDeadlineDate && lhs.runDescription == rhs.runDescription
+        lhs.registrationURL == rhs.registrationURL && lhs.runDate == rhs.runDate && lhs.registrationDeadlineDate == rhs.registrationDeadlineDate && lhs.runDescription == rhs.runDescription && lhs.assetID == rhs.assetID
+    }
+    
+    static func ==(lhs: ActiveRun, rhs: [String: Any]) -> Bool {
+        return self.compareRuns(lhs: lhs, rhs: rhs)
+    }
+    
+    static func ==(lhs: [String: Any], rhs: ActiveRun) -> Bool {
+        return self.compareRuns(lhs: rhs, rhs: lhs)
+    }
+    
+    static func compareRuns(lhs: ActiveRun, rhs: [String: Any]) -> Bool {
+        return true
     }
 }

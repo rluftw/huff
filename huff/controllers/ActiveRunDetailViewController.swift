@@ -77,15 +77,12 @@ class ActiveRunDetailViewController: UIViewController {
     }
     
     @IBAction func like(_ sender: Any) {
-        
+        let assetsReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs")
+        assetsReference.child(run.assetID).setValue(run.toDict())
     }
- 
     
     // MARK: - firebase configurations
     func configDatabase() {
-        ref = FIRDatabase.database().reference()
-        ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/likes").observeSingleEvent(of: .childAdded, with: { (snapshot) in
-            
-        })
+
     }
 }
