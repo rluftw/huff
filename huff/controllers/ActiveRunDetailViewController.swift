@@ -22,18 +22,17 @@ class ActiveRunDetailViewController: UIViewController {
     @IBOutlet weak var runDate: UILabel!
     @IBOutlet weak var contactButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    
     
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ref = FIRDatabase.database().reference()
+        configure()
         updateLabels()
     }
-    
-    deinit {
-        
-    }
+
     
     // MARK: - helper methods
     func updateLabels() {
@@ -58,6 +57,12 @@ class ActiveRunDetailViewController: UIViewController {
         
     }
     
+    func updateLikeButton(liked: Bool) {
+        DispatchQueue.main.async { 
+            self.likeButton.setImage(UIImage(named: liked ? "like": "unlike"), for: .normal)
+        }
+    }
+    
     // MARK: - actions
     
     @IBAction func close(_ sender: Any) {
@@ -77,12 +82,31 @@ class ActiveRunDetailViewController: UIViewController {
     }
     
     @IBAction func like(_ sender: Any) {
-        let assetsReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs")
-        assetsReference.child(run.assetID).setValue(run.toDict())
+        toggleLike()
     }
     
-    // MARK: - firebase configurations
-    func configDatabase() {
-
+    // MARK: - firebase
+    
+    func configure() {
+        ref = FIRDatabase.database().reference()
+        let assetsReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs")
+        
+        assetsReference.observeSingleEvent(of: .value, with: { (localSnapshot) in
+            self.updateLikeButton(liked: localSnapshot.hasChild(self.run.assetID))
+        })
+    }
+    
+    fileprivate func toggleLike() {
+        let assetsReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs")
+        
+        assetsReference.observeSingleEvent(of: .value, with: { (localSnapshot) in
+            if localSnapshot.hasChild(self.run.assetID) {
+                assetsReference.child(self.run.assetID).removeValue()
+                self.updateLikeButton(liked: false)
+            } else {
+                assetsReference.child(self.run.assetID).setValue(self.run.toDict())
+                self.updateLikeButton(liked: true)
+            }
+        })
     }
 }

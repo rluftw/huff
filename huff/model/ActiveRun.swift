@@ -115,8 +115,7 @@ class ActiveRun: CustomStringConvertible {
 extension ActiveRun: Equatable {
     // MARK: - allow the usage of identity operators
     static func ==(lhs: ActiveRun, rhs: ActiveRun) -> Bool {
-        return lhs.organization == rhs.organization && lhs.location == rhs.location && lhs.name == rhs.name && lhs.logoURL == rhs.logoURL &&
-        lhs.registrationURL == rhs.registrationURL && lhs.runDate == rhs.runDate && lhs.registrationDeadlineDate == rhs.registrationDeadlineDate && lhs.runDescription == rhs.runDescription && lhs.assetID == rhs.assetID
+        return lhs.assetID == rhs.assetID
     }
     
     static func ==(lhs: ActiveRun, rhs: [String: Any]) -> Bool {
@@ -128,6 +127,6 @@ extension ActiveRun: Equatable {
     }
     
     static func compareRuns(lhs: ActiveRun, rhs: [String: Any]) -> Bool {
-        return true
+        return lhs.assetID == rhs["run_id"] as! String
     }
 }

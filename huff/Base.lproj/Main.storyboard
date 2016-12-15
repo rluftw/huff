@@ -1360,6 +1360,7 @@
                     </view>
                     <connections>
                         <outlet property="contactButton" destination="MZF-yv-ISc" id="Sek-Nt-FF5"/>
+                        <outlet property="likeButton" destination="aBb-wL-zAq" id="oH0-oK-MkD"/>
                         <outlet property="organizationName" destination="oWN-Nr-er0" id="3hy-4K-uHM"/>
                         <outlet property="registerButton" destination="ydL-pU-VnC" id="Tbj-lh-8in"/>
                         <outlet property="runDate" destination="Ufd-6S-STR" id="pP6-sY-xZg"/>
