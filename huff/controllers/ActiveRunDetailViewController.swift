@@ -25,6 +25,7 @@ class ActiveRunDetailViewController: UIViewController {
     @IBOutlet weak var likeButton: UIButton!
     
     
+    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
