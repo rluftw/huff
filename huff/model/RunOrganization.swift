@@ -28,25 +28,25 @@ class RunOrganization: CustomStringConvertible {
             return nil
         }
         
-        primaryContact = organizationDict["primaryContactName"] as? String
-        name = organizationDict["organizationName"] as? String
-        address1 = organizationDict["addressLine1Txt"] as? String
-        city = organizationDict["addressCityName"] as? String
-        state = organizationDict["addressStateProvinceCode"] as? String
-        phone = organizationDict["primaryContactPhone"] as? String
-        zip = organizationDict["addressPostalCd"] as? String
+        primaryContact = organizationDict[Key.ContactName] as? String
+        name = organizationDict[Key.OrganizationName] as? String
+        address1 = organizationDict[Key.Address1] as? String
+        city = organizationDict[Key.City] as? String
+        state = organizationDict[Key.State] as? String
+        phone = organizationDict[Key.Phone] as? String
+        zip = organizationDict[Key.Postal] as? String
     }
     
     func toDict() -> [String: Any] {
         var dict = [String: Any]()
         
-        if let name = self.name { dict["organization_name"] = name }
-        if let address1 = self.address1 { dict["organization_address1"] = address1 }
-        if let contact = self.primaryContact { dict["primary_contact"] = contact }
-        if let city = self.city { dict["organization_city"] = city }
-        if let state = self.state { dict["organization_state"] = state }
-        if let phone = self.phone { dict["organization_phone"] = phone }
-        if let zip = self.zip { dict["organization_zip"] = zip }
+        if let name = self.name { dict[Key.OrganizationName] = name }
+        if let address1 = self.address1 { dict[Key.Address1] = address1 }
+        if let contact = self.primaryContact { dict[Key.ContactName] = contact }
+        if let city = self.city { dict[Key.City] = city }
+        if let state = self.state { dict[Key.State] = state }
+        if let phone = self.phone { dict[Key.Phone] = phone }
+        if let zip = self.zip { dict[Key.Postal] = zip }
         
         return dict
     }
@@ -55,5 +55,17 @@ class RunOrganization: CustomStringConvertible {
 extension RunOrganization: Equatable {
     static func ==(lhs: RunOrganization, rhs: RunOrganization) -> Bool {
         return lhs.primaryContact == rhs.primaryContact && lhs.name == rhs.name && lhs.address1 == rhs.address1 && lhs.city == rhs.city && lhs.state == rhs.state && lhs.phone == rhs.phone && lhs.zip == rhs.zip
+    }
+}
+
+extension RunOrganization {
+    struct Key {
+        static let ContactName = "primaryContactName"
+        static let OrganizationName = "organizationName"
+        static let Address1 = "addressLine1Txt"
+        static let City = "addressCityName"
+        static let State = "addressStateProvinceCode"
+        static let Phone = "primaryContactPhone"
+        static let Postal = "addressPostalCd"
     }
 }

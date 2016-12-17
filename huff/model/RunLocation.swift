@@ -20,25 +20,25 @@ class RunLocation: CustomStringConvertible {
     }
     
     init?(result: [String: AnyObject]) {
-        guard let runLocation = result["place"] as? [String: AnyObject] else {
+        guard let runLocation = result[Key.Place] as? [String: AnyObject] else {
             return nil
         }
         
-        placeName = runLocation["placeName"] as? String
-        address1 = runLocation["addressLine1Txt"] as? String
-        city = runLocation["cityName"] as? String
-        state = runLocation["stateProvinceCode"] as? String
-        zip = runLocation["postalCode"] as? String
+        placeName = runLocation[Key.PlaceName] as? String
+        address1 = runLocation[Key.Address1] as? String
+        city = runLocation[Key.City] as? String
+        state = runLocation[Key.State] as? String
+        zip = runLocation[Key.Postal] as? String
     }
     
     func toDict() -> [String: Any] {
         var dict = [String: Any]()
         
-        if let runPlaceName = self.placeName { dict["run_location_name"] = runPlaceName }
-        if let runAddress1 = self.address1 { dict["run_address1"] = runAddress1 }
-        if let runCity = self.city { dict["run_city"] = runCity }
-        if let runState = self.state { dict["run_state"] = runState }
-        if let runZip = self.zip { dict["run_zip"] = runZip }
+        if let runPlaceName = self.placeName { dict[Key.PlaceName] = runPlaceName }
+        if let runAddress1 = self.address1 { dict[Key.Address1] = runAddress1 }
+        if let runCity = self.city { dict[Key.City] = runCity }
+        if let runState = self.state { dict[Key.State] = runState }
+        if let runZip = self.zip { dict[Key.Postal] = runZip }
         
         return dict
     }
@@ -47,5 +47,16 @@ class RunLocation: CustomStringConvertible {
 extension RunLocation: Equatable {
     static func ==(lhs: RunLocation, rhs: RunLocation) -> Bool {
         return lhs.placeName == rhs.placeName && lhs.address1 == rhs.address1 && lhs.city == rhs.city && lhs.state == rhs.state && lhs.zip == rhs.zip
+    }
+}
+
+extension RunLocation {
+    struct Key {
+        static let Place = "place"
+        static let PlaceName = "placeName"
+        static let Address1 = "addressLine1Txt"
+        static let City = "cityName"
+        static let Postal = "postalCode"
+        static let State = "stateProvinceCode"
     }
 }

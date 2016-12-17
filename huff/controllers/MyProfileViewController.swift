@@ -16,12 +16,17 @@ class MyProfileViewController: UIViewController {
     // TODO: change this profile into a custom profile model
     var profile: Profile?
     var databaseRef: FIRDatabaseReference?
-    var accountRef: FIRDatabaseHandle?
+    var accountHandle: FIRDatabaseHandle?
     
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
+    @IBOutlet weak var favoritedActiveRuns: UITableView! {
+        didSet {
+            favoritedActiveRuns.delegate = self
+            favoritedActiveRuns.dataSource = self
+        }
+    }
 
-    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +72,7 @@ class MyProfileViewController: UIViewController {
     // step 1: grab information from the database
     func configureDatabase(completionHandler: (()->Void)?) {
         databaseRef = FIRDatabase.database().reference()
-        accountRef = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)").observe(.value, with: { (localSnapshot) in
+        accountHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)").observe(.value, with: { (localSnapshot) in
             let snap = localSnapshot.value as? [String: Any]
             self.profile?.status = snap?["status"] as? String
             self.profile?.accountCreationDate = snap?["creation_date"] as? TimeInterval
@@ -96,5 +101,16 @@ class MyProfileViewController: UIViewController {
             // step 3: assign the profile header view a new profile object
             self.profileInfoHeader.profile = self.profile
         })
+    }
+}
+
+extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return profile?.favoriteActiveRuns.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activeRunCell", for: indexPath) as! ActiveRunTableViewCell
+        return cell
     }
 }

@@ -44,25 +44,25 @@ class ActiveRun: CustomStringConvertible {
         }
         self.organization = organization
         self.location = location
-        self.name = result["assetName"] as? String
-        self.logoURL = result["logoUrlAdr"] as? String
+        self.name = result[Key.Name] as? String
+        self.logoURL = result[Key.LogoURL] as? String
         
         // extract the dates
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
-        if let rawRunDate = result["activityStartDate"] as? String {
+        if let rawRunDate = result[Key.ActivityStartDate] as? String {
             runDate = formatter.date(from: rawRunDate)
         }
-        if let rawRegistrationDeadline = result["salesEndDate"] as? String {
+        if let rawRegistrationDeadline = result[Key.SalesEndDate] as? String {
             registrationDeadlineDate = formatter.date(from: rawRegistrationDeadline)
         }
         
-        self.assetID = result["assetGuid"] as! String
+        self.assetID = result[Key.AssetUID] as! String
         
-        if let descriptionArray = result["assetDescriptions"] as? [AnyObject] {
+        if let descriptionArray = result[Key.AssetDescriptionDict] as? [AnyObject] {
             for descriptionDict in descriptionArray {
-                let htmlDescription = descriptionDict["description"] as? String
+                let htmlDescription = descriptionDict[Key.AssetDescription] as? String
                 let description = self.htmlToAttributedString(htmlString: htmlDescription)?.string
                 if let trimmedDescription = description?.trimmingCharacters(in: .whitespacesAndNewlines) {
                     self.runDescription = trimmedDescription
@@ -91,22 +91,16 @@ class ActiveRun: CustomStringConvertible {
         let locationDict = self.location.toDict()
         let organizationDict = self.organization.toDict()
         
-        if let runName = name { dict["run_name"] = runName }
-        if let logoLink = logoURL { dict["run_logo"] = logoLink }
-        if let id = assetID { dict["run_id"] = id }
-        if let registrationLink = registrationURL { dict["registration_link"] = registrationLink }
-        if let run_date = runDate?.timeIntervalSince1970 { dict["run_date"] = run_date }
-        if let run_deadline = registrationDeadlineDate?.timeIntervalSince1970 { dict["run_deadline"] = run_deadline }
-        if let run_description = runDescription { dict["run_description"] = run_description }
-
+        if let runName = name { dict[Key.Name] = runName }
+        if let logoLink = logoURL { dict[Key.LogoURL] = logoLink }
+        if let id = assetID { dict[Key.AssetUID] = id }
+        if let registrationLink = registrationURL { dict[Key.RegistrationURL] = registrationLink }
+        if let run_date = runDate?.timeIntervalSince1970 { dict[Key.ActivityStartDate] = run_date }
+        if let run_deadline = registrationDeadlineDate?.timeIntervalSince1970 { dict[Key.SalesEndDate] = run_deadline }
+        if let run_description = runDescription { dict[Key.AssetDescription] = run_description }
         
-        locationDict.forEach { (key, value) in
-            dict[key] = value
-        }
-        
-        organizationDict.forEach { (key, value) in
-            dict[key] = value
-        }
+        dict[Key.Location] = locationDict
+        dict[Key.Organization] = organizationDict
         
         return dict
     }
@@ -128,5 +122,21 @@ extension ActiveRun: Equatable {
     
     static func compareRuns(lhs: ActiveRun, rhs: [String: Any]) -> Bool {
         return lhs.assetID == rhs["run_id"] as! String
+    }
+}
+
+
+extension ActiveRun {
+    struct Key {
+        static let Name = "assetName"
+        static let LogoURL = "logoUrlAdr"
+        static let ActivityStartDate = "activityStartDate"
+        static let SalesEndDate = "salesEndDate"
+        static let AssetUID = "assetGuid"
+        static let AssetDescriptionDict = "assetDescriptions"
+        static let AssetDescription = "description"
+        static let RegistrationURL = "urlAdr"
+        static let Location = "location"
+        static let Organization = "organization"
     }
 }

@@ -17,6 +17,7 @@ class Profile {
     var uid: String?
     var email: String?
     var status: String?
+    var favoriteActiveRuns = [ActiveRun]()
     
     init(user: FIRUser, photo: UIImage?, status: String?, dateJoined: TimeInterval?) {
         self.photo = photo
