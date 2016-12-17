@@ -19,8 +19,9 @@ class RunLocation: CustomStringConvertible {
         return "\(placeName ?? "Place Name N/A")\n\(address1 ?? "N/A")\n\(city ?? "N/A"), \(state ?? "N/A") \(zip ?? "N/A")"
     }
     
-    init?(result: [String: AnyObject]) {
+    init?(result: [String: Any]) {
         guard let runLocation = result[Key.Place] as? [String: AnyObject] else {
+            print("run location key is incorrect")
             return nil
         }
         

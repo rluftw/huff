@@ -36,7 +36,7 @@ class ActiveService: Service {
                                             ParameterKeys.ExcludeChildren: "true",
                                             ParameterKeys.StartDate: dateString+".."+after4WeekString,
                                             ParameterKeys.Topic: "running"]
-        let searchURL = getCompleteURL(parameters: parameters, scheme: Constants.Scheme, host: Constants.Host, method: Constants.Method)
+        let searchURL = getCompleteURL(parameters: parameters, scheme: Constants.Scheme, host: Constants.Host, method: Constants.Method)        
         let urlRequest = URLRequest(url: searchURL)
         _ = NetworkOperation.sharedInstance().request(urlRequest) { (data, error) -> Void in
             guard let data = data else {

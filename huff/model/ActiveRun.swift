@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class ActiveRun: CustomStringConvertible {
+
+
+    
     let organization: RunOrganization!
     let location: RunLocation!
     let name: String?
@@ -30,18 +33,22 @@ class ActiveRun: CustomStringConvertible {
         return "\(name ?? "Run Name N/A")\nlocation:\n==========\n\(location)\n\norganization\n==========\n\(organization)\n\(formatter.string(from: runDate!))"
     }
     
-    init?(result: [String: AnyObject]?) {
+    init?(result: [String: Any]?) {
         guard let result = result else {
+            print("error - the parameter is invalid")
             return nil
         }
         // we must have an organization
         guard let organization = RunOrganization(result: result) else {
+            print("error - the run has no organization key")
             return nil
         }
         // we also must have a location to run in
         guard let location = RunLocation(result: result) else {
+            print("error - the run has no location")
             return nil
         }
+        
         self.organization = organization
         self.location = location
         self.name = result[Key.Name] as? String
@@ -72,6 +79,7 @@ class ActiveRun: CustomStringConvertible {
         
         self.registrationURL = result["urlAdr"] as? String
     }
+
     
     // MARK: - helper methods
     func htmlToAttributedString(htmlString: String?) -> NSAttributedString? {
@@ -136,7 +144,7 @@ extension ActiveRun {
         static let AssetDescriptionDict = "assetDescriptions"
         static let AssetDescription = "description"
         static let RegistrationURL = "urlAdr"
-        static let Location = "location"
+        static let Location = "place"
         static let Organization = "organization"
     }
 }

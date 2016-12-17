@@ -17,6 +17,8 @@ class MyProfileViewController: UIViewController {
     var profile: Profile?
     var databaseRef: FIRDatabaseReference?
     var accountHandle: FIRDatabaseHandle?
+    var runAddHandle: FIRDatabaseHandle?
+    var runRemoveHandle: FIRDatabaseHandle?
     
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
@@ -24,6 +26,8 @@ class MyProfileViewController: UIViewController {
         didSet {
             favoritedActiveRuns.delegate = self
             favoritedActiveRuns.dataSource = self
+            favoritedActiveRuns.rowHeight = UITableViewAutomaticDimension
+            favoritedActiveRuns.estimatedRowHeight = 150
         }
     }
 
@@ -34,9 +38,11 @@ class MyProfileViewController: UIViewController {
         let firebaseUser = FIRAuth.auth()!.currentUser!
         self.profile = Profile(user: firebaseUser, photo: nil, status: nil, dateJoined: nil)
      
-        configureDatabase { 
-            self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL)
+        databaseRef = FIRDatabase.database().reference()
+        configureDatabase {
+            self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL, completionHandler: nil)
         }
+        fetchFavoritedRuns()
     }
     
     // MARK: - action
@@ -71,7 +77,6 @@ class MyProfileViewController: UIViewController {
     
     // step 1: grab information from the database
     func configureDatabase(completionHandler: (()->Void)?) {
-        databaseRef = FIRDatabase.database().reference()
         accountHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)").observe(.value, with: { (localSnapshot) in
             let snap = localSnapshot.value as? [String: Any]
             self.profile?.status = snap?["status"] as? String
@@ -82,7 +87,7 @@ class MyProfileViewController: UIViewController {
     }
 
     // step 2: fetch the image
-    func fetchProfilePhoto(profilePhotoUrl: URL?) {
+    func fetchProfilePhoto(profilePhotoUrl: URL?, completionHandler: (()->Void)?) {
         if let url = profilePhotoUrl {
             let request = URLRequest(url: url)
             _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
@@ -94,6 +99,44 @@ class MyProfileViewController: UIViewController {
         } else {
             self.updateProfile()
         }
+    }
+    
+    func fetchFavoritedRuns() {
+        runAddHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs").observe(.childAdded, with: { (localSnapshot) in
+            guard let snapshot = localSnapshot.value as? [String: Any] else {
+                return
+            }
+            
+            print("childAdded")
+            if let run = ActiveRun(result: snapshot) {
+                self.profile?.favoriteActiveRuns.append(run)
+                self.favoritedActiveRuns.insertRows(at: [IndexPath(row: self.profile!.favoriteActiveRuns.count-1, section: 0)], with: .automatic)
+            }
+        })
+        
+        runAddHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs").observe(.childRemoved, with: { (localSnapshot) in
+            guard let snapshot = localSnapshot.value as? [String: Any] else {
+                return
+            }
+            
+            print("childRemoved")
+            
+            // the run must have a uid
+            guard let uid = snapshot[ActiveRun.Key.AssetUID] as? String else {
+                print("error - the run does not consist of any uid")
+                return
+            }
+            
+            print("the user has liked \(self.profile!.favoriteActiveRuns.count) runs")
+            
+            if let index = self.profile?.favoriteActiveRuns.index(where: { (run) -> Bool in
+                return run.assetID == uid
+            }) {
+                self.profile?.favoriteActiveRuns.remove(at: index)
+                self.favoritedActiveRuns.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+            }
+            
+        })
     }
     
     fileprivate func updateProfile() {
@@ -111,6 +154,24 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "activeRunCell", for: indexPath) as! ActiveRunTableViewCell
+        cell.run = self.profile?.favoriteActiveRuns[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        // use the cell as the sender - used later to extract the active run object
+        let cell = tableView.cellForRow(at: indexPath)
+        performSegue(withIdentifier: "showRunDetail", sender: cell)
+    }
+    
+    // MARK: - navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showRunDetail" {
+            let cell = sender as? ActiveRunTableViewCell
+            let detailVC = segue.destination as! ActiveRunDetailViewController
+            detailVC.run = cell?.run
+        }
     }
 }

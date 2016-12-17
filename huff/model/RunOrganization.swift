@@ -21,9 +21,9 @@ class RunOrganization: CustomStringConvertible {
         return "Primary Contact: \(primaryContact ?? "N/A")\nOrganization: \(name ?? "N/A")\nAddress:\n\t\(address1 ?? "N/A")\n\t\(city ?? "N/A"), \(state ?? "N/A")\n\tPhone: \(phone ?? "N/A")"
     }
     
-    init?(result: [String: AnyObject]) {
+    init?(result: [String: Any]) {
         // there must be an organization dictionary
-        guard let organizationDict = result["organization"] as? [String: AnyObject] else {
+        guard let organizationDict = result[Key.Organization] as? [String: AnyObject] else {
             print("there was a problem with the active service results")
             return nil
         }
@@ -60,6 +60,7 @@ extension RunOrganization: Equatable {
 
 extension RunOrganization {
     struct Key {
+        static let Organization = "organization"
         static let ContactName = "primaryContactName"
         static let OrganizationName = "organizationName"
         static let Address1 = "addressLine1Txt"

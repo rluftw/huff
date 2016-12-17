@@ -97,6 +97,7 @@ class ActiveRunDetailViewController: UIViewController {
         })
     }
     
+    // updates firebase db when user wants to either like or unlike a run
     fileprivate func toggleLike() {
         let assetsReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs")
         
