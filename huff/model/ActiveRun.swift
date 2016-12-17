@@ -75,6 +75,8 @@ class ActiveRun: CustomStringConvertible {
                     self.runDescription = trimmedDescription
                 }
             }
+        } else {
+            self.runDescription = result[Key.AssetDescription] as? String
         }
         
         self.registrationURL = result["urlAdr"] as? String
@@ -105,7 +107,12 @@ class ActiveRun: CustomStringConvertible {
         if let registrationLink = registrationURL { dict[Key.RegistrationURL] = registrationLink }
         if let run_date = runDate?.timeIntervalSince1970 { dict[Key.ActivityStartDate] = run_date }
         if let run_deadline = registrationDeadlineDate?.timeIntervalSince1970 { dict[Key.SalesEndDate] = run_deadline }
-        if let run_description = runDescription { dict[Key.AssetDescription] = run_description }
+        if let run_description = runDescription {
+            print(run_description)
+            dict[Key.AssetDescription] = run_description
+        }
+        
+        
         
         dict[Key.Location] = locationDict
         dict[Key.Organization] = organizationDict

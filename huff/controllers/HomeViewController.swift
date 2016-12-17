@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         // first step is check if this is the users first time logging in
         configureDatabase()
         

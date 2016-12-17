@@ -172,6 +172,8 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = sender as? ActiveRunTableViewCell
             let detailVC = segue.destination as! ActiveRunDetailViewController
             detailVC.run = cell?.run
+            
+            tabBarController?.tabBar.isHidden = true
         }
     }
 }

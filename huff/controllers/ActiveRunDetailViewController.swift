@@ -67,6 +67,10 @@ class ActiveRunDetailViewController: UIViewController {
     // MARK: - actions
     
     @IBAction func close(_ sender: Any) {
+        if let vc = presentingViewController as? UINavigationController {
+            vc.tabBarController?.tabBar.isHidden = false
+        }
+        
         dismiss(animated: true, completion: nil)
     }
     

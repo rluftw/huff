@@ -24,13 +24,12 @@ class ProfileHeaderView: UIView {
                 memberSince.text = "member since: \(formatter.string(from: Date(timeIntervalSince1970: accountCreationDate)))"
             }
             
-            profileDescription.text = profile?.status ?? "Tap here to change your status"
+            self.backgroundColor = UIColor(patternImage: UIImage(named: "profile_background")!)
         }
     }
     
     @IBOutlet weak var profilePhoto: UIImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var profileDescription: UILabel!
     @IBOutlet weak var memberSince: UILabel!
     
 }
