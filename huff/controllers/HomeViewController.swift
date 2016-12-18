@@ -107,4 +107,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.valueLabel.text = "10 miles"
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.row == 0
+    }
 }

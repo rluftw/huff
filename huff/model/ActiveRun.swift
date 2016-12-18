@@ -60,7 +60,12 @@ class ActiveRun: CustomStringConvertible {
         
         if let rawRunDate = result[Key.ActivityStartDate] as? String {
             runDate = formatter.date(from: rawRunDate)
+        } else if let rawRunDate = result[Key.ActivityStartDate] as? TimeInterval {
+            runDate = Date(timeIntervalSince1970: rawRunDate)
         }
+        
+
+        
         if let rawRegistrationDeadline = result[Key.SalesEndDate] as? String {
             registrationDeadlineDate = formatter.date(from: rawRegistrationDeadline)
         }

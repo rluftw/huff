@@ -25,13 +25,19 @@ class ActiveRunDetailViewController: UIViewController {
     @IBOutlet weak var likeButton: UIButton!
     
     
-    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        configureDatabase()
         updateLabels()
+        
+        // check if the run has passed
+        if let runDate = run.runDate, Date().compare(runDate) == .orderedDescending {
+            registerButton.setTitle("NOT AVAILABLE", for: .normal)
+            registerButton.isUserInteractionEnabled = false
+            registerButton.alpha = 0.5
+        }
     }
 
     
@@ -79,6 +85,7 @@ class ActiveRunDetailViewController: UIViewController {
             registerButton.setTitle("NOT AVAILABLE", for: .normal)
             return
         }
+        
         UIApplication.shared.open(registrationURL, options: [:], completionHandler: nil)
     }
     @IBAction func contactOrganizer(_ sender: Any) {
@@ -92,7 +99,7 @@ class ActiveRunDetailViewController: UIViewController {
     
     // MARK: - firebase
     
-    func configure() {
+    func configureDatabase() {
         ref = FIRDatabase.database().reference()
         let assetsReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs")
         

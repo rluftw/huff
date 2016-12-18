@@ -24,7 +24,7 @@ class ProfileHeaderView: UIView {
                 memberSince.text = "member since: \(formatter.string(from: Date(timeIntervalSince1970: accountCreationDate)))"
             }
             
-            self.backgroundColor = UIColor(patternImage: UIImage(named: "profile_background")!)
+            self.backgroundColor = UIColor(patternImage: UIImage(named: "pixel_background")!)
         }
     }
     

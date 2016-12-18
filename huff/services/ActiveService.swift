@@ -22,7 +22,8 @@ class ActiveService: Service {
         let todaysDate = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        let dateString = formatter.string(from: todaysDate)
+        // start date is tomorrows date
+        let dateString = formatter.string(from: todaysDate.addingTimeInterval(60*60*24))
         let after4WeekString = formatter.string(from: todaysDate.addingTimeInterval(60*60*24*28))
         
         // build the parameters dict

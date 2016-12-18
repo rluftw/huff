@@ -52,6 +52,8 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         
         // this request for location use
         locationManager.requestWhenInUseAuthorization()
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "pixel_background")!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

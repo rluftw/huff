@@ -654,7 +654,7 @@
                                                                     <color key="textColor" red="1" green="0.75686274509999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZzV-Bt-If7">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="swipe to edit" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZzV-Bt-If7">
                                                                     <rect key="frame" x="171.5" y="0.0" width="171.5" height="37"/>
                                                                     <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -688,7 +688,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.16862745100000001" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="dateLabel" destination="ZzV-Bt-If7" id="0oL-sE-I1C"/>
                                             <outlet property="organizationNameLabel" destination="tYC-Om-SLK" id="dbZ-qw-rpH"/>
                                             <outlet property="runName" destination="C20-dU-XGv" id="srI-jT-Yhg"/>
                                         </connections>
@@ -1789,6 +1788,6 @@
         <image name="unlike" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wEM-eA-trW"/>
+        <segue reference="P3T-SK-drg"/>
     </inferredMetricsTieBreakers>
 </document>
