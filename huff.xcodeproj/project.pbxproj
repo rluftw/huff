@@ -18,6 +18,7 @@
 		373DBDE91DF7B61800DB3698 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373DBDE81DF7B61800DB3698 /* LoginViewController.swift */; };
 		373DBDEB1DF7D28900DB3698 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373DBDEA1DF7D28900DB3698 /* SignUpViewController.swift */; };
 		373DBDED1DF8D5FB00DB3698 /* UnderlinerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373DBDEC1DF8D5FB00DB3698 /* UnderlinerTextField.swift */; };
+		374562EF1E05FF34004CEBE9 /* TopListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374562EE1E05FF34004CEBE9 /* TopListCell.swift */; };
 		375686EA1DE4FC82004F2951 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375686E91DE4FC82004F2951 /* AppDelegate.swift */; };
 		375686EF1DE4FC82004F2951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375686ED1DE4FC82004F2951 /* Main.storyboard */; };
 		375686F21DE4FC82004F2951 /* huff.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 375686F01DE4FC82004F2951 /* huff.xcdatamodeld */; };
@@ -85,6 +86,7 @@
 		373DBDEA1DF7D28900DB3698 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = controllers/SignUpViewController.swift; sourceTree = "<group>"; };
 		373DBDEC1DF8D5FB00DB3698 /* UnderlinerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnderlinerTextField.swift; path = views/UnderlinerTextField.swift; sourceTree = "<group>"; };
 		373DBDEE1DF8F8B500DB3698 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		374562EE1E05FF34004CEBE9 /* TopListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopListCell.swift; path = views/TopListCell.swift; sourceTree = "<group>"; };
 		375686E61DE4FC82004F2951 /* huff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = huff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375686E91DE4FC82004F2951 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		375686EE1DE4FC82004F2951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				373DBDEC1DF8D5FB00DB3698 /* UnderlinerTextField.swift */,
 				37DD92F11DFA5DBB00CD8D15 /* LoginOverlayView.swift */,
 				37DB549A1DFCF155004BD15C /* TweetPhotoCollectionViewCell.swift */,
+				374562EE1E05FF34004CEBE9 /* TopListCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */,
 				37CEB4281DF6604200CF4446 /* ProfileHeaderView.swift in Sources */,
 				3730D6B21DEFD1B70065F3B7 /* ActiveService.swift in Sources */,
+				374562EF1E05FF34004CEBE9 /* TopListCell.swift in Sources */,
 				3730D6B41DEFD24C0065F3B7 /* Service.swift in Sources */,
 				37DD92F21DFA5DBB00CD8D15 /* LoginOverlayView.swift in Sources */,
 				375D318F1DEB2F9900829788 /* TweetTableViewCell.swift in Sources */,

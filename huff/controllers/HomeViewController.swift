@@ -16,6 +16,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var quoteAuthor: UILabel!
     
+    @IBOutlet weak var topDistanceTable: UITableView!
+    
     // MARK: - properties
     var remoteConfig: FIRRemoteConfig!
     var ref: FIRDatabaseReference!
@@ -33,6 +35,8 @@ class HomeViewController: UIViewController {
         
         // fetch the remote configurations
         fetchConfigurations()
+        
+        topDistanceTable.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
     }
     
     
@@ -89,5 +93,18 @@ class HomeViewController: UIViewController {
             }
         })
     }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "topListCell", for: indexPath) as! TopListCell
+        cell.rankLabel.text = "\(indexPath.row+1)."
+        cell.userLabel.text = "richuuurd"
+        cell.valueLabel.text = "10 miles"
+        return cell
+    }
 }
