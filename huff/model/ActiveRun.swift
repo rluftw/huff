@@ -108,7 +108,6 @@ class ActiveRun: CustomStringConvertible {
         if let run_date = runDate?.timeIntervalSince1970 { dict[Key.ActivityStartDate] = run_date }
         if let run_deadline = registrationDeadlineDate?.timeIntervalSince1970 { dict[Key.SalesEndDate] = run_deadline }
         if let run_description = runDescription {
-            print(run_description)
             dict[Key.AssetDescription] = run_description
         }
         

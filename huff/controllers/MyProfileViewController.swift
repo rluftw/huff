@@ -45,6 +45,11 @@ class MyProfileViewController: UIViewController {
         fetchFavoritedRuns()
     }
     
+    deinit {
+        if let addHandle = runAddHandle { databaseRef?.removeObserver(withHandle: addHandle) }
+        if let removeHandle = runRemoveHandle { databaseRef?.removeObserver(withHandle: removeHandle)}
+    }
+    
     // MARK: - action
     
     @IBAction func logout(_ sender: Any) {
@@ -114,7 +119,7 @@ class MyProfileViewController: UIViewController {
             }
         })
         
-        runAddHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs").observe(.childRemoved, with: { (localSnapshot) in
+        runRemoveHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs").observe(.childRemoved, with: { (localSnapshot) in
             guard let snapshot = localSnapshot.value as? [String: Any] else {
                 return
             }

@@ -13,7 +13,7 @@ class Location {
     let longitude: CLLocationDegrees
     let latitude: CLLocationDegrees
     
-    let timestamp: Double
+    let timestamp: TimeInterval
     
     init(location: CLLocationCoordinate2D) {
         timestamp = NSDate().timeIntervalSince1970

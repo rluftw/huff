@@ -19,6 +19,7 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var signalView: UIView!
     
     
     // MARK: - properties
@@ -81,21 +82,14 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         pauseButton.backgroundColor = paused ? UIColor(red: 0, green: 153/255.0, blue: 0, alpha: 1.0): UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)
     }
     
-    @IBAction func cancelRun(_ sender: Any) {
-        self.stopUpdatingLocation()
-        
-        endRunWithWarning(title: "Cancel Run", message: "Are you sure you'd like to cancel? All data recorded from this run will be deleted.") {
-            (action) in
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    
-    
     // MARK: - location manager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for newLocation in locations {
             print(newLocation.timestamp.timeIntervalSince(Date()))
+            
+            // check if the signal is good by checking the accuracy
+            signalView.backgroundColor = newLocation.horizontalAccuracy < 20 ? UIColor(red: 0, green: 153/255.0, blue: 0, alpha: 1): UIColor(red: 204/255.0, green: 0, blue: 0, alpha: 1)
+            
             
             if newLocation.horizontalAccuracy < 20 && newLocation.timestamp.timeIntervalSince(Date()) > -1 {
                 // update the distance if at least 1 location logged
