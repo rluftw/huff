@@ -112,7 +112,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Top 20 Distance Runners" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="DM5-NO-jDb">
-                                <rect key="frame" x="24" y="199.5" width="327" height="44"/>
+                                <rect key="frame" x="24" y="197.5" width="327" height="44"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="DZ1-Xa-b2g"/>
@@ -122,10 +122,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="15" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-cA-uwd">
-                                <rect key="frame" x="24" y="243.5" width="327" height="229.5"/>
+                                <rect key="frame" x="24" y="241.5" width="327" height="231.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="ch8-xG-fID">
-                                    <rect key="frame" x="0.0" y="38" width="327" height="20"/>
+                                    <rect key="frame" x="0.0" y="38" width="327" height="10"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.0" green="0.40000000000000002" blue="0.80000000000000004" alpha="0.5" colorSpace="calibratedRGB"/>
                                 </view>
@@ -197,7 +197,7 @@
                             <constraint firstItem="jcX-7t-fUn" firstAttribute="top" secondItem="B0S-cA-uwd" secondAttribute="bottom" constant="16" id="IVp-lf-x1H"/>
                             <constraint firstItem="B0S-cA-uwd" firstAttribute="top" secondItem="DM5-NO-jDb" secondAttribute="bottom" id="Jgb-64-Wda"/>
                             <constraint firstItem="Y4k-j2-RdS" firstAttribute="top" secondItem="jcX-7t-fUn" secondAttribute="bottom" constant="8" id="Prv-wY-OhJ"/>
-                            <constraint firstItem="DM5-NO-jDb" firstAttribute="top" secondItem="TxG-IG-2MM" secondAttribute="bottom" constant="50" id="YXT-kl-UiE"/>
+                            <constraint firstItem="DM5-NO-jDb" firstAttribute="top" secondItem="TxG-IG-2MM" secondAttribute="bottom" constant="48" id="YXT-kl-UiE"/>
                             <constraint firstAttribute="trailing" secondItem="JhI-pp-ziQ" secondAttribute="trailing" id="ZaX-Yn-zbQ"/>
                             <constraint firstAttribute="trailing" secondItem="jcX-7t-fUn" secondAttribute="trailing" constant="16" id="brk-vD-XCn"/>
                             <constraint firstItem="TxG-IG-2MM" firstAttribute="top" secondItem="Y6u-gj-PTI" secondAttribute="bottom" constant="32" id="jHl-hR-cwQ"/>
@@ -948,7 +948,7 @@
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I44-2X-4rw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="278" height="424"/>
-                                                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                             </imageView>
                                                         </subviews>
                                                     </view>

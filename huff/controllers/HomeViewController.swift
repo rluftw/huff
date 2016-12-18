@@ -99,16 +99,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "topListCell", for: indexPath) as! TopListCell
         cell.rankLabel.text = "\(indexPath.row+1)."
         cell.userLabel.text = "richuuurd"
         cell.valueLabel.text = "10 miles"
+        
+        // the only row that should be highlighted will be the first
+        cell.isUserInteractionEnabled = indexPath.row == 0
+        
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.row == 0
     }
 }

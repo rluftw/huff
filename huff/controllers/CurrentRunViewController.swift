@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 fileprivate let metersInMiles = 1609.344
 
@@ -23,7 +24,7 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // MARK: - properties
-    let run: Run = Run()
+    let run: Run = Run(uid: FIRAuth.auth()!.currentUser!.uid)
     var timer: Timer?
     
     // used to determine distance

@@ -77,6 +77,15 @@ class MyProfileViewController: UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
+    func showOptions(sender: Any) {
+        print(sender)
+        
+        let alertVC = UIAlertController(title: "Event Options for ", message: "", preferredStyle: .actionSheet)
+        alertVC.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+            
+        }))
+    }
+    
     
     // MARK: - firebase methods
     
@@ -168,6 +177,11 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         // use the cell as the sender - used later to extract the active run object
         let cell = tableView.cellForRow(at: indexPath)
+        
+        // assign a long hold gesture to add more options
+        let longHoldGesture = UILongPressGestureRecognizer(target: self, action: #selector(showOptions(sender:)))
+        cell?.addGestureRecognizer(longHoldGesture)
+        
         performSegue(withIdentifier: "showRunDetail", sender: cell)
     }
     

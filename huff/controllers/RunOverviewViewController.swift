@@ -8,11 +8,13 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 class RunOverviewViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - properties
     var run: Run!
+    var databaseRef: FIRDatabaseReference!
     lazy var mapRegion: MKCoordinateRegion? = {
         var mr = MKCoordinateRegion()
         guard let initialLocation = self.run.locations.last else {
@@ -66,11 +68,15 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
 
         setupMap()
+        
+        // setup firebase connections
+        databaseRef = FIRDatabase.database().reference()
     }
 
     // MARK: - actions
     @IBAction func done(_ sender: Any) {
-        // TODO: save context to coredata
+        // TODO: save data to firebase and check if the run has been longet than 5 minutes
+        saveRun()
         
         let alertVC = UIAlertController(title: "Run", message: "Your run has been saved.", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Great!", style: .default, handler: { (action) in
@@ -102,5 +108,10 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         
         return polyLineRenderer
     }
-    
+
+    func saveRun() {
+        databaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs")
+            .childByAutoId()
+            .setValue(run.toDict())
+    }
 }
