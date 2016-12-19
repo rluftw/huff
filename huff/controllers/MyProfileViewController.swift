@@ -77,13 +77,37 @@ class MyProfileViewController: UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
-    func showOptions(sender: Any) {
-        print(sender)
-        
-        let alertVC = UIAlertController(title: "Event Options for ", message: "", preferredStyle: .actionSheet)
-        alertVC.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+    func showOptions(gesture: UILongPressGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            // 1. extract the cell and object associated
+            guard let cell = gesture.view as? ActiveRunTableViewCell, let run = cell.run else {
+                return
+            }
             
-        }))
+            // 2. create the alert controller
+            let alertVC = UIAlertController(title: "Event Options for \(run.name ?? run.organization.name ?? "N/A")", message: "", preferredStyle: .actionSheet)
+            
+            // 3. create the actions
+            if let phone = run.organization.phone, UIDevice.current.model == "iPhone" {
+                alertVC.addAction(UIAlertAction(title: "Call Organizer", style: .default, handler: { (action) in
+                    guard let phoneURL = URL(string: "telprompt://" + phone) else { return }
+                    UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+                }))
+            }
+            // set option to delete the run
+            alertVC.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+                if let id = run.assetID {
+                    self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs/\(id)").removeValue()
+                }
+            }))
+            
+            alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(alertVC, animated: true, completion: nil)
+        default: break
+        }
+        
+
     }
     
     
@@ -140,9 +164,7 @@ class MyProfileViewController: UIViewController {
                 print("error - the run does not consist of any uid")
                 return
             }
-            
-            print("the user has liked \(self.profile!.favoriteActiveRuns.count) runs")
-            
+            // find the index of the run with the same uid
             if let index = self.profile?.favoriteActiveRuns.index(where: { (run) -> Bool in
                 return run.assetID == uid
             }) {
@@ -169,6 +191,10 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "activeRunCell", for: indexPath) as! ActiveRunTableViewCell
         cell.run = self.profile?.favoriteActiveRuns[indexPath.row]
+        
+        // assign a long hold gesture to add more options
+        let longHoldGesture = UILongPressGestureRecognizer(target: self, action: #selector(showOptions(gesture:)))
+        cell.addGestureRecognizer(longHoldGesture)
         return cell
     }
     
@@ -177,10 +203,6 @@ extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         // use the cell as the sender - used later to extract the active run object
         let cell = tableView.cellForRow(at: indexPath)
-        
-        // assign a long hold gesture to add more options
-        let longHoldGesture = UILongPressGestureRecognizer(target: self, action: #selector(showOptions(sender:)))
-        cell?.addGestureRecognizer(longHoldGesture)
         
         performSegue(withIdentifier: "showRunDetail", sender: cell)
     }

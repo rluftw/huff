@@ -21,11 +21,11 @@ class HomeViewController: UIViewController {
     // MARK: - properties
     var remoteConfig: FIRRemoteConfig!
     var ref: FIRDatabaseReference!
+    var topRecords = [TopRunRecord]()
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // first step is check if this is the users first time logging in
         configureDatabase()
@@ -36,7 +36,9 @@ class HomeViewController: UIViewController {
         // fetch the remote configurations
         fetchConfigurations()
         
+        // select the first row
         topDistanceTable.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
+        
     }
     
     
@@ -92,6 +94,28 @@ class HomeViewController: UIViewController {
                 return
             }
         })
+        
+        // create the values to locate the node on firebase
+        let components = Calendar.current.dateComponents([.weekOfYear, .year], from: Date())
+        guard let weekOfYear = components.weekOfYear, let year = components.year else {
+            return
+        }
+    
+        let topRunnersRef = ref.child("global_runs/week\(weekOfYear)-\(year)")
+        topRunnersRef
+            .observeSingleEvent(of: .value, with: { (localSnapshot) in
+            guard let snapshot = localSnapshot.value as? [String: Any] else {
+                print("invalid snapshot format")
+                return
+            }
+            
+            for key in snapshot.keys {
+                let record = TopRunRecord(dict: snapshot[key] as! [String: Any])
+                self.topRecords.append(record)
+            }
+                
+            self.topDistanceTable.reloadData()
+        })
     }
 }
 
@@ -101,9 +125,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "topListCell", for: indexPath) as! TopListCell
+        
         cell.rankLabel.text = "\(indexPath.row+1)."
-        cell.userLabel.text = "richuuurd"
-        cell.valueLabel.text = "10 miles"
+    
+        
+//        let record = topRecords[indexPath.row]
+//        cell.userLabel.text = "\(record.username ?? "")"
+//        cell.
         
         // the only row that should be highlighted will be the first
         cell.isUserInteractionEnabled = indexPath.row == 0

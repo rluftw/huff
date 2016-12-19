@@ -14,7 +14,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - properties
     var run: Run!
-    var databaseRef: FIRDatabaseReference!
+    var databaseRef: FIRDatabaseReference?
     lazy var mapRegion: MKCoordinateRegion? = {
         var mr = MKCoordinateRegion()
         guard let initialLocation = self.run.locations.last else {
@@ -110,8 +110,38 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
     }
 
     func saveRun() {
-        databaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs")
+        // create the values to locate the node on firebase
+        let components = Calendar.current.dateComponents([.weekOfYear, .year], from: Date())
+        guard let weekOfYear = components.weekOfYear, let year = components.year else {
+            return
+        }
+    
+        // save run to personal node
+        databaseRef?
+            .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/week\(weekOfYear)-\(year)")
             .childByAutoId()
             .setValue(run.toDict())
+        
+        // save total distance to global
+        databaseRef?
+            .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/week\(weekOfYear)-\(year)")
+            .observeSingleEvent(of: .value, with: { (localSnaphot) in
+                guard let snapshot = localSnaphot.value as? [String: Any] else {
+                    return
+                }
+                var totalDistance: Double = 0
+                for key in snapshot.keys {
+                    if let runDict = snapshot[key] as? [String: Any], let distance = runDict["distance"] as? Double {
+                        totalDistance += distance
+                    }
+                }
+                self.databaseRef?
+                    .child("global_runs/week\(weekOfYear)-\(year)/\(FIRAuth.auth()!.currentUser!.uid)")
+                    .setValue([
+                        "distance": totalDistance,
+                        "username": FIRAuth.auth()!.currentUser!.email?.components(separatedBy: "@")[0] ?? FIRAuth.auth()!.currentUser!.displayName!
+                        ], andPriority: totalDistance)
+            })
+
     }
 }

@@ -10,6 +10,7 @@
 		370677901DE9FF8E007EC3FD /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3706778F1DE9FF8E007EC3FD /* NetworkOperation.swift */; };
 		370677951DEA020B007EC3FD /* TwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370677941DEA020B007EC3FD /* TwitterService.swift */; };
 		370677991DEA7F1A007EC3FD /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 370677981DEA7F1A007EC3FD /* KeychainWrapper.m */; };
+		370D986B1E07978000F6970F /* TopRunRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370D986A1E07978000F6970F /* TopRunRecord.swift */; };
 		371F5D081DF7B51C00680A48 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 371F5D071DF7B51C00680A48 /* GoogleService-Info.plist */; };
 		3730D6B21DEFD1B70065F3B7 /* ActiveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730D6B11DEFD1B70065F3B7 /* ActiveService.swift */; };
 		3730D6B41DEFD24C0065F3B7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730D6B31DEFD24C0065F3B7 /* Service.swift */; };
@@ -76,6 +77,7 @@
 		370677961DEA7F1A007EC3FD /* huff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "huff-Bridging-Header.h"; sourceTree = "<group>"; };
 		370677971DEA7F1A007EC3FD /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainWrapper.h; path = "supporting files/KeychainWrapper.h"; sourceTree = "<group>"; };
 		370677981DEA7F1A007EC3FD /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainWrapper.m; path = "supporting files/KeychainWrapper.m"; sourceTree = "<group>"; };
+		370D986A1E07978000F6970F /* TopRunRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopRunRecord.swift; path = model/TopRunRecord.swift; sourceTree = "<group>"; };
 		371F5D071DF7B51C00680A48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		372DBE201DFBB7D100EB321F /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/huff-aymyvzzlyjcavzetsmbynhpfykam/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		3730D6B11DEFD1B70065F3B7 /* ActiveService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActiveService.swift; path = services/ActiveService.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				37B249EC1DF279F80052E5BA /* RunOrganization.swift */,
 				37C323AE1DF31841002A93B6 /* RunLocation.swift */,
 				375F3EDF1DFD1E7B00743245 /* Profile.swift */,
+				370D986A1E07978000F6970F /* TopRunRecord.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */,
 				37CEB4281DF6604200CF4446 /* ProfileHeaderView.swift in Sources */,
 				3730D6B21DEFD1B70065F3B7 /* ActiveService.swift in Sources */,
+				370D986B1E07978000F6970F /* TopRunRecord.swift in Sources */,
 				374562EF1E05FF34004CEBE9 /* TopListCell.swift in Sources */,
 				3730D6B41DEFD24C0065F3B7 /* Service.swift in Sources */,
 				37DD92F21DFA5DBB00CD8D15 /* LoginOverlayView.swift in Sources */,
