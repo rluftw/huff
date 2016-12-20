@@ -120,7 +120,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         databaseRef?
             .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/week\(weekOfYear)-\(year)")
             .childByAutoId()
-            .setValue(run.toDict())
+            .setValue(run.toDict(), andPriority: run.timestamp)
         
         // save total distance to global
         databaseRef?

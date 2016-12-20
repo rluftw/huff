@@ -36,7 +36,7 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         let lm = CLLocationManager()
         lm.desiredAccuracy = kCLLocationAccuracyBest
         lm.activityType = .fitness
-        // lm.distanceFilter = 5
+        lm.allowsBackgroundLocationUpdates = true
         lm.delegate = self
         return lm
     }()
