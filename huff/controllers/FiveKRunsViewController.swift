@@ -64,12 +64,11 @@ extension FiveKRunsViewController: CLLocationManagerDelegate {
                         self.activeRuns.append(run)
                         DispatchQueue.main.async {
                             // use this instead of reload table to balance out ui update
-                            self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .none)
+                            self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .automatic)
                         }
                     }
                 }
                 DispatchQueue.main.async {
-                    // self.fiveKTable.reloadData()
                     self.activityIndicator.stopAnimating()
                     self.fiveKTable.isUserInteractionEnabled = true
                 }

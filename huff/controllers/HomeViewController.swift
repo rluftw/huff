@@ -21,6 +21,8 @@ class HomeViewController: UIViewController {
     // MARK: - properties
     var remoteConfig: FIRRemoteConfig!
     var ref: FIRDatabaseReference!
+    var addTopRecordHandle: FIRDatabaseHandle?
+    var removeTopRecordHandle: FIRDatabaseHandle?
     var topRecords = [TopRunRecord]()
     
     // MARK: - life cycle
@@ -35,10 +37,6 @@ class HomeViewController: UIViewController {
         
         // fetch the remote configurations
         fetchConfigurations()
-        
-        // select the first row
-        topDistanceTable.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
-        
     }
     
     
@@ -102,20 +100,22 @@ class HomeViewController: UIViewController {
         }
     
         let topRunnersRef = ref.child("global_runs/week\(weekOfYear)-\(year)")
-        topRunnersRef
-            .observeSingleEvent(of: .value, with: { (localSnapshot) in
-            guard let snapshot = localSnapshot.value as? [String: Any] else {
-                print("invalid snapshot format")
-                return
-            }
-            
-            for key in snapshot.keys {
-                let record = TopRunRecord(dict: snapshot[key] as! [String: Any])
-                self.topRecords.append(record)
-            }
-                
-            self.topDistanceTable.reloadData()
-        })
+        addTopRecordHandle = topRunnersRef
+            .queryLimited(toFirst: 20)
+            .observe(.childAdded, with: { (localSnapshot) in
+                self.handleTopRecords(localSnapshot: localSnapshot)
+            })
+    }
+    
+    func handleTopRecords(localSnapshot: FIRDataSnapshot) {
+        guard let snapshot = localSnapshot.value as? [String: Any] else {
+            print("invalid snapshot format")
+            return
+        }
+        
+        let record = TopRunRecord(dict: snapshot)
+        self.topRecords.insert(record, at: 0)
+        self.topDistanceTable.reloadData()
     }
 }
 
@@ -127,14 +127,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "topListCell", for: indexPath) as! TopListCell
         
         cell.rankLabel.text = "\(indexPath.row+1)."
-    
-        
-//        let record = topRecords[indexPath.row]
-//        cell.userLabel.text = "\(record.username ?? "")"
-//        cell.
-        
-        // the only row that should be highlighted will be the first
-        cell.isUserInteractionEnabled = indexPath.row == 0
+        cell.userLabel.text = indexPath.row <= topRecords.count-1 ? topRecords[indexPath.row].username : "--------------"
+        cell.valueLabel.text = indexPath.row <= topRecords.count-1 ? "\(String(format: "%.2f", topRecords[indexPath.row].distance/1609.34)) miles": "0.00 miles"
         
         return cell
     }
