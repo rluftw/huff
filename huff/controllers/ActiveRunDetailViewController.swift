@@ -50,6 +50,11 @@ class ActiveRunDetailViewController: UIViewController {
         runDescription?.text = run.runDescription
         runDescription?.scrollRangeToVisible(NSMakeRange(0, 0))
         
+        // this seems like a bug - text is getting cut off
+        // the following forces the rendering
+        runDescription?.isScrollEnabled = false
+        runDescription?.isScrollEnabled = true
+        
         // calculate how many days are left till run
         if let dateRun = run.runDate {
             let formatter = DateFormatter()

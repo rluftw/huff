@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func showRunHistory(_ sender: Any) {
-        // TODO: show run history view
+        performSegue(withIdentifier: "showPastRuns", sender: self)
     }
     
     // MARK: - configurations for firebase
