@@ -24,7 +24,6 @@ class ActiveRunDetailViewController: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     
-    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +39,6 @@ class ActiveRunDetailViewController: UIViewController {
         }
     }
 
-    
     // MARK: - helper methods
     func updateLabels() {
         organizationName?.text = run.organization.name
@@ -51,7 +49,7 @@ class ActiveRunDetailViewController: UIViewController {
         runDescription?.scrollRangeToVisible(NSMakeRange(0, 0))
         
         // this seems like a bug - text is getting cut off
-        // the following forces the rendering
+        // the following forces the full rendering
         runDescription?.isScrollEnabled = false
         runDescription?.isScrollEnabled = true
         
@@ -76,12 +74,10 @@ class ActiveRunDetailViewController: UIViewController {
     }
     
     // MARK: - actions
-    
     @IBAction func close(_ sender: Any) {
         if let vc = presentingViewController as? UINavigationController {
             vc.tabBarController?.tabBar.isHidden = false
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
@@ -90,9 +86,9 @@ class ActiveRunDetailViewController: UIViewController {
             registerButton.setTitle("NOT AVAILABLE", for: .normal)
             return
         }
-        
         UIApplication.shared.open(registrationURL, options: [:], completionHandler: nil)
     }
+    
     @IBAction func contactOrganizer(_ sender: Any) {
         guard let phone = run.organization.phone, let phoneURL = URL(string: "telprompt://" + phone) else { return }
         UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)

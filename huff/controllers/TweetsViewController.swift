@@ -62,6 +62,9 @@ class TweetsViewController: UIViewController {
     }
     
     fileprivate func handleStopSearch() {
+        // TODO: check if there are any tweets. If not, replace the tableviews background view.
+        
+        
         DispatchQueue.main.async {
             self.tweetsTable.reloadData()
             self.activityIndicator.stopAnimating()

@@ -20,6 +20,9 @@
 		373DBDEB1DF7D28900DB3698 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373DBDEA1DF7D28900DB3698 /* SignUpViewController.swift */; };
 		373DBDED1DF8D5FB00DB3698 /* UnderlinerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373DBDEC1DF8D5FB00DB3698 /* UnderlinerTextField.swift */; };
 		374562EF1E05FF34004CEBE9 /* TopListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374562EE1E05FF34004CEBE9 /* TopListCell.swift */; };
+		374FF33B1E0A34AE0032AB31 /* PastRunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FF33A1E0A34AE0032AB31 /* PastRunTableViewCell.swift */; };
+		374FF33D1E0A34DB0032AB31 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FF33C1E0A34DB0032AB31 /* Profile.swift */; };
+		374FF33F1E0A357E0032AB31 /* PastRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */; };
 		375686EA1DE4FC82004F2951 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375686E91DE4FC82004F2951 /* AppDelegate.swift */; };
 		375686EF1DE4FC82004F2951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375686ED1DE4FC82004F2951 /* Main.storyboard */; };
 		375686F21DE4FC82004F2951 /* huff.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 375686F01DE4FC82004F2951 /* huff.xcdatamodeld */; };
@@ -33,7 +36,6 @@
 		375687271DE5059E004F2951 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375687261DE5059E004F2951 /* Run.swift */; };
 		375687291DE508BE004F2951 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375687281DE508BE004F2951 /* Location.swift */; };
 		375D318F1DEB2F9900829788 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D318E1DEB2F9900829788 /* TweetTableViewCell.swift */; };
-		375F3EE01DFD1E7B00743245 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375F3EDF1DFD1E7B00743245 /* Profile.swift */; };
 		37714A0B1DE7CFE3002ACB3A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A0A1DE7CFE3002ACB3A /* HomeViewController.swift */; };
 		37714A0D1DE883F0002ACB3A /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A0C1DE883F0002ACB3A /* TweetsViewController.swift */; };
 		37714A111DE89020002ACB3A /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A101DE89020002ACB3A /* Tweet.swift */; };
@@ -89,6 +91,9 @@
 		373DBDEC1DF8D5FB00DB3698 /* UnderlinerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnderlinerTextField.swift; path = views/UnderlinerTextField.swift; sourceTree = "<group>"; };
 		373DBDEE1DF8F8B500DB3698 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		374562EE1E05FF34004CEBE9 /* TopListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopListCell.swift; path = views/TopListCell.swift; sourceTree = "<group>"; };
+		374FF33A1E0A34AE0032AB31 /* PastRunTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PastRunTableViewCell.swift; path = views/PastRunTableViewCell.swift; sourceTree = "<group>"; };
+		374FF33C1E0A34DB0032AB31 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = model/Profile.swift; sourceTree = "<group>"; };
+		374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PastRunViewController.swift; path = controllers/PastRunViewController.swift; sourceTree = "<group>"; };
 		375686E61DE4FC82004F2951 /* huff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = huff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375686E91DE4FC82004F2951 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		375686EE1DE4FC82004F2951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,7 +113,6 @@
 		375687261DE5059E004F2951 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Run.swift; path = model/Run.swift; sourceTree = "<group>"; };
 		375687281DE508BE004F2951 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = model/Location.swift; sourceTree = "<group>"; };
 		375D318E1DEB2F9900829788 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetTableViewCell.swift; path = views/TweetTableViewCell.swift; sourceTree = "<group>"; };
-		375F3EDF1DFD1E7B00743245 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		37714A0A1DE7CFE3002ACB3A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = controllers/HomeViewController.swift; sourceTree = "<group>"; };
 		37714A0C1DE883F0002ACB3A /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetsViewController.swift; path = controllers/TweetsViewController.swift; sourceTree = "<group>"; };
 		37714A101DE89020002ACB3A /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = model/Tweet.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 				37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */,
 				373DBDE81DF7B61800DB3698 /* LoginViewController.swift */,
 				373DBDEA1DF7D28900DB3698 /* SignUpViewController.swift */,
+				374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -282,9 +287,9 @@
 				375687281DE508BE004F2951 /* Location.swift */,
 				37714A101DE89020002ACB3A /* Tweet.swift */,
 				3730D6B71DF1AC350065F3B7 /* ActiveRun.swift */,
+				374FF33C1E0A34DB0032AB31 /* Profile.swift */,
 				37B249EC1DF279F80052E5BA /* RunOrganization.swift */,
 				37C323AE1DF31841002A93B6 /* RunLocation.swift */,
-				375F3EDF1DFD1E7B00743245 /* Profile.swift */,
 				370D986A1E07978000F6970F /* TopRunRecord.swift */,
 			);
 			name = models;
@@ -301,6 +306,7 @@
 				37DD92F11DFA5DBB00CD8D15 /* LoginOverlayView.swift */,
 				37DB549A1DFCF155004BD15C /* TweetPhotoCollectionViewCell.swift */,
 				374562EE1E05FF34004CEBE9 /* TopListCell.swift */,
+				374FF33A1E0A34AE0032AB31 /* PastRunTableViewCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -536,11 +542,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				37714A0D1DE883F0002ACB3A /* TweetsViewController.swift in Sources */,
+				374FF33B1E0A34AE0032AB31 /* PastRunTableViewCell.swift in Sources */,
 				37C323B11DF33007002A93B6 /* ActiveRunTableViewCell.swift in Sources */,
 				3730D6B81DF1AC350065F3B7 /* ActiveRun.swift in Sources */,
 				37DB549B1DFCF155004BD15C /* TweetPhotoCollectionViewCell.swift in Sources */,
 				37C323AF1DF31841002A93B6 /* RunLocation.swift in Sources */,
-				375F3EE01DFD1E7B00743245 /* Profile.swift in Sources */,
+				374FF33F1E0A357E0032AB31 /* PastRunViewController.swift in Sources */,
 				370677951DEA020B007EC3FD /* TwitterService.swift in Sources */,
 				37DB54991DFCE875004BD15C /* TweetPhotosViewController.swift in Sources */,
 				37B371BB1DF3D38200EB719F /* ActiveRunDetailViewController.swift in Sources */,
@@ -552,6 +559,7 @@
 				375687291DE508BE004F2951 /* Location.swift in Sources */,
 				375687201DE4FD35004F2951 /* CurrentRunViewController.swift in Sources */,
 				37CEB42C1DF6670A00CF4446 /* MyProfileViewController.swift in Sources */,
+				374FF33D1E0A34DB0032AB31 /* Profile.swift in Sources */,
 				373DBDED1DF8D5FB00DB3698 /* UnderlinerTextField.swift in Sources */,
 				373DBDEB1DF7D28900DB3698 /* SignUpViewController.swift in Sources */,
 				3730D6B61DF113560065F3B7 /* FiveKRunsViewController.swift in Sources */,

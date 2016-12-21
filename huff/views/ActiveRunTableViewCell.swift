@@ -12,7 +12,7 @@ class ActiveRunTableViewCell: UITableViewCell {
     // MARK: - properties
     var run: ActiveRun! {
         didSet {
-            organizationNameLabel.text = run.organization.name
+            organizationNameLabel.text = run.organization.name ?? "Organization navailable"
             runName.text = run.name
             
             let calendar = Calendar.current
