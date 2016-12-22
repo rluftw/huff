@@ -8,22 +8,30 @@
 
 import UIKit
 
+
 class PastRunTableViewCell: UITableViewCell {
 
+    var run: Run! {
+        didSet {
+            // set distance
+            self.distance.text = "\(run.distanceInMiles()) miles"
+            
+            // set date
+            self.date.text = run.dateString()
+            
+            // set pace
+            self.pace.text = "PACE: \(run.determinePace()) min/mile"
+            
+            // set duration
+            let durationValues = run.determineDuration()
+            let hours = Int(durationValues.hour)
+            let minutes = Int(durationValues.min)
+            duration.text = "\((minutes ?? 0)+((hours ?? 0)*60)):\(durationValues.sec)"
+        }
+    }
+    
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var pace: UILabel!
     @IBOutlet weak var date: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

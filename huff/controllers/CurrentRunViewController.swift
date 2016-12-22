@@ -119,10 +119,10 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - selectors
     func eachSecond() {
         run.duration += 1
-        let durationValues = determineDuration()
+        let durationValues = run.determineDuration()
         timerLabel.text = "\(durationValues.hour):\(durationValues.min):\(durationValues.sec)"
         distanceLabel.text = String(format: "%.2f", run.distance/metersInMiles)
-        paceLabel.text = determinePace()
+        paceLabel.text = run.determinePace()
     }
     
     // MARK: - helper methods
@@ -134,26 +134,6 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     func stopUpdatingLocation() {
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
-    }
-    
-    func determineDuration() -> (hour: String, min: String, sec: String) {
-        let minutes = Int(floor(run.duration/60))
-        let hours = Int(floor(Double(minutes)/60.0))
-        let seconds = Int(run.duration.truncatingRemainder(dividingBy: 60))
-        let sHours = String(format: "%02d", hours)
-        let sMinutes = String(format: "%02d", minutes%60)
-        let sSeconds = String(format: "%02d", seconds)
-        return (sHours, sMinutes, sSeconds)
-    }
-    
-    func determinePace() -> String {
-        guard run.duration != 0 && run.distance != 0 else {
-            return "00:00"
-        }
-        let avgPaceSecMeters = (run.duration/run.distance)*metersInMiles
-        let paceMin = Int(avgPaceSecMeters/60)
-        let paceSec = Int(avgPaceSecMeters)-(paceMin*60)
-        return String(format: "%02d:%02d ", paceMin, paceSec)
     }
     
     func endRunWithWarning(title: String, message: String, yesAction: @escaping (UIAlertAction) -> Void) {
