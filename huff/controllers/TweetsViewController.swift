@@ -62,8 +62,7 @@ class TweetsViewController: UIViewController {
     }
     
     fileprivate func handleStopSearch() {
-        // TODO: check if there are any tweets. If not, replace the tableviews background view.
-        
+        // TODO: check if there are any tweets. If not, replace the tableviews background view. eventually.
         
         DispatchQueue.main.async {
             self.tweetsTable.reloadData()

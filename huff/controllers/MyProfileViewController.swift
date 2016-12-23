@@ -13,7 +13,6 @@ import Firebase
 
 class MyProfileViewController: UIViewController {
     
-    // TODO: change this profile into a custom profile model
     var profile: Profile?
     var databaseRef: FIRDatabaseReference?
     var accountHandle: FIRDatabaseHandle?
@@ -22,6 +21,8 @@ class MyProfileViewController: UIViewController {
     
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
+    @IBOutlet weak var bestPaceLabel: UILabel!
+    @IBOutlet weak var bestDistanceLabel: UILabel!
     @IBOutlet weak var favoritedActiveRuns: UITableView! {
         didSet {
             favoritedActiveRuns.delegate = self
@@ -40,7 +41,30 @@ class MyProfileViewController: UIViewController {
      
         databaseRef = FIRDatabase.database().reference()
         configureDatabase {
-            self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL, completionHandler: nil)
+            self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL) { ()->Void in
+                // fetch best pace - the pace node just stores a run
+                self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/best_pace")
+                    .observeSingleEvent(of: .value, with: { (localSnapshot) in
+                    guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else {
+                        print("Best pace not available")
+                        return
+                    }
+                    let run = Run(dict: bestPaceRunDict)
+                    let pace = run.determinePace()
+                    
+                    self.bestPaceLabel.text = "\(pace) min/mile"
+                })
+                
+                // fetch best distance - stored as a distance
+                self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/best_distance")
+                    .observeSingleEvent(of: .value, with: { (localSnapshot) in
+                        guard let bestDistance = localSnapshot.value as? Double else {
+                            print("Best pace not available")
+                            return
+                        }
+                        self.bestDistanceLabel.text = String(format: "%.2f", Run.distanceInMiles(meters: bestDistance)) + " miles"
+                    })
+            }
         }
         fetchFavoritedRuns()
     }
@@ -51,7 +75,6 @@ class MyProfileViewController: UIViewController {
     }
     
     // MARK: - action
-    
     @IBAction func logout(_ sender: Any) {
         giveWarning(title: "Logout", message: "Are you sure you'd like to log off?") { (action) -> Void in
             let providerID = FIRAuth.auth()?.currentUser?.providerID ?? "N/A"
@@ -137,6 +160,7 @@ class MyProfileViewController: UIViewController {
         } else {
             self.updateProfile()
         }
+        completionHandler?()
     }
     
     func fetchFavoritedRuns() {

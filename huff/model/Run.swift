@@ -12,12 +12,19 @@ import CoreLocation
 fileprivate let metersInMiles = 1609.344
 
 class Run {
+    // MARK: - properties
     var distance: Double    // in meters
     var duration: Double
     let timestamp: TimeInterval
     var userUID: String!
     
     var locations: [Location] = []
+    
+    // MARK: - computed properties
+    var shouldSave: Bool {
+        return distance != 0
+    }
+    
     
     // MARK: initialization
     init(uid: String) {
@@ -84,5 +91,9 @@ extension Run {
         formatter.dateStyle = .long
         formatter.timeStyle = .medium
         return formatter.string(from: date)
+    }
+    
+    static func distanceInMiles(meters: Double) -> Double {
+        return meters/metersInMiles
     }
 }

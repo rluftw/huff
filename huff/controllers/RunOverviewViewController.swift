@@ -76,14 +76,14 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
     // MARK: - actions
     @IBAction func done(_ sender: Any) {
         // TODO: save data to firebase and check if the run has been longet than 5 minutes
+        guard run.shouldSave else {
+            presentAlert(message: "No distance was covered during the run - Run will NOT be saved.")
+            return
+        }
+        
         saveRun()
         
-        let alertVC = UIAlertController(title: "Run", message: "Your run has been saved.", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Great!", style: .default, handler: { (action) in
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        }))
-        
-        present(alertVC, animated: true, completion: nil)
+        presentAlert(message: "Your run has been saved.")
     }
     
     // MARK: - helper methods
@@ -94,6 +94,15 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
             mapView.region = mapRegion!
             mapView.add(polyLine!)
         }
+    }
+    
+    func presentAlert(message: String) {
+        let alertVC = UIAlertController(title: "Run", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Great!", style: .default, handler: { (action) in
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }))
+        
+        present(alertVC, animated: true, completion: nil)
     }
     
     // MARK: - map delegate methods

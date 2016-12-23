@@ -12,12 +12,7 @@ import Firebase
 class PastRunViewController: UIViewController {
     @IBOutlet weak var numberOfRunsLabel: UILabel!
     @IBOutlet weak var runsLabel: UILabel!
-    @IBOutlet weak var historyTable: UITableView! /*{
-        didSet {
-            historyTable.estimatedRowHeight = 128
-            historyTable.rowHeight = UITableViewAutomaticDimension
-        }
-    }*/
+    @IBOutlet weak var historyTable: UITableView!
 
     // MARK: - properties
     var databaseRef: FIRDatabaseReference?
@@ -52,7 +47,7 @@ class PastRunViewController: UIViewController {
                     self.runs.append(run)
                     
                     // TODO: implement it as a priority queue later on
-                    self.runs.sort(by: { $0.timestamp < $1.timestamp })
+                    self.runs.sort(by: { $0.timestamp > $1.timestamp })
                     self.historyTable.reloadData()
                     self.numberOfRunsLabel.text = "\(self.runs.count)"
                 }
