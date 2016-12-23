@@ -24,8 +24,12 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // MARK: - properties
-    let run: Run = Run(uid: FIRAuth.auth()!.currentUser!.uid)
+    let runCollection: RunCollection = RunCollection(currentRun: Run(uid: FIRAuth.auth()!.currentUser!.uid))
     var timer: Timer?
+    var databaseRef: FIRDatabaseReference?
+    var run: Run {
+        return runCollection.currentRun
+    }
     
     // used to determine distance
     var locations: [CLLocation] = []
@@ -55,6 +59,9 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "pixel_background")!)
+        
+        // fetch the best pace and distance values
+        fetchPaceandDistance()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -150,8 +157,36 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let runOverviewVC = segue.destination as? RunOverviewViewController {
-            runOverviewVC.run = self.run
+            runOverviewVC.runCollection = runCollection
         }
+    }
+}
+
+extension CurrentRunViewController {
+    // MARK: - firebase connections
+    func fetchPaceandDistance() {
+        databaseRef = FIRDatabase.database().reference()
+        
+        // fetch best pace - the pace node just stores a run
+        self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_pace")
+            .observeSingleEvent(of: .value, with: { (localSnapshot) in
+                guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else {
+                    print("Best pace not available")
+                    return
+                }
+                let run = Run(dict: bestPaceRunDict)
+                self.runCollection.bestPace = run
+            })
+        
+        // fetch best distance - stored as a distance
+        self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_distance")
+            .observeSingleEvent(of: .value, with: { (localSnapshot) in
+                guard let bestDistance = localSnapshot.value as? Double else {
+                    print("Best pace not available")
+                    return
+                }
+                self.runCollection.bestDistance = bestDistance
+            })
     }
 }
 

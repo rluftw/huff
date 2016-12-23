@@ -13,11 +13,11 @@ import Firebase
 class RunOverviewViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - properties
-    var run: Run!
+    var runCollection: RunCollection!
     var databaseRef: FIRDatabaseReference?
     lazy var mapRegion: MKCoordinateRegion? = {
         var mr = MKCoordinateRegion()
-        guard let initialLocation = self.run.locations.last else {
+        guard let initialLocation = self.runCollection.currentRun.locations.last else {
             return nil
         }
         
@@ -30,7 +30,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         
         
         // iterate through the coordinates and check the longitude and latitude
-        _ = self.run.locations.map { (location) in
+        _ = self.runCollection.currentRun.locations.map { (location) in
             let lat = location.latitude
             let lon = location.longitude
             
@@ -53,7 +53,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
     lazy var polyLine: MKPolyline? = {
         var coordinates = [CLLocationCoordinate2D]()
         
-        for location in self.run.locations {
+        for location in self.runCollection.currentRun.locations {
             coordinates.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         }
         
@@ -76,13 +76,12 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
     // MARK: - actions
     @IBAction func done(_ sender: Any) {
         // TODO: save data to firebase and check if the run has been longet than 5 minutes
-        guard run.shouldSave else {
+        guard runCollection.currentRun.shouldSave else {
             presentAlert(message: "No distance was covered during the run - Run will NOT be saved.")
             return
         }
         
         saveRun()
-        
         presentAlert(message: "Your run has been saved.")
     }
     
@@ -90,7 +89,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
     func setupMap() {
         mapView.delegate = self
         
-        if self.run.locations.count > 0 {
+        if self.runCollection.currentRun.locations.count > 0 {
             mapView.region = mapRegion!
             mapView.add(polyLine!)
         }
@@ -118,6 +117,8 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         return polyLineRenderer
     }
 
+    
+    // MARK: - firebase methods
     func saveRun() {
         // create the values to locate the node on firebase
         let components = Calendar.current.dateComponents([.weekOfYear, .year], from: Date())
@@ -129,7 +130,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         databaseRef?
             .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/week\(weekOfYear)-\(year)")
             .childByAutoId()
-            .setValue(run.toDict(), andPriority: run.timestamp)
+            .setValue(runCollection.currentRun.toDict(), andPriority: runCollection.currentRun.timestamp)
         
         // save total distance to global
         databaseRef?
@@ -151,6 +152,19 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
                         "username": FIRAuth.auth()!.currentUser!.email?.components(separatedBy: "@")[0] ?? FIRAuth.auth()!.currentUser!.displayName!
                         ], andPriority: totalDistance)
             })
-
+        
+        // check if we should update best distance
+        if runCollection.shouldUpdateBestDistance {
+            databaseRef?
+                .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_distance")
+                .setValue(runCollection.currentRun.distance)
+        }
+        
+        // check if we should update best pace
+        if runCollection.shouldUpdateBestPace {
+            databaseRef?
+                .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_pace")
+                .setValue(runCollection.currentRun.toDict())
+        }
     }
 }

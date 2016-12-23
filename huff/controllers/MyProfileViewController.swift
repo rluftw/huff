@@ -42,8 +42,9 @@ class MyProfileViewController: UIViewController {
         databaseRef = FIRDatabase.database().reference()
         configureDatabase {
             self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL) { ()->Void in
+                
                 // fetch best pace - the pace node just stores a run
-                self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/best_pace")
+                self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_pace")
                     .observeSingleEvent(of: .value, with: { (localSnapshot) in
                     guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else {
                         print("Best pace not available")
@@ -56,7 +57,7 @@ class MyProfileViewController: UIViewController {
                 })
                 
                 // fetch best distance - stored as a distance
-                self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/best_distance")
+                self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_distance")
                     .observeSingleEvent(of: .value, with: { (localSnapshot) in
                         guard let bestDistance = localSnapshot.value as? Double else {
                             print("Best pace not available")
@@ -70,8 +71,7 @@ class MyProfileViewController: UIViewController {
     }
     
     deinit {
-        if let addHandle = runAddHandle { databaseRef?.removeObserver(withHandle: addHandle) }
-        if let removeHandle = runRemoveHandle { databaseRef?.removeObserver(withHandle: removeHandle)}
+        databaseRef?.removeAllObservers()
     }
     
     // MARK: - action
