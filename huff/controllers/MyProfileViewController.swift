@@ -51,7 +51,7 @@ class MyProfileViewController: UIViewController {
                         return
                     }
                     let run = Run(dict: bestPaceRunDict)
-                    let pace = run.determinePace()
+                    let pace = run.determinePaceString()
                     
                     self.bestPaceLabel.text = "\(pace) min/mile"
                 })

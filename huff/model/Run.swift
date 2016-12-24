@@ -70,7 +70,7 @@ extension Run {
         return (sHours, sMinutes, sSeconds)
     }
     
-    func determinePace() -> String {
+    func determinePaceString() -> String {
         guard duration != 0 && distance != 0 else {
             return "00:00"
         }
@@ -78,6 +78,16 @@ extension Run {
         let paceMin = Int(avgPaceSecMeters/60)
         let paceSec = Int(avgPaceSecMeters)-(paceMin*60)
         return String(format: "%02d:%02d", paceMin, paceSec)
+    }
+    
+    func determinePace() -> (Int, Int) {
+        guard duration != 0 && distance != 0 else {
+            return (0,0)
+        }
+        let avgPaceSecMeters = (duration/distance)*metersInMiles
+        let paceMin = Int(avgPaceSecMeters/60)
+        let paceSec = Int(avgPaceSecMeters)-(paceMin*60)
+        return (paceMin, paceSec)
     }
     
     func distanceInMiles() -> String {

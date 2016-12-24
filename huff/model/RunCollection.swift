@@ -26,7 +26,11 @@ class RunCollection {
             // if there's no best pace, then we should set one
             return true
         }
-        return (Double(currentRun.distanceInMiles()) ?? 0)/60 > (Double(bPace.distanceInMiles()) ?? 0)/60
+        let (bPaceMin, bPaceSec) = bPace.determinePace()
+        let (cPaceMin, cPaceSec) = currentRun.determinePace()
+        
+        // if current run pace min is lower or if current run pace min and best run pace min is the same, check the seconds
+        return cPaceMin < bPaceMin  || (cPaceMin == bPaceMin && cPaceSec < bPaceSec)
     }
     
     init(currentRun: Run) {

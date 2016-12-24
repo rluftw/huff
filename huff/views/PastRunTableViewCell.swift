@@ -20,7 +20,7 @@ class PastRunTableViewCell: UITableViewCell {
             self.date.text = run.dateString()
             
             // set pace
-            self.pace.text = "PACE: \(run.determinePace()) min/mile"
+            self.pace.text = "PACE: \(run.determinePaceString()) min/mile"
             
             // set duration
             let durationValues = run.determineDuration()

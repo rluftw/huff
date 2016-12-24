@@ -129,7 +129,7 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         let durationValues = run.determineDuration()
         timerLabel.text = "\(durationValues.hour):\(durationValues.min):\(durationValues.sec)"
         distanceLabel.text = String(format: "%.2f", run.distance/metersInMiles)
-        paceLabel.text = run.determinePace()
+        paceLabel.text = run.determinePaceString()
     }
     
     // MARK: - helper methods
