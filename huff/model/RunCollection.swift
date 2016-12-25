@@ -29,7 +29,8 @@ class RunCollection {
         let (bPaceMin, bPaceSec) = bPace.determinePace()
         let (cPaceMin, cPaceSec) = currentRun.determinePace()
         
-        // if current run pace min is lower or if current run pace min and best run pace min is the same, check the seconds
+        // if current run pace min is lower or if current run pace min 
+        // and best run pace min is the same, check the seconds
         return cPaceMin < bPaceMin  || (cPaceMin == bPaceMin && cPaceSec < bPaceSec)
     }
     

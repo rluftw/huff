@@ -23,6 +23,7 @@
 		374FF33B1E0A34AE0032AB31 /* PastRunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FF33A1E0A34AE0032AB31 /* PastRunTableViewCell.swift */; };
 		374FF33D1E0A34DB0032AB31 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FF33C1E0A34DB0032AB31 /* Profile.swift */; };
 		374FF33F1E0A357E0032AB31 /* PastRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */; };
+		37509E8A1E0F467B00E8E87A /* RLPriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37509E891E0F467B00E8E87A /* RLPriorityQueue.swift */; };
 		375686EA1DE4FC82004F2951 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375686E91DE4FC82004F2951 /* AppDelegate.swift */; };
 		375686EF1DE4FC82004F2951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375686ED1DE4FC82004F2951 /* Main.storyboard */; };
 		375686F21DE4FC82004F2951 /* huff.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 375686F01DE4FC82004F2951 /* huff.xcdatamodeld */; };
@@ -95,6 +96,7 @@
 		374FF33A1E0A34AE0032AB31 /* PastRunTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PastRunTableViewCell.swift; path = views/PastRunTableViewCell.swift; sourceTree = "<group>"; };
 		374FF33C1E0A34DB0032AB31 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = model/Profile.swift; sourceTree = "<group>"; };
 		374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PastRunViewController.swift; path = controllers/PastRunViewController.swift; sourceTree = "<group>"; };
+		37509E891E0F467B00E8E87A /* RLPriorityQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RLPriorityQueue.swift; path = "data structures/RLPriorityQueue.swift"; sourceTree = "<group>"; };
 		375686E61DE4FC82004F2951 /* huff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = huff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375686E91DE4FC82004F2951 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		375686EE1DE4FC82004F2951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -184,6 +186,14 @@
 			name = services;
 			sourceTree = "<group>";
 		};
+		37509E881E0F465500E8E87A /* datastructures */ = {
+			isa = PBXGroup;
+			children = (
+				37509E891E0F467B00E8E87A /* RLPriorityQueue.swift */,
+			);
+			name = datastructures;
+			sourceTree = "<group>";
+		};
 		375686DD1DE4FC82004F2951 = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +219,7 @@
 		375686E81DE4FC82004F2951 /* huff */ = {
 			isa = PBXGroup;
 			children = (
+				37509E881E0F465500E8E87A /* datastructures */,
 				37DD92F01DF8FF8C00CD8D15 /* huff.entitlements */,
 				375686E91DE4FC82004F2951 /* AppDelegate.swift */,
 				375686ED1DE4FC82004F2951 /* Main.storyboard */,
@@ -549,6 +560,7 @@
 				37C323B11DF33007002A93B6 /* ActiveRunTableViewCell.swift in Sources */,
 				3730D6B81DF1AC350065F3B7 /* ActiveRun.swift in Sources */,
 				37DB549B1DFCF155004BD15C /* TweetPhotoCollectionViewCell.swift in Sources */,
+				37509E8A1E0F467B00E8E87A /* RLPriorityQueue.swift in Sources */,
 				37C323AF1DF31841002A93B6 /* RunLocation.swift in Sources */,
 				374FF33F1E0A357E0032AB31 /* PastRunViewController.swift in Sources */,
 				370677951DEA020B007EC3FD /* TwitterService.swift in Sources */,
