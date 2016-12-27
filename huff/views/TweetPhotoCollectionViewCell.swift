@@ -14,9 +14,18 @@ class TweetPhotoCollectionViewCell: UICollectionViewCell {
     var photo: UIImage? {
         didSet {
             photoView.image = photo
+            activityIndicator.stopAnimating()
         }
     }
     
     // MARK: - outlets
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        photo = nil
+        activityIndicator.startAnimating()
+    }
 }

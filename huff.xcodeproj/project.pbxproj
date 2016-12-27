@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370358171E12ADD20098593B /* MyProfileViewControllerTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370358161E12ADD20098593B /* MyProfileViewControllerTableDelegate.swift */; };
 		370677901DE9FF8E007EC3FD /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3706778F1DE9FF8E007EC3FD /* NetworkOperation.swift */; };
 		370677951DEA020B007EC3FD /* TwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370677941DEA020B007EC3FD /* TwitterService.swift */; };
 		370677991DEA7F1A007EC3FD /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 370677981DEA7F1A007EC3FD /* KeychainWrapper.m */; };
@@ -79,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		370358161E12ADD20098593B /* MyProfileViewControllerTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyProfileViewControllerTableDelegate.swift; path = controllers/MyProfileViewControllerTableDelegate.swift; sourceTree = "<group>"; };
 		3706778F1DE9FF8E007EC3FD /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkOperation.swift; path = network/NetworkOperation.swift; sourceTree = "<group>"; };
 		370677941DEA020B007EC3FD /* TwitterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwitterService.swift; path = services/TwitterService.swift; sourceTree = "<group>"; };
 		370677961DEA7F1A007EC3FD /* huff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "huff-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				3730D6B51DF113560065F3B7 /* FiveKRunsViewController.swift */,
 				37B371BA1DF3D38200EB719F /* ActiveRunDetailViewController.swift */,
 				37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */,
+				370358161E12ADD20098593B /* MyProfileViewControllerTableDelegate.swift */,
 				373DBDE81DF7B61800DB3698 /* LoginViewController.swift */,
 				373DBDEA1DF7D28900DB3698 /* SignUpViewController.swift */,
 				374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */,
@@ -584,6 +587,7 @@
 				370677951DEA020B007EC3FD /* TwitterService.swift in Sources */,
 				37DB54991DFCE875004BD15C /* TweetPhotosViewController.swift in Sources */,
 				37D8811F1E11DBDA0087334E /* FirebaseRemoteConfigService.swift in Sources */,
+				370358171E12ADD20098593B /* MyProfileViewControllerTableDelegate.swift in Sources */,
 				37B371BB1DF3D38200EB719F /* ActiveRunDetailViewController.swift in Sources */,
 				37714A111DE89020002ACB3A /* Tweet.swift in Sources */,
 				37F20F131E0CCF98003CB556 /* RunCollection.swift in Sources */,

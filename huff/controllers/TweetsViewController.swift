@@ -33,6 +33,7 @@ class TweetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isUserInteractionEnabled = false
+        
         tweetsTable.addSubview(refreshControl)
         performSearch()
     }

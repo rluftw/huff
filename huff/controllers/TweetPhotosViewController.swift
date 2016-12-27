@@ -48,6 +48,7 @@ extension TweetPhotosViewController: UICollectionViewDelegate, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! TweetPhotoCollectionViewCell
         let urlString = photoURLs[indexPath.row]
 
+        
         // check if the photo is cached (quick operation)
         if let image = imageCache.object(forKey: NSString(string: urlString)) {
             cell.photo = image

@@ -74,18 +74,15 @@ class MyProfileViewController: UIViewController {
     // MARK: - action
     @IBAction func logout(_ sender: Any) {
         giveWarning(title: "Logout", message: "Are you sure you'd like to log off?") { (action) -> Void in
-            let providerID = FIRAuth.auth()?.currentUser?.providerID ?? "N/A"
             do {
                 try FIRAuth.auth()?.signOut()
             } catch let error {
                 print("there was an error signing this user out: \(error.localizedDescription)")
             }
             
-            // it seems that googles sdk remembers the users, and logs in automatically with their oauth screen
-            if providerID == "Firebase" {
-                print("Revoking current google login")
-                GIDSignIn.sharedInstance().disconnect()
-            }
+            // it seems that googles sdk remembers the users and logs in automatically with their oauth token
+            // revokes the current google login
+            GIDSignIn.sharedInstance().disconnect()
         }
     }
 
@@ -104,10 +101,8 @@ class MyProfileViewController: UIViewController {
             guard let cell = gesture.view as? ActiveRunTableViewCell, let run = cell.run else {
                 return
             }
-            
             // 2. create the alert controller
             let alertVC = UIAlertController(title: "Event Options for \(run.name ?? run.organization.name ?? "N/A")", message: "", preferredStyle: .actionSheet)
-            
             // 3. create the actions
             if let phone = run.organization.phone, UIDevice.current.model == "iPhone" {
                 alertVC.addAction(UIAlertAction(title: "Call Organizer", style: .default, handler: { (action) in
@@ -130,7 +125,7 @@ class MyProfileViewController: UIViewController {
 
     }
     
-    // MARK: - firebase fetching
+    // MARK: - data fetching
     
     // step 1: grab information from the database
     func fetchProfileData(completionHandler: (()->Void)?) {
@@ -194,31 +189,6 @@ class MyProfileViewController: UIViewController {
             // step 3: assign the profile header view a new profile object
             self.profileInfoHeader.profile = self.profile
         })
-    }
-}
-
-extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profile?.favoriteActiveRuns.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "activeRunCell", for: indexPath) as! ActiveRunTableViewCell
-        cell.run = self.profile?.favoriteActiveRuns[indexPath.row]
-        
-        // assign a long hold gesture to add more options
-        let longHoldGesture = UILongPressGestureRecognizer(target: self, action: #selector(showOptions(gesture:)))
-        cell.addGestureRecognizer(longHoldGesture)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        
-        // use the cell as the sender - used later to extract the active run object
-        let cell = tableView.cellForRow(at: indexPath)
-        
-        performSegue(withIdentifier: "showRunDetail", sender: cell)
     }
     
     // MARK: - navigation

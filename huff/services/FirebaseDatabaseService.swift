@@ -129,29 +129,6 @@ class FirebaseService {
         })
     }
     
-    
-    /*
-     databaseRef?
-     .child("users/\(FIRAuth.auth()!.currentUser!.uid)/")
-     .observeSingleEvent(of: .value, with: { (localSnaphot) in
-     guard let snapshot = localSnaphot.value as? [String: Any] else {
-     return
-     }
-     var totalDistance: Double = 0
-     for key in snapshot.keys {
-     if let runDict = snapshot[key] as? [String: Any], let distance = runDict["distance"] as? Double {
-     totalDistance += distance
-     }
-     }
-     self.databaseRef?
-     .child("global_runs/week\(weekOfYear)-\(year)/\(FIRAuth.auth()!.currentUser!.uid)")
-     .setValue([
-     "distance": totalDistance,
-     "username": FIRAuth.auth()!.currentUser!.email?.components(separatedBy: "@")[0] ?? FIRAuth.auth()!.currentUser!.displayName!
-     ], andPriority: totalDistance)
-     })
-
-    */
 }
 
 
