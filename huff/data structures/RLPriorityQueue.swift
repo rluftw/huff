@@ -8,58 +8,56 @@
 
 import Foundation
 
-struct RLPriorityQueue<T: Comparable> {
-    fileprivate var buffer = [T]()
+struct RLPriorityQueue<T: Comparable>: CustomStringConvertible {
+    fileprivate var heap = [T]()
     
-    mutating func insert(item: T) {
-        // add item to the last position of the container
-        buffer.append(item)
-        
-        heapify(index: buffer.count-1)
-        
-        var outputString = ""
-        for int in buffer {
-            outputString += "\(int)\t"
-        }
-        
-        print(outputString)
+    var description: String {
+        return "\(heap)"
     }
     
-    // insures that the structure stays as a heap
-    // - parent node is less than the child nodes
-    mutating func heapify(index: Int) {
-        // termination condition
-        guard index != 0 else {
-            return
-        }
-        
-        let parentIndex: Int = (index-1)/2
-        let element = buffer[index]
-        let parentElement = buffer[parentIndex]
-        
-        print("parent index: \(parentIndex)\telement index: \(index)")
-        
-        // if the element is greater dont do anything
-        // if the element is less than swap
-        guard element < parentElement else {
-            swap(index1: index, index2: parentIndex)
-            heapify(index: parentIndex)
-            
-            return
-        }
+    
+    // MARK: - basic operations
+    
+    var size: Int {
+        return heap.count
     }
     
-    fileprivate mutating func swap(index1: Int, index2: Int) {
-        let element1 = buffer[index1]
-        buffer[index1] = buffer[index2]
-        buffer[index2] = element1
+    mutating func push(item: T) {
+        heap.append(item)
+        swim(k: size-1)
     }
     
-    func isEmpty() -> Bool {
-        return buffer.isEmpty
+    mutating func pop() -> T? {
+        if heap.count == 1 { return heap.removeFirst() }
+        if heap.count == 0 { return nil }
+        
+        swap(&heap[0], &heap[size-1])
+        let maxPriorityElement = heap.removeLast()
+        sink(k: 0)
+        return maxPriorityElement
     }
     
-    func size() -> Int {
-        return buffer.count
+    mutating func removeAll() {
+        heap.removeAll(keepingCapacity: false)
+    }
+    
+    
+    // MARK: - helper methods
+    
+    fileprivate mutating func swim(k: Int) {
+        guard k > 0 && less(parent: (k-1)/2, child: k) else { return }
+        swap(&heap[(k-1)/2], &heap[k])
+        swim(k: (k-1)/2)
+    }
+    
+    fileprivate mutating func sink(k: Int) {
+        guard 2*k+1 < size && less(parent: k, child: 2*k+1) else { return }
+        swap(&heap[2*k+1], &heap[k])
+        sink(k: 2*k+1)
+    }
+    
+    // if the parent is less than the child - true
+    fileprivate func less(parent: Int, child: Int) -> Bool {
+        return heap[parent] < heap[child]
     }
 }

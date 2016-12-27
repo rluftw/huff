@@ -41,7 +41,7 @@ class Run {
         self.userUID = dict[Key.UID] as! String
     }
     
-    func toDict() -> [String: Any] {
+    func toDict()->[String: Any] {
         return [
             Key.Distance: self.distance,
             Key.Duration: self.duration,
@@ -105,5 +105,28 @@ extension Run {
     
     static func distanceInMiles(meters: Double) -> Double {
         return meters/metersInMiles
+    }
+}
+
+
+extension Run: Comparable {
+    public static func ==(lhs: Run, rhs: Run) -> Bool {
+        return lhs.timestamp == rhs.timestamp
+    }
+
+    public static func <(lhs: Run, rhs: Run) -> Bool {
+        return lhs.timestamp < rhs.timestamp
+    }
+    
+    public static func >(lhs: Run, rhs: Run) -> Bool {
+        return lhs.timestamp > rhs.timestamp
+    }
+    
+    public static func <=(lhs: Run, rhs: Run) -> Bool {
+        return lhs.timestamp <= rhs.timestamp
+    }
+    
+    public static func >=(lhs: Run, rhs: Run) -> Bool {
+        return lhs.timestamp >= rhs.timestamp
     }
 }

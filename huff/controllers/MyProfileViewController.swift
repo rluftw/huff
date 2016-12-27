@@ -14,10 +14,10 @@ import Firebase
 class MyProfileViewController: UIViewController {
     
     var profile: Profile?
-    var databaseRef: FIRDatabaseReference?
     var accountHandle: FIRDatabaseHandle?
     var runAddHandle: FIRDatabaseHandle?
     var runRemoveHandle: FIRDatabaseHandle?
+    var accountValueHandle: FIRDatabaseHandle?
     
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
@@ -31,21 +31,24 @@ class MyProfileViewController: UIViewController {
             favoritedActiveRuns.estimatedRowHeight = 150
         }
     }
+    
+    // MARK: - initialization
+    deinit {
+        FirebaseService.sharedInstance().removeObserver(handler: runAddHandle)
+        FirebaseService.sharedInstance().removeObserver(handler: runRemoveHandle)
+        FirebaseService.sharedInstance().removeObserver(handler: accountValueHandle)
+    }
 
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let firebaseUser = FIRAuth.auth()!.currentUser!
+        let firebaseUser = FirebaseService.getCurrentUser()
         self.profile = Profile(user: firebaseUser, photo: nil, status: nil, dateJoined: nil)
-     
-        databaseRef = FIRDatabase.database().reference()
-        configureDatabase {
+        
+        fetchProfileData {
             self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL) { ()->Void in
-                
-                // fetch best pace - the pace node just stores a run
-                self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_pace")
-                    .observeSingleEvent(of: .value, with: { (localSnapshot) in
+                FirebaseService.sharedInstance().fetchBestPace() { (localSnapshot)->Void in
                     guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else {
                         print("Best pace not available")
                         return
@@ -54,24 +57,18 @@ class MyProfileViewController: UIViewController {
                     let pace = run.determinePaceString()
                     
                     self.bestPaceLabel.text = "\(pace) min/mile"
-                })
+                }
                 
-                // fetch best distance - stored as a distance
-                self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_distance")
-                    .observeSingleEvent(of: .value, with: { (localSnapshot) in
-                        guard let bestDistance = localSnapshot.value as? Double else {
-                            print("Best pace not available")
-                            return
-                        }
-                        self.bestDistanceLabel.text = String(format: "%.2f", Run.distanceInMiles(meters: bestDistance)) + " miles"
-                    })
+                FirebaseService.sharedInstance().fetchBestDistance(completionHandler: { (localSnapshot) in
+                    guard let bestDistance = localSnapshot.value as? Double else {
+                        print("Best pace not available")
+                        return
+                    }
+                    self.bestDistanceLabel.text = String(format: "%.2f", Run.distanceInMiles(meters: bestDistance)) + " miles"
+                })
             }
         }
         fetchFavoritedRuns()
-    }
-    
-    deinit {
-        databaseRef?.removeAllObservers()
     }
     
     // MARK: - action
@@ -120,31 +117,30 @@ class MyProfileViewController: UIViewController {
             }
             // set option to delete the run
             alertVC.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
-                if let id = run.assetID {
-                    self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs/\(id)").removeValue()
+                if let id = run.assetID {                    
+                    FirebaseService.sharedInstance().removeRunWith(id: id, completionHandler: nil)
                 }
             }))
             
             alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            present(alertVC, animated: true, completion: nil)
+            present(alertVC, animated: true)
         default: break
         }
         
 
     }
     
-    
-    // MARK: - firebase methods
+    // MARK: - firebase fetching
     
     // step 1: grab information from the database
-    func configureDatabase(completionHandler: (()->Void)?) {
-        accountHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)").observe(.value, with: { (localSnapshot) in
+    func fetchProfileData(completionHandler: (()->Void)?) {
+        accountValueHandle = FirebaseService.sharedInstance().fetchAccountNode { (localSnapshot) in
             let snap = localSnapshot.value as? [String: Any]
             self.profile?.status = snap?["status"] as? String
             self.profile?.accountCreationDate = snap?["creation_date"] as? TimeInterval
             
             completionHandler?()
-        })
+        }
     }
 
     // step 2: fetch the image
@@ -164,25 +160,20 @@ class MyProfileViewController: UIViewController {
     }
     
     func fetchFavoritedRuns() {
-        runAddHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs").observe(.childAdded, with: { (localSnapshot) in
+        runRemoveHandle = FirebaseService.sharedInstance().observeLikedRuns(eventType: .childAdded) { (localSnapshot) in
             guard let snapshot = localSnapshot.value as? [String: Any] else {
                 return
             }
-            
-            print("childAdded")
             if let run = ActiveRun(result: snapshot) {
                 self.profile?.favoriteActiveRuns.append(run)
                 self.favoritedActiveRuns.insertRows(at: [IndexPath(row: self.profile!.favoriteActiveRuns.count-1, section: 0)], with: .automatic)
             }
-        })
+        }
         
-        runRemoveHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs").observe(.childRemoved, with: { (localSnapshot) in
+        runAddHandle = FirebaseService.sharedInstance().observeLikedRuns(eventType: .childRemoved) { (localSnapshot) in
             guard let snapshot = localSnapshot.value as? [String: Any] else {
                 return
             }
-            
-            print("childRemoved")
-            
             // the run must have a uid
             guard let uid = snapshot[ActiveRun.Key.AssetUID] as? String else {
                 print("error - the run does not consist of any uid")
@@ -195,8 +186,7 @@ class MyProfileViewController: UIViewController {
                 self.profile?.favoriteActiveRuns.remove(at: index)
                 self.favoritedActiveRuns.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
             }
-            
-        })
+        }
     }
     
     fileprivate func updateProfile() {

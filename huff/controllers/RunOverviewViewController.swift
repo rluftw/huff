@@ -8,13 +8,11 @@
 
 import UIKit
 import MapKit
-import Firebase
 
 class RunOverviewViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - properties
     var runCollection: RunCollection!
-    var databaseRef: FIRDatabaseReference?
     lazy var mapRegion: MKCoordinateRegion? = {
         var mr = MKCoordinateRegion()
         guard let initialLocation = self.runCollection.currentRun.locations.last else {
@@ -68,16 +66,12 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
 
         setupMap()
-        
-        // setup firebase connections
-        databaseRef = FIRDatabase.database().reference()
     }
 
     // MARK: - actions
     @IBAction func done(_ sender: Any) {
-        // TODO: save data to firebase and check if the run has been longet than 5 minutes
         guard runCollection.currentRun.shouldSave else {
-            presentAlert(message: "No distance was covered during the run - Run will NOT be saved.")
+            presentAlert(message: "Run will not be saved due - less than 5 meters ran")
             return
         }
         
@@ -111,60 +105,28 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         }
         
         let polyLineRenderer = MKPolylineRenderer(polyline: overlay)
-        polyLineRenderer.strokeColor = UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)
+        polyLineRenderer.strokeColor = UIColor(red: 0, green: 122/255.0, blue: 1.0, alpha: 1)
         polyLineRenderer.lineWidth = 3
         
         return polyLineRenderer
     }
 
-    
     // MARK: - firebase methods
     func saveRun() {
-        // create the values to locate the node on firebase
-        let components = Calendar.current.dateComponents([.weekOfYear, .year], from: Date())
-        guard let weekOfYear = components.weekOfYear, let year = components.year else {
-            return
-        }
-    
         // save run to personal node
-        databaseRef?
-            .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/week\(weekOfYear)-\(year)")
-            .childByAutoId()
-            .setValue(runCollection.currentRun.toDict(), andPriority: runCollection.currentRun.timestamp)
+        FirebaseService.sharedInstance().saveRun(run: runCollection.currentRun)
         
         // save total distance to global
-        databaseRef?
-            .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/week\(weekOfYear)-\(year)")
-            .observeSingleEvent(of: .value, with: { (localSnaphot) in
-                guard let snapshot = localSnaphot.value as? [String: Any] else {
-                    return
-                }
-                var totalDistance: Double = 0
-                for key in snapshot.keys {
-                    if let runDict = snapshot[key] as? [String: Any], let distance = runDict["distance"] as? Double {
-                        totalDistance += distance
-                    }
-                }
-                self.databaseRef?
-                    .child("global_runs/week\(weekOfYear)-\(year)/\(FIRAuth.auth()!.currentUser!.uid)")
-                    .setValue([
-                        "distance": totalDistance,
-                        "username": FIRAuth.auth()!.currentUser!.email?.components(separatedBy: "@")[0] ?? FIRAuth.auth()!.currentUser!.displayName!
-                        ], andPriority: totalDistance)
-            })
+        FirebaseService.sharedInstance().saveDistanceToGlobal()
         
         // check if we should update best distance
         if runCollection.shouldUpdateBestDistance {
-            databaseRef?
-                .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_distance")
-                .setValue(runCollection.currentRun.distance)
+            FirebaseService.sharedInstance().updateBestDistance(distance: runCollection.currentRun.distance)
         }
         
         // check if we should update best pace
         if runCollection.shouldUpdateBestPace {
-            databaseRef?
-                .child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_pace")
-                .setValue(runCollection.currentRun.toDict())
+            FirebaseService.sharedInstance().updateBestPace(run: runCollection.currentRun)
         }
     }
 }

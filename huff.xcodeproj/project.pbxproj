@@ -24,6 +24,7 @@
 		374FF33D1E0A34DB0032AB31 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FF33C1E0A34DB0032AB31 /* Profile.swift */; };
 		374FF33F1E0A357E0032AB31 /* PastRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */; };
 		37509E8A1E0F467B00E8E87A /* RLPriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37509E891E0F467B00E8E87A /* RLPriorityQueue.swift */; };
+		37509E8C1E10D79500E8E87A /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37509E8B1E10D79500E8E87A /* FirebaseDatabaseService.swift */; };
 		375686EA1DE4FC82004F2951 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375686E91DE4FC82004F2951 /* AppDelegate.swift */; };
 		375686EF1DE4FC82004F2951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375686ED1DE4FC82004F2951 /* Main.storyboard */; };
 		375686F21DE4FC82004F2951 /* huff.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 375686F01DE4FC82004F2951 /* huff.xcdatamodeld */; };
@@ -50,6 +51,8 @@
 		37CEB4281DF6604200CF4446 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB4271DF6604200CF4446 /* ProfileHeaderView.swift */; };
 		37CEB42C1DF6670A00CF4446 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */; };
 		37D6AF861DE76A2A00EA0DB8 /* RunOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */; };
+		37D8811F1E11DBDA0087334E /* FirebaseRemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8811E1E11DBDA0087334E /* FirebaseRemoteConfigService.swift */; };
+		37D881211E11DC110087334E /* FirebaseAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D881201E11DC110087334E /* FirebaseAuthenticationService.swift */; };
 		37DB54991DFCE875004BD15C /* TweetPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB54981DFCE875004BD15C /* TweetPhotosViewController.swift */; };
 		37DB549B1DFCF155004BD15C /* TweetPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB549A1DFCF155004BD15C /* TweetPhotoCollectionViewCell.swift */; };
 		37DD92F21DFA5DBB00CD8D15 /* LoginOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DD92F11DFA5DBB00CD8D15 /* LoginOverlayView.swift */; };
@@ -97,6 +100,7 @@
 		374FF33C1E0A34DB0032AB31 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = model/Profile.swift; sourceTree = "<group>"; };
 		374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PastRunViewController.swift; path = controllers/PastRunViewController.swift; sourceTree = "<group>"; };
 		37509E891E0F467B00E8E87A /* RLPriorityQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RLPriorityQueue.swift; path = "data structures/RLPriorityQueue.swift"; sourceTree = "<group>"; };
+		37509E8B1E10D79500E8E87A /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseDatabaseService.swift; path = services/FirebaseDatabaseService.swift; sourceTree = "<group>"; };
 		375686E61DE4FC82004F2951 /* huff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = huff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375686E91DE4FC82004F2951 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		375686EE1DE4FC82004F2951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		37CEB4271DF6604200CF4446 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileHeaderView.swift; path = views/ProfileHeaderView.swift; sourceTree = "<group>"; };
 		37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyProfileViewController.swift; path = controllers/MyProfileViewController.swift; sourceTree = "<group>"; };
 		37D6AF851DE76A2A00EA0DB8 /* RunOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunOverviewViewController.swift; path = controllers/RunOverviewViewController.swift; sourceTree = "<group>"; };
+		37D8811E1E11DBDA0087334E /* FirebaseRemoteConfigService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseRemoteConfigService.swift; path = services/FirebaseRemoteConfigService.swift; sourceTree = "<group>"; };
+		37D881201E11DC110087334E /* FirebaseAuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseAuthenticationService.swift; path = services/FirebaseAuthenticationService.swift; sourceTree = "<group>"; };
 		37DB54981DFCE875004BD15C /* TweetPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetPhotosViewController.swift; path = controllers/TweetPhotosViewController.swift; sourceTree = "<group>"; };
 		37DB549A1DFCF155004BD15C /* TweetPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetPhotoCollectionViewCell.swift; path = views/TweetPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		37DD92F01DF8FF8C00CD8D15 /* huff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = huff.entitlements; sourceTree = "<group>"; };
@@ -179,9 +185,9 @@
 		370677931DEA01F8007EC3FD /* services */ = {
 			isa = PBXGroup;
 			children = (
-				370677941DEA020B007EC3FD /* TwitterService.swift */,
 				3730D6B11DEFD1B70065F3B7 /* ActiveService.swift */,
 				3730D6B31DEFD24C0065F3B7 /* Service.swift */,
+				37D881221E11DC4A0087334E /* Firebase */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -219,10 +225,10 @@
 		375686E81DE4FC82004F2951 /* huff */ = {
 			isa = PBXGroup;
 			children = (
-				37509E881E0F465500E8E87A /* datastructures */,
 				37DD92F01DF8FF8C00CD8D15 /* huff.entitlements */,
 				375686E91DE4FC82004F2951 /* AppDelegate.swift */,
 				375686ED1DE4FC82004F2951 /* Main.storyboard */,
+				37509E881E0F465500E8E87A /* datastructures */,
 				3756871E1DE4FCC7004F2951 /* views */,
 				3756871D1DE4FCC4004F2951 /* models */,
 				3756871C1DE4FCBD004F2951 /* controllers */,
@@ -328,11 +334,22 @@
 		375687211DE4FDF1004F2951 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				370677941DEA020B007EC3FD /* TwitterService.swift */,
 				375687221DE4FDFD004F2951 /* Roboto-Regular.ttf */,
 				375687231DE4FDFD004F2951 /* RobotoMono-Regular.ttf */,
 				37CEB4251DF65BBB00CF4446 /* RobotoMono-Bold.ttf */,
 			);
 			name = other;
+			sourceTree = "<group>";
+		};
+		37D881221E11DC4A0087334E /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				37509E8B1E10D79500E8E87A /* FirebaseDatabaseService.swift */,
+				37D8811E1E11DBDA0087334E /* FirebaseRemoteConfigService.swift */,
+				37D881201E11DC110087334E /* FirebaseAuthenticationService.swift */,
+			);
+			name = Firebase;
 			sourceTree = "<group>";
 		};
 		37FE51761DEA8A3B00152D35 /* Frameworks */ = {
@@ -555,6 +572,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37509E8C1E10D79500E8E87A /* FirebaseDatabaseService.swift in Sources */,
 				37714A0D1DE883F0002ACB3A /* TweetsViewController.swift in Sources */,
 				374FF33B1E0A34AE0032AB31 /* PastRunTableViewCell.swift in Sources */,
 				37C323B11DF33007002A93B6 /* ActiveRunTableViewCell.swift in Sources */,
@@ -565,10 +583,12 @@
 				374FF33F1E0A357E0032AB31 /* PastRunViewController.swift in Sources */,
 				370677951DEA020B007EC3FD /* TwitterService.swift in Sources */,
 				37DB54991DFCE875004BD15C /* TweetPhotosViewController.swift in Sources */,
+				37D8811F1E11DBDA0087334E /* FirebaseRemoteConfigService.swift in Sources */,
 				37B371BB1DF3D38200EB719F /* ActiveRunDetailViewController.swift in Sources */,
 				37714A111DE89020002ACB3A /* Tweet.swift in Sources */,
 				37F20F131E0CCF98003CB556 /* RunCollection.swift in Sources */,
 				37B249ED1DF279F80052E5BA /* RunOrganization.swift in Sources */,
+				37D881211E11DC110087334E /* FirebaseAuthenticationService.swift in Sources */,
 				3782605E1DEDABDF003C5F13 /* UIViewAnchor.swift in Sources */,
 				375686F21DE4FC82004F2951 /* huff.xcdatamodeld in Sources */,
 				375687271DE5059E004F2951 /* Run.swift in Sources */,

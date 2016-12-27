@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import Firebase
 
 fileprivate let metersInMiles = 1609.344
 
@@ -24,9 +23,8 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // MARK: - properties
-    let runCollection: RunCollection = RunCollection(currentRun: Run(uid: FIRAuth.auth()!.currentUser!.uid))
+    let runCollection: RunCollection = RunCollection(currentRun: Run(uid: FirebaseService.getCurrentUser().uid))
     var timer: Timer?
-    var databaseRef: FIRDatabaseReference?
     var run: Run {
         return runCollection.currentRun
     }
@@ -165,28 +163,17 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
 extension CurrentRunViewController {
     // MARK: - firebase connections
     func fetchPaceandDistance() {
-        databaseRef = FIRDatabase.database().reference()
-        
         // fetch best pace - the pace node just stores a run
-        self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_pace")
-            .observeSingleEvent(of: .value, with: { (localSnapshot) in
-                guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else {
-                    print("Best pace not available")
-                    return
-                }
-                let run = Run(dict: bestPaceRunDict)
-                self.runCollection.bestPace = run
-            })
+        FirebaseService.sharedInstance().fetchBestPace { (localSnapshot) in
+            guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else { return }
+            self.runCollection.bestPace = Run(dict: bestPaceRunDict)
+        }
         
         // fetch best distance - stored as a distance
-        self.databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs/best_distance")
-            .observeSingleEvent(of: .value, with: { (localSnapshot) in
-                guard let bestDistance = localSnapshot.value as? Double else {
-                    print("Best pace not available")
-                    return
-                }
-                self.runCollection.bestDistance = bestDistance
-            })
+        FirebaseService.sharedInstance().fetchBestDistance { (localSnapshot) in
+            guard let bestDistance = localSnapshot.value as? Double else { return }
+            self.runCollection.bestDistance = bestDistance
+        }
     }
 }
 

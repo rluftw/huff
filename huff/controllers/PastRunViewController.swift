@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class PastRunViewController: UIViewController {
     @IBOutlet weak var numberOfRunsLabel: UILabel!
@@ -15,45 +15,41 @@ class PastRunViewController: UIViewController {
     @IBOutlet weak var historyTable: UITableView!
 
     // MARK: - properties
-    var databaseRef: FIRDatabaseReference?
-    var addChildHandle: FIRDatabaseHandle?
     var runs = [Run]()
+    var personalRunHandle: FIRDatabaseHandle?
     
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureDatabase()
+        fetchPersonalRun()
     }
     
     // MARK: - initialization
     deinit {
-        databaseRef?.removeAllObservers()
+        FirebaseService.sharedInstance().removeObserver(handler: personalRunHandle)
     }
     
-    // MARK: - firebase setup
-    func configureDatabase() {
-        databaseRef = FIRDatabase.database().reference()
-        addChildHandle = databaseRef?.child("users/\(FIRAuth.auth()!.currentUser!.uid)/personal_runs")
-            .queryOrdered(byChild: "timestamp")
-            .observe(.childAdded, with: { (localSnapshot) in
+    // MARK: - firebase fetch
+    func fetchPersonalRun() {
+        personalRunHandle = FirebaseService.sharedInstance().fetchPersonalRuns { (localSnapshot) in
             guard let snapshot = localSnapshot.value as? [String: Any] else {
                 return
             }
-            
             for (_, value) in snapshot {
                 if let runDict = value as? [String: Any] {
                     let run = Run(dict: runDict)
+                    
+                    // TODO: make this more efficient
                     self.runs.append(run)
                     
-                    // TODO: implement it as a priority queue later on
                     self.runs.sort(by: { $0.timestamp > $1.timestamp })
                     self.historyTable.reloadData()
                     self.numberOfRunsLabel.text = "\(self.runs.count)"
                 }
             }
-            
-        })
+        }
+        
     }
     
     // MARK: - actions

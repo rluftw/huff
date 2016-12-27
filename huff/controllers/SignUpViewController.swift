@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseAuth
 
 class SignUpViewController: UIViewController {
 
@@ -18,11 +16,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var confirmPassword: UnderlinerTextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var textfieldContainerStack: UIStackView!
-
-    // MARK: - properties
-    var ref: FIRDatabaseReference!
     
-    // MARK: - computed properties
+    // MARK: - properties
     var readyToContinue: Bool {
         // check if they all have values
         guard let email = self.email.text, let password = self.password.text, let confirmPassword = self.confirmPassword.text else {
@@ -51,9 +46,6 @@ class SignUpViewController: UIViewController {
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ref = FIRDatabase.database().reference()
-        
         email.delegate = self
         password.delegate = self
         confirmPassword.delegate = self
@@ -70,20 +62,16 @@ class SignUpViewController: UIViewController {
     @IBAction func goToHome(_ sender: Any) {
         if readyToContinue {
             userInteraction(halt: true)
-            FIRAuth.auth()?.createUser(withEmail: email.text!, password: password.text!, completion: { (user: FIRUser?, error: Error?) in
+            FirebaseService.sharedInstance().createAccount(email:  email.text!, password: password.text!, completionHandler: { (user, error) in
                 guard error == nil else {
                     self.giveWarning(title: "Sign Up", message: error!.localizedDescription)
                     self.userInteraction(halt: false)
                     return
                 }
                 
-                let values: [String: Any] = [
-                    "creation_date": Date().timeIntervalSince1970,
-                ]
-                
-                self.ref.child("users/\(user!.uid)").setValue(values)
+                FirebaseService.sharedInstance().setupUser(userDict: ["creation_date": Date().timeIntervalSince1970])
                 user?.sendEmailVerification(completion: nil)
-                
+
                 // dismiss this view controller
                 let window = (UIApplication.shared.delegate as? AppDelegate)?.window
                 window?.rootViewController?.dismiss(animated: false, completion: nil)

@@ -13,7 +13,6 @@ class ActiveRunDetailViewController: UIViewController {
 
     // MARK: - properties
     var run: ActiveRun!
-    var ref: FIRDatabaseReference!
     
     // MARK: - outlets
     @IBOutlet weak var organizationName: UILabel!
@@ -28,7 +27,7 @@ class ActiveRunDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureDatabase()
+        checkRunStatus()
         updateLabels()
         
         // check if the run has passed
@@ -64,7 +63,6 @@ class ActiveRunDetailViewController: UIViewController {
         if let _ = run.organization.phone, UIDevice.current.model == "iPhone" {
             contactButton?.isHidden = false
         }
-        
     }
     
     func updateLikeButton(liked: Bool) {
@@ -99,28 +97,21 @@ class ActiveRunDetailViewController: UIViewController {
     }
     
     // MARK: - firebase
-    
-    func configureDatabase() {
-        ref = FIRDatabase.database().reference()
-        let assetsReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs")
-        
-        assetsReference.observeSingleEvent(of: .value, with: { (localSnapshot) in
+    func checkRunStatus() {
+        FirebaseService.sharedInstance().fetchActiveRunLikeStatus { (localSnapshot) in
             self.updateLikeButton(liked: localSnapshot.hasChild(self.run.assetID))
-        })
+        }
     }
     
     // updates firebase db when user wants to either like or unlike a run
     fileprivate func toggleLike() {
-        let assetsReference = ref.child("users/\(FIRAuth.auth()!.currentUser!.uid)/liked_runs")
-        
-        assetsReference.observeSingleEvent(of: .value, with: { (localSnapshot) in
-            if localSnapshot.hasChild(self.run.assetID) {
-                assetsReference.child(self.run.assetID).removeValue()
-                self.updateLikeButton(liked: false)
-            } else {
-                assetsReference.child(self.run.assetID).setValue(self.run.toDict())
-                self.updateLikeButton(liked: true)
+        FirebaseService.sharedInstance().fetchActiveRunLikeStatus { (localSnapshot) in
+            // true if snapshot contains the child
+            let hasChild = localSnapshot.hasChild(self.run.assetID)
+            
+            FirebaseService.sharedInstance().activeRunAction(action: hasChild ? .Remove: .Add, run: self.run) {
+                self.updateLikeButton(liked: !hasChild)
             }
-        })
+        }
     }
 }
