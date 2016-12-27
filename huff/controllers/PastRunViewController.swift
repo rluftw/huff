@@ -40,21 +40,23 @@ class PastRunViewController: UIViewController {
                 if let runDict = value as? [String: Any] {
                     let run = Run(dict: runDict)
                     
-                    // TODO: make this more efficient
-                    self.runs.append(run)
-                    
-                    self.runs.sort(by: { $0.timestamp > $1.timestamp })
+                    self.insertRunToCollection(run: run)
                     self.historyTable.reloadData()
                     self.numberOfRunsLabel.text = "\(self.runs.count)"
                 }
             }
         }
-        
     }
     
     // MARK: - actions
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - helper methods
+    func insertRunToCollection(run: Run) {
+        let index = runs.findIndexToInsert(item: run, lo: 0, hi: runs.count-1)
+        runs.insert(run, at: index)
     }
 }
 
@@ -69,5 +71,25 @@ extension PastRunViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "pastRunCell", for: indexPath) as! PastRunTableViewCell
         cell.run = runs[indexPath.row]
         return cell
+    }
+}
+
+
+// MARK: - array extension
+
+// This method allows the use of O(logn) insertion while maintaining a sorted array
+// The underlying logic is a binary search
+extension Array where Element:Comparable {
+    func findIndexToInsert(item: Element, lo: Int, hi: Int) -> Int {
+        let mid = (hi+lo)/2
+        // low must be less to hi
+        guard lo <= hi else {
+            return lo
+        }
+        // if there's an identical item in the array
+        guard self[mid] != item else {
+            return mid
+        }
+        return findIndexToInsert(item: item, lo: self[mid] > item ? mid+1: lo, hi: self[mid] < item ? mid-1: hi)
     }
 }

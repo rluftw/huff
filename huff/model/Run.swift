@@ -130,3 +130,9 @@ extension Run: Comparable {
         return lhs.timestamp >= rhs.timestamp
     }
 }
+
+extension Run: CustomStringConvertible {
+    var description: String {
+        return "\(timestamp)"
+    }
+}
