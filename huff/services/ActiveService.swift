@@ -17,7 +17,7 @@ class ActiveService: Service {
         return Singleton.activeService
     }
     
-    func search(location: CLLocation, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
+    func search(radius: Int, location: CLLocation, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
         // find todays date and convert to string
         let todaysDate = Date()
         let formatter = DateFormatter()
@@ -27,7 +27,7 @@ class ActiveService: Service {
         let after4WeekString = formatter.string(from: todaysDate.addingTimeInterval(60*60*24*28))
         
         // build the parameters dict
-        let parameters: [String: Any] = [ParameterKeys.Radius: 300,
+        let parameters: [String: Any] = [ParameterKeys.Radius: radius,
                                             ParameterKeys.CurrentPage: 1,
                                             ParameterKeys.Query: "5K",
                                             ParameterKeys.Location: "\(location.coordinate.latitude), \(location.coordinate.longitude)",

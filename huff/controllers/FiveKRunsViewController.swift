@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 class FiveKRunsViewController: UIViewController {
-    // MARK: - outlets
+    // MARK: - outlets/views
     @IBOutlet weak var fiveKTable: UITableView! {
         didSet {
             fiveKTable.delegate = self
@@ -21,6 +21,11 @@ class FiveKRunsViewController: UIViewController {
     }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    lazy var noResultBackgroundView: NoResultsTableViewBackground = {
+        var bgv = NoResultsTableViewBackground(frame: self.fiveKTable.bounds)
+        bgv.title = "No Five 5ks Available - Try Refreshing"
+        return bgv
+    }()
     
     // MARK: - properties
     var activeRuns = [ActiveRun]()
@@ -37,6 +42,37 @@ class FiveKRunsViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
     }
 
+    // MARK: - helper methods
+    func search(radius: Int, location: CLLocation) {
+        ActiveService.sharedInstance().search(radius: radius, location: location, completionHandler: { (result, error) in
+            guard let results = result?["results"] as? [[String: AnyObject]] else {
+                print("there was a problem with the active service results")
+                return
+            }
+            for result in results {
+                // check registration status - only include runs that are still open for registration.
+                guard let registrationStatus = result["salesStatus"] as? String, registrationStatus == "registration-open" else {
+                    continue
+                }
+                
+                // create the array of runs available
+                if let run = ActiveRun(result: result) {
+                    self.activeRuns.append(run)
+                    DispatchQueue.main.async {
+                        // use this instead of reload table to balance out ui update
+                        self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .automatic)
+                    }
+                }
+            }
+            DispatchQueue.main.async {
+                // display no results for background view
+                self.fiveKTable.backgroundView = self.activeRuns.count < 1 ? self.noResultBackgroundView: nil
+                
+                self.activityIndicator.stopAnimating()
+                self.fiveKTable.isUserInteractionEnabled = true
+            }
+        })
+    }
 }
 
 extension FiveKRunsViewController: CLLocationManagerDelegate {
@@ -48,31 +84,7 @@ extension FiveKRunsViewController: CLLocationManagerDelegate {
         
         fiveKTable.isUserInteractionEnabled = false
         if let location = locations.last {
-            ActiveService.sharedInstance().search(location: location, completionHandler: { (result, error) in
-                guard let results = result?["results"] as? [[String: AnyObject]] else {
-                    print("there was a problem with the active service results")
-                    return
-                }
-                for result in results {
-                    // check registration status - only include runs that are still open for registration.
-                    guard let registrationStatus = result["salesStatus"] as? String, registrationStatus == "registration-open" else {
-                        continue
-                    }
-                    
-                    // create the array of runs available
-                    if let run = ActiveRun(result: result) {
-                        self.activeRuns.append(run)
-                        DispatchQueue.main.async {
-                            // use this instead of reload table to balance out ui update
-                            self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .automatic)
-                        }
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.fiveKTable.isUserInteractionEnabled = true
-                }
-            })
+            search(radius: 50, location: location)
         }
     }
     

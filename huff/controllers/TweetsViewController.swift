@@ -17,6 +17,11 @@ class TweetsViewController: UIViewController {
         rc.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
         return rc
     }()
+    lazy var noResultBackgroundView: NoResultsTableViewBackground = {
+        var bgv = NoResultsTableViewBackground(frame: self.tweetsTable.bounds)
+        bgv.title = "No Tweets Available"
+        return bgv
+    }()
         
     // MARK: - outlets
     @IBOutlet weak var tweetsTable: UITableView! {
@@ -33,7 +38,6 @@ class TweetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isUserInteractionEnabled = false
-        
         tweetsTable.addSubview(refreshControl)
         performSearch()
     }
@@ -63,9 +67,10 @@ class TweetsViewController: UIViewController {
     }
     
     fileprivate func handleStopSearch() {
-        // TODO: check if there are any tweets. If not, replace the tableviews background view. eventually.
-        
         DispatchQueue.main.async {
+            // display no results for background view
+            self.tweetsTable.backgroundView = self.tweets.count < 1 ? self.noResultBackgroundView: nil
+            
             self.tweetsTable.reloadData()
             self.activityIndicator.stopAnimating()
             self.refreshControl.endRefreshing()
