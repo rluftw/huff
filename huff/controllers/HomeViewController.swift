@@ -33,6 +33,11 @@ class HomeViewController: UIViewController {
     }
     
     
+    // MARK: - initialization
+    deinit {
+        FirebaseService.sharedInstance().removeObserver(handler: topRecordHandle)
+    }
+    
     // MARK: - actions
     @IBAction func startARun(_ sender: Any) {
         performSegue(withIdentifier: "beginRun", sender: self)
@@ -54,14 +59,13 @@ class HomeViewController: UIViewController {
     
     func configureHomescreen() {
         // check if this is the users first time logging in
-        let accountHandler = FirebaseService.sharedInstance().fetchAccountNode { (localSnapshot) in
+        FirebaseService.sharedInstance().fetchAccountNode { (localSnapshot) in
             guard let snapshot = localSnapshot.value as? [String: Any], let _ = snapshot["creation_date"] as? TimeInterval else {
                 print("no creation date found - attempting to set a creation date")
                 FirebaseService.sharedInstance().setAccountCreationDate()
                 return
             }
         }
-        FirebaseService.sharedInstance().removeObserver(handler: accountHandler)
         topRecordHandle = FirebaseService.sharedInstance().fetchGlobalHSDistance { (localSnapshot) in
             self.handleTopRecords(localSnapshot: localSnapshot)
         }
@@ -73,7 +77,7 @@ class HomeViewController: UIViewController {
             return
         }
         let record = TopRunRecord(dict: snapshot)
-        self.topRecords.insert(record, at: 0)
+        self.topRecords.insertOrdered(record)
         self.topDistanceTable.reloadData()
     }
 }

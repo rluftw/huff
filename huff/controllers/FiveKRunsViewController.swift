@@ -23,7 +23,7 @@ class FiveKRunsViewController: UIViewController {
     
     lazy var noResultBackgroundView: NoResultsTableViewBackground = {
         var bgv = NoResultsTableViewBackground(frame: self.fiveKTable.bounds)
-        bgv.title = "No Five 5ks Available - Try Refreshing"
+        bgv.title = "No Five 5ks Available"
         return bgv
     }()
     
@@ -40,6 +40,11 @@ class FiveKRunsViewController: UIViewController {
         super.viewDidLoad()
 
         locationManager.requestWhenInUseAuthorization()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
 
     // MARK: - helper methods
@@ -130,6 +135,8 @@ extension FiveKRunsViewController {
             let cell = sender as? ActiveRunTableViewCell
             let detailVC = segue.destination as! ActiveRunDetailViewController
             detailVC.run = cell?.run
+            
+            tabBarController?.tabBar.isHidden = true
         }
     }
 }

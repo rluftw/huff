@@ -91,7 +91,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
     
     func presentAlert(message: String) {
         let alertVC = UIAlertController(title: "Run", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Great!", style: .default, handler: { (action) in
+        alertVC.addAction(UIAlertAction(title: "Done", style: .default, handler: { (action) in
             self.navigationController?.dismiss(animated: true, completion: nil)
         }))
         

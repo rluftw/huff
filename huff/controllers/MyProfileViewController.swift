@@ -14,11 +14,9 @@ import Firebase
 class MyProfileViewController: UIViewController {
     
     var profile: Profile?
-    var accountHandle: FIRDatabaseHandle?
     var runAddHandle: FIRDatabaseHandle?
     var runRemoveHandle: FIRDatabaseHandle?
-    var accountValueHandle: FIRDatabaseHandle?
-    
+
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
     @IBOutlet weak var bestPaceLabel: UILabel!
@@ -36,7 +34,6 @@ class MyProfileViewController: UIViewController {
     deinit {
         FirebaseService.sharedInstance().removeObserver(handler: runAddHandle)
         FirebaseService.sharedInstance().removeObserver(handler: runRemoveHandle)
-        FirebaseService.sharedInstance().removeObserver(handler: accountValueHandle)
     }
 
     // MARK: - lifecycle
@@ -129,7 +126,7 @@ class MyProfileViewController: UIViewController {
     
     // step 1: grab information from the database
     func fetchProfileData(completionHandler: (()->Void)?) {
-        accountValueHandle = FirebaseService.sharedInstance().fetchAccountNode { (localSnapshot) in
+        FirebaseService.sharedInstance().fetchAccountNode { (localSnapshot) in
             let snap = localSnapshot.value as? [String: Any]
             self.profile?.status = snap?["status"] as? String
             self.profile?.accountCreationDate = snap?["creation_date"] as? TimeInterval
@@ -200,5 +197,46 @@ class MyProfileViewController: UIViewController {
             
             tabBarController?.tabBar.isHidden = true
         }
+    }
+}
+
+extension MyProfileViewController {
+    // MARK: - setting options
+    
+    @IBAction func settings(_ sender: Any) {
+        let alertVC = UIAlertController(title: "Settings", message: "Here are some options you can take", preferredStyle: .actionSheet)
+
+        alertVC.addAction(UIAlertAction(title: "Change Profile Picture", style: .default, handler: { (action) in
+            // show an uiimagepicker
+        }))
+
+        alertVC.addAction(UIAlertAction(title: "3rd Party Attributions", style: .default, handler: { (action) in
+            // Show credit page
+        }))
+        
+        alertVC.addAction(UIAlertAction(title: "Delete My Account", style: .destructive, handler: { (action) in
+            self.deleteAccount()
+        }))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+        present(alertVC, animated: true, completion: nil)
+    }
+
+    
+    func deleteAccount() {
+        let confirmationVC = UIAlertController(title: "Account Deletion", message: "This action can not be undone and all data will be lost, are you sure you want to continue?", preferredStyle: .alert)
+        confirmationVC.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
+            FirebaseService.sharedInstance().removeGlobalRunInfo()
+            FirebaseService.sharedInstance().removeUser()
+            FirebaseService.sharedInstance().deleteAccount(completion: { (error) in
+                guard error == nil else {
+                    return
+                }
+                FirebaseService.destroy()
+                GIDSignIn.sharedInstance().disconnect()
+            })
+        }))
+        confirmationVC.addAction(UIAlertAction(title: "Nevermind", style: .default, handler: nil))
+        self.present(confirmationVC, animated: true, completion: nil)
     }
 }

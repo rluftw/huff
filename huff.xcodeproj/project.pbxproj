@@ -14,6 +14,8 @@
 		370677991DEA7F1A007EC3FD /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 370677981DEA7F1A007EC3FD /* KeychainWrapper.m */; };
 		370D986B1E07978000F6970F /* TopRunRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370D986A1E07978000F6970F /* TopRunRecord.swift */; };
 		371F5D081DF7B51C00680A48 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 371F5D071DF7B51C00680A48 /* GoogleService-Info.plist */; };
+		372BF9331E1370210014E657 /* Credits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 372BF9321E1370210014E657 /* Credits.plist */; };
+		372BF9351E1481490014E657 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372BF9341E1481490014E657 /* Array.swift */; };
 		3730D6B21DEFD1B70065F3B7 /* ActiveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730D6B11DEFD1B70065F3B7 /* ActiveService.swift */; };
 		3730D6B41DEFD24C0065F3B7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730D6B31DEFD24C0065F3B7 /* Service.swift */; };
 		3730D6B61DF113560065F3B7 /* FiveKRunsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730D6B51DF113560065F3B7 /* FiveKRunsViewController.swift */; };
@@ -90,6 +92,8 @@
 		370677981DEA7F1A007EC3FD /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainWrapper.m; path = "supporting files/KeychainWrapper.m"; sourceTree = "<group>"; };
 		370D986A1E07978000F6970F /* TopRunRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopRunRecord.swift; path = model/TopRunRecord.swift; sourceTree = "<group>"; };
 		371F5D071DF7B51C00680A48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		372BF9321E1370210014E657 /* Credits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credits.plist; path = "supporting files/Credits.plist"; sourceTree = "<group>"; };
+		372BF9341E1481490014E657 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = "data structures/Array.swift"; sourceTree = "<group>"; };
 		372DBE201DFBB7D100EB321F /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/huff-aymyvzzlyjcavzetsmbynhpfykam/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		3730D6B11DEFD1B70065F3B7 /* ActiveService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActiveService.swift; path = services/ActiveService.swift; sourceTree = "<group>"; };
 		3730D6B31DEFD24C0065F3B7 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Service.swift; path = services/Service.swift; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				37509E891E0F467B00E8E87A /* RLPriorityQueue.swift */,
+				372BF9341E1481490014E657 /* Array.swift */,
 			);
 			name = datastructures;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 		3756871A1DE4FC89004F2951 /* supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				372BF9321E1370210014E657 /* Credits.plist */,
 				375686F31DE4FC82004F2951 /* Assets.xcassets */,
 				375686F51DE4FC82004F2951 /* LaunchScreen.storyboard */,
 				375686F81DE4FC82004F2951 /* Info.plist */,
@@ -445,7 +451,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Xing Hui Lu";
 				TargetAttributes = {
 					375686E51DE4FC82004F2951 = {
@@ -504,6 +510,7 @@
 				375687251DE4FE44004F2951 /* RobotoMono-Regular.ttf in Resources */,
 				375686F71DE4FC82004F2951 /* LaunchScreen.storyboard in Resources */,
 				375686F41DE4FC82004F2951 /* Assets.xcassets in Resources */,
+				372BF9331E1370210014E657 /* Credits.plist in Resources */,
 				375686EF1DE4FC82004F2951 /* Main.storyboard in Resources */,
 				371F5D081DF7B51C00680A48 /* GoogleService-Info.plist in Resources */,
 			);
@@ -595,6 +602,7 @@
 				37B371BB1DF3D38200EB719F /* ActiveRunDetailViewController.swift in Sources */,
 				37714A111DE89020002ACB3A /* Tweet.swift in Sources */,
 				37F20F131E0CCF98003CB556 /* RunCollection.swift in Sources */,
+				372BF9351E1481490014E657 /* Array.swift in Sources */,
 				37B249ED1DF279F80052E5BA /* RunOrganization.swift in Sources */,
 				37D881211E11DC110087334E /* FirebaseAuthenticationService.swift in Sources */,
 				3782605E1DEDABDF003C5F13 /* UIViewAnchor.swift in Sources */,
@@ -692,6 +700,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -741,6 +750,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

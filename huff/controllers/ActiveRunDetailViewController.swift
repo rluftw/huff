@@ -36,6 +36,9 @@ class ActiveRunDetailViewController: UIViewController {
             registerButton.isUserInteractionEnabled = false
             registerButton.alpha = 0.5
         }
+        
+        // hide the tool bar
+        presentingViewController?.navigationController?.toolbar.isHidden = true
     }
 
     // MARK: - helper methods

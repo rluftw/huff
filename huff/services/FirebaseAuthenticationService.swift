@@ -27,4 +27,10 @@ extension FirebaseService {
     func signInWithEmail(email: String, password: String, completionHandler: @escaping (FIRUser?, Error?)->Void) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: completionHandler)
     }
+
+    func deleteAccount(completion: @escaping (Error?)->Void) {
+        FirebaseService.getCurrentUser().delete { (error) in
+            completion(error)
+        }
+    }
 }

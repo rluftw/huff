@@ -15,7 +15,6 @@ struct RLPriorityQueue<T: Comparable>: CustomStringConvertible {
         return "\(heap)"
     }
     
-    
     // MARK: - basic operations
     
     var size: Int {

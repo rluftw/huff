@@ -55,8 +55,7 @@ class PastRunViewController: UIViewController {
     
     // MARK: - helper methods
     func insertRunToCollection(run: Run) {
-        let index = runs.findIndexToInsert(item: run, lo: 0, hi: runs.count-1)
-        runs.insert(run, at: index)
+        runs.insertOrdered(run)
     }
 }
 
@@ -75,21 +74,3 @@ extension PastRunViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-// MARK: - array extension
-
-// This method allows the use of O(logn) insertion while maintaining a sorted array
-// The underlying logic is a binary search
-extension Array where Element:Comparable {
-    func findIndexToInsert(item: Element, lo: Int, hi: Int) -> Int {
-        let mid = (hi+lo)/2
-        // low must be less to hi
-        guard lo <= hi else {
-            return lo
-        }
-        // if there's an identical item in the array
-        guard self[mid] != item else {
-            return mid
-        }
-        return findIndexToInsert(item: item, lo: self[mid] > item ? mid+1: lo, hi: self[mid] < item ? mid-1: hi)
-    }
-}

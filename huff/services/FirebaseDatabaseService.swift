@@ -6,6 +6,9 @@
 //  Copyright © 2016 Xing Hui Lu. All rights reserved.
 //
 
+// TODO: figure out how to reset this class for new users.
+// idea is to destroy the past singleton and create a new one when called
+
 import Foundation
 import Firebase
 
@@ -29,13 +32,20 @@ class FirebaseService {
         return FIRDatabase.database().reference().child("global_runs/week\(self.weekOfYear ?? 1)-\(self.year ?? 2017)")
     }()
     
+    private static var fbService: FirebaseService?
     class func sharedInstance() -> FirebaseService {
-        struct Singleton {
-            static let fbService = FirebaseService()
+        guard let service = fbService else {
+            fbService = FirebaseService()
+            return fbService!
         }
-        return Singleton.fbService
+        return service
     }
     
+    class func destroy() {
+        fbService = nil
+        print("service destroyed")
+    }
+
     // MARK: - initialization
     init() {
         databaseRef = FIRDatabase.database().reference()
@@ -74,10 +84,10 @@ class FirebaseService {
             })
     }
     
-    func fetchAccountNode(completionhandler: @escaping (FIRDataSnapshot)->Void) -> FIRDatabaseHandle {
-        return userNodeDatabaseRef.observe(.value, with: { (localSnapshot) in
+    func fetchAccountNode(completionhandler: @escaping (FIRDataSnapshot)->Void) {
+        userNodeDatabaseRef.observeSingleEvent(of: .value) { (localSnapshot) in
             completionhandler(localSnapshot)
-        })
+        }
     }
     
     
@@ -119,7 +129,6 @@ class FirebaseService {
                     totalDistance += distance
                 }
             }
-        
             self.globalNodeDatabaseRef
                 .child("\(FirebaseService.getCurrentUser().uid)")
                 .setValue([
@@ -136,8 +145,8 @@ extension FirebaseService {
     // MARK: - utility methods
     
     func removeObserver(handler: UInt?) {
-        guard let handler = handler else { return }
-        databaseRef.removeObserver(withHandle: handler)
+//        guard let handler = handler else { return }
+        databaseRef.removeObserver(withHandle: handler!)
     }
     
     static func getCurrentUser() -> FIRUser {
@@ -173,4 +182,11 @@ extension FirebaseService {
         userNodeDatabaseRef.child("personal_runs/best_pace").setValue(run.toDict())
     }
     
+    func removeGlobalRunInfo() {
+        globalNodeDatabaseRef.child(FirebaseService.getCurrentUser().uid).removeValue()
+    }
+    
+    func removeUser() {
+        userNodeDatabaseRef.removeValue()
+    }
 }

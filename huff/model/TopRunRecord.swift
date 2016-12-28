@@ -21,3 +21,25 @@ class TopRunRecord: CustomStringConvertible {
         username = dict["username"] as! String
     }
 }
+
+extension TopRunRecord: Comparable {
+    public static func ==(lhs: TopRunRecord, rhs: TopRunRecord) -> Bool {
+        return lhs.distance == rhs.distance
+    }
+    
+    public static func <(lhs: TopRunRecord, rhs: TopRunRecord) -> Bool {
+        return lhs.distance < rhs.distance
+    }
+    
+    public static func >(lhs: TopRunRecord, rhs: TopRunRecord) -> Bool {
+        return lhs.distance > rhs.distance
+    }
+    
+    public static func <=(lhs: TopRunRecord, rhs: TopRunRecord) -> Bool {
+        return lhs.distance <= rhs.distance
+    }
+    
+    public static func >=(lhs: TopRunRecord, rhs: TopRunRecord) -> Bool {
+        return lhs.distance >= rhs.distance
+    }
+}
