@@ -6,10 +6,10 @@ huff is a simply a running app that focuses on getting a user to run in a commun
         2. Twitter Account to post a tweet with #huffrunapp 
         3. An Active.com search API Key 
 
-![profile](https://github.com/rluftw/huff/tree/master/screenshots/profile.PNG)
-![home](https://github.com/rluftw/huff/tree/master/screenshots/home.PNG)
-![run_detail](https://github.com/rluftw/huff/tree/master/screenshots/run_detail.PNG)
-![active_runs](https://github.com/rluftw/huff/tree/master/screenshots/active_runs.PNG)
+![profile](screenshots/profile.PNG)
+![home](screenshots/home.PNG)
+![run_detail](screenshots/run_detail.PNG)
+![active_runs](screenshots/active_runs.PNG)
         
 ## Table of contents
 * Instructions
