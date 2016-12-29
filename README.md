@@ -27,5 +27,5 @@ The app has several features which includes the following:
     * A global distance table that is updated everytime the user opens the app
     
 ## Copyright and License
-The Code released under the [MIT License](https://github.com/twbs/bootstrap/blob/master/LICENSE). Credit has been provided to their respective owners in app.
+The code released under the [MIT License](https://github.com/rluftw/huff/blob/master/license.txt). Credit has been provided to their respective owners in app.
 
