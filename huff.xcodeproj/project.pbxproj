@@ -14,8 +14,10 @@
 		370677991DEA7F1A007EC3FD /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 370677981DEA7F1A007EC3FD /* KeychainWrapper.m */; };
 		370D986B1E07978000F6970F /* TopRunRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370D986A1E07978000F6970F /* TopRunRecord.swift */; };
 		371F5D081DF7B51C00680A48 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 371F5D071DF7B51C00680A48 /* GoogleService-Info.plist */; };
+		3720978D1E14C52900B129B8 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3720978C1E14C52900B129B8 /* OptionsView.swift */; };
 		372BF9331E1370210014E657 /* Credits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 372BF9321E1370210014E657 /* Credits.plist */; };
 		372BF9351E1481490014E657 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372BF9341E1481490014E657 /* Array.swift */; };
+		372BF9371E149F3C0014E657 /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372BF9361E149F3C0014E657 /* CreditViewController.swift */; };
 		3730D6B21DEFD1B70065F3B7 /* ActiveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730D6B11DEFD1B70065F3B7 /* ActiveService.swift */; };
 		3730D6B41DEFD24C0065F3B7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730D6B31DEFD24C0065F3B7 /* Service.swift */; };
 		3730D6B61DF113560065F3B7 /* FiveKRunsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730D6B51DF113560065F3B7 /* FiveKRunsViewController.swift */; };
@@ -92,8 +94,10 @@
 		370677981DEA7F1A007EC3FD /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainWrapper.m; path = "supporting files/KeychainWrapper.m"; sourceTree = "<group>"; };
 		370D986A1E07978000F6970F /* TopRunRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopRunRecord.swift; path = model/TopRunRecord.swift; sourceTree = "<group>"; };
 		371F5D071DF7B51C00680A48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3720978C1E14C52900B129B8 /* OptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsView.swift; path = views/OptionsView.swift; sourceTree = "<group>"; };
 		372BF9321E1370210014E657 /* Credits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credits.plist; path = "supporting files/Credits.plist"; sourceTree = "<group>"; };
 		372BF9341E1481490014E657 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = "data structures/Array.swift"; sourceTree = "<group>"; };
+		372BF9361E149F3C0014E657 /* CreditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditViewController.swift; path = controllers/CreditViewController.swift; sourceTree = "<group>"; };
 		372DBE201DFBB7D100EB321F /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/huff-aymyvzzlyjcavzetsmbynhpfykam/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		3730D6B11DEFD1B70065F3B7 /* ActiveService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActiveService.swift; path = services/ActiveService.swift; sourceTree = "<group>"; };
 		3730D6B31DEFD24C0065F3B7 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Service.swift; path = services/Service.swift; sourceTree = "<group>"; };
@@ -307,6 +311,7 @@
 				373DBDE81DF7B61800DB3698 /* LoginViewController.swift */,
 				373DBDEA1DF7D28900DB3698 /* SignUpViewController.swift */,
 				374FF33E1E0A357E0032AB31 /* PastRunViewController.swift */,
+				372BF9361E149F3C0014E657 /* CreditViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				374562EE1E05FF34004CEBE9 /* TopListCell.swift */,
 				374FF33A1E0A34AE0032AB31 /* PastRunTableViewCell.swift */,
 				3703581A1E12B4530098593B /* NoResultsTableViewBackground.swift */,
+				3720978C1E14C52900B129B8 /* OptionsView.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -588,6 +594,7 @@
 				37509E8C1E10D79500E8E87A /* FirebaseDatabaseService.swift in Sources */,
 				37714A0D1DE883F0002ACB3A /* TweetsViewController.swift in Sources */,
 				374FF33B1E0A34AE0032AB31 /* PastRunTableViewCell.swift in Sources */,
+				3720978D1E14C52900B129B8 /* OptionsView.swift in Sources */,
 				37C323B11DF33007002A93B6 /* ActiveRunTableViewCell.swift in Sources */,
 				3730D6B81DF1AC350065F3B7 /* ActiveRun.swift in Sources */,
 				37DB549B1DFCF155004BD15C /* TweetPhotoCollectionViewCell.swift in Sources */,
@@ -628,6 +635,7 @@
 				37DD92F21DFA5DBB00CD8D15 /* LoginOverlayView.swift in Sources */,
 				375D318F1DEB2F9900829788 /* TweetTableViewCell.swift in Sources */,
 				370677901DE9FF8E007EC3FD /* NetworkOperation.swift in Sources */,
+				372BF9371E149F3C0014E657 /* CreditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

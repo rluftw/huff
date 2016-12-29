@@ -29,6 +29,7 @@ extension FirebaseService {
     }
 
     func deleteAccount(completion: @escaping (Error?)->Void) {
+        FirebaseService.enablePersistence(enabled: false)
         FirebaseService.getCurrentUser().delete { (error) in
             completion(error)
         }

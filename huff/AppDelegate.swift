@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // configure firebase
         FIRApp.configure()
-        FIRDatabase.database().persistenceEnabled = true
         
         // configure the authorization
         configureAuth()

@@ -70,7 +70,7 @@ class SignUpViewController: UIViewController {
                 }
                 
                 FirebaseService.sharedInstance().setupUser(userDict: ["creation_date": Date().timeIntervalSince1970])
-                user?.sendEmailVerification(completion: nil)
+                //user?.sendEmailVerification(completion: nil)
 
                 // dismiss this view controller
                 let window = (UIApplication.shared.delegate as? AppDelegate)?.window

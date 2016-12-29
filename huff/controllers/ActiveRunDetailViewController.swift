@@ -27,6 +27,8 @@ class ActiveRunDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        presentingViewController?.tabBarController?.tabBar.isHidden = true
+        
         checkRunStatus()
         updateLabels()
         
@@ -36,9 +38,6 @@ class ActiveRunDetailViewController: UIViewController {
             registerButton.isUserInteractionEnabled = false
             registerButton.alpha = 0.5
         }
-        
-        // hide the tool bar
-        presentingViewController?.navigationController?.toolbar.isHidden = true
     }
 
     // MARK: - helper methods
@@ -76,9 +75,7 @@ class ActiveRunDetailViewController: UIViewController {
     
     // MARK: - actions
     @IBAction func close(_ sender: Any) {
-        if let vc = presentingViewController as? UINavigationController {
-            vc.tabBarController?.tabBar.isHidden = false
-        }
+        presentingViewController?.tabBarController?.tabBar.isHidden = false
         dismiss(animated: true, completion: nil)
     }
     

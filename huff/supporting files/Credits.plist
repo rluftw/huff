@@ -2,31 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Running Man with raised arm free icon</key>
+	<key>Twitter</key>
+	<string>Icomoon</string>
+	<key>Sliders</key>
+	<string>Vaadin</string>
+	<key>Running Man with raised arm</key>
 	<string>Freepik</string>
-	<key>History clock button free icon</key>
+	<key>History clock button</key>
 	<string>Google</string>
-	<key>Home Icon Silhouette free icon</key>
+	<key>Home Icon Silhouette</key>
 	<string>Freepik</string>
-	<key>Hashtag symbol free icon</key>
+	<key>Hashtag symbol</key>
 	<string>Freepik</string>
-	<key>Close button free icon</key>
+	<key>Close button</key>
 	<string>Google</string>
-	<key>User Avatar Main Picture free icon</key>
+	<key>User Avatar Main Picture</key>
 	<string>Bogdan Rosu</string>
-	<key>Mailbox free icon</key>
+	<key>Mailbox</key>
 	<string>Freepik</string>
-	<key>Running silhouette free icon</key>
+	<key>Running</key>
 	<string>Freepik</string>
-	<key>Gear Option free icon</key>
+	<key>Gear Option</key>
 	<string>Freepik</string>
-	<key>Runner free icon</key>
+	<key>Runner</key>
 	<string>Freepik</string>
-	<key>Heart black shape for valentines free icon</key>
+	<key>Heart black shape for valentines</key>
 	<string>Freepik</string>
-	<key>Heart outline free icon</key>
+	<key>Heart outline</key>
 	<string>Freepik</string>
-	<key>Virus free icon</key>
+	<key>Virus</key>
 	<string>Freepik</string>
 </dict>
 </plist>

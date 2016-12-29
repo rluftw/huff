@@ -41,11 +41,6 @@ class FiveKRunsViewController: UIViewController {
 
         locationManager.requestWhenInUseAuthorization()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.tabBar.isHidden = false
-    }
 
     // MARK: - helper methods
     func search(radius: Int, location: CLLocation) {

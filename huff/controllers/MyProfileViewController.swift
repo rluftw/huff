@@ -67,6 +67,7 @@ class MyProfileViewController: UIViewController {
         }
         fetchFavoritedRuns()
     }
+
     
     // MARK: - action
     @IBAction func logout(_ sender: Any) {
@@ -194,8 +195,6 @@ class MyProfileViewController: UIViewController {
             let cell = sender as? ActiveRunTableViewCell
             let detailVC = segue.destination as! ActiveRunDetailViewController
             detailVC.run = cell?.run
-            
-            tabBarController?.tabBar.isHidden = true
         }
     }
 }
@@ -205,38 +204,13 @@ extension MyProfileViewController {
     
     @IBAction func settings(_ sender: Any) {
         let alertVC = UIAlertController(title: "Settings", message: "Here are some options you can take", preferredStyle: .actionSheet)
-
-        alertVC.addAction(UIAlertAction(title: "Change Profile Picture", style: .default, handler: { (action) in
-            // show an uiimagepicker
-        }))
-
         alertVC.addAction(UIAlertAction(title: "3rd Party Attributions", style: .default, handler: { (action) in
-            // Show credit page
+            self.performSegue(withIdentifier: "ShowAttributions", sender: self)
         }))
         
-        alertVC.addAction(UIAlertAction(title: "Delete My Account", style: .destructive, handler: { (action) in
-            self.deleteAccount()
-        }))
         alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
         present(alertVC, animated: true, completion: nil)
     }
-
     
-    func deleteAccount() {
-        let confirmationVC = UIAlertController(title: "Account Deletion", message: "This action can not be undone and all data will be lost, are you sure you want to continue?", preferredStyle: .alert)
-        confirmationVC.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
-            FirebaseService.sharedInstance().removeGlobalRunInfo()
-            FirebaseService.sharedInstance().removeUser()
-            FirebaseService.sharedInstance().deleteAccount(completion: { (error) in
-                guard error == nil else {
-                    return
-                }
-                FirebaseService.destroy()
-                GIDSignIn.sharedInstance().disconnect()
-            })
-        }))
-        confirmationVC.addAction(UIAlertAction(title: "Nevermind", style: .default, handler: nil))
-        self.present(confirmationVC, animated: true, completion: nil)
-    }
 }

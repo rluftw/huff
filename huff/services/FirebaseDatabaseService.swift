@@ -25,11 +25,15 @@ class FirebaseService {
     let weekOfYear: Int!
     let year: Int!
     lazy var userNodeDatabaseRef: FIRDatabaseReference! = {
-        return FIRDatabase.database().reference().child("users/\(FirebaseService.getCurrentUser().uid)")
+        let userNodeRef = FIRDatabase.database().reference().child("users/\(FirebaseService.getCurrentUser().uid)")
+        userNodeRef.keepSynced(true)
+        return userNodeRef
     }()
     
     lazy var globalNodeDatabaseRef: FIRDatabaseReference! = {
-        return FIRDatabase.database().reference().child("global_runs/week\(self.weekOfYear ?? 1)-\(self.year ?? 2017)")
+        let globalNodeRef = FIRDatabase.database().reference().child("global_runs/week\(self.weekOfYear ?? 1)-\(self.year ?? 2017)")
+        globalNodeRef.keepSynced(false)
+        return globalNodeRef
     }()
     
     private static var fbService: FirebaseService?
@@ -48,6 +52,7 @@ class FirebaseService {
 
     // MARK: - initialization
     init() {
+        FirebaseService.enablePersistence(enabled: true)
         databaseRef = FIRDatabase.database().reference()
         
         let components = Calendar.current.dateComponents([.weekOfYear, .year], from: Date())
@@ -188,5 +193,9 @@ extension FirebaseService {
     
     func removeUser() {
         userNodeDatabaseRef.removeValue()
+    }
+    
+    static func enablePersistence(enabled: Bool) {
+        FIRDatabase.database().persistenceEnabled = enabled
     }
 }
