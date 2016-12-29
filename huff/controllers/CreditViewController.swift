@@ -53,12 +53,19 @@ class CreditViewController: UIViewController {
         let text = NSMutableAttributedString(string: "Credits", attributes: attributes)
         attributes[NSParagraphStyleAttributeName] = nil
         attributes[NSFontAttributeName] = UIFont(name: "RobotoMono-Bold", size:16)!
-        let descriptionText = "\n\nICONS\n-----"
-        text.append(NSAttributedString(string: descriptionText, attributes: attributes))
+        let iconSubtitle = "\n\nICONS\n-----"
+        text.append(NSAttributedString(string: iconSubtitle, attributes: attributes))
         attributes[NSFontAttributeName] = UIFont(name: "RobotoMono-Bold", size:8)!
         for (key, value) in creditDict {
             text.append(NSAttributedString(string: "\n- \(key) made by \(value) from www.flaticon.com", attributes: attributes))
         }
+        let appIconSubtitle = "\n\nAPP ICON\n---------"
+        attributes[NSFontAttributeName] = UIFont(name: "RobotoMono-Bold", size:16)!
+        text.append(NSAttributedString(string: appIconSubtitle, attributes: attributes))
+        let appIconDescription = "\nThe app icon named Fitness App Logo is from a user named Ramotion on www.dribbble.com"
+        attributes[NSFontAttributeName] = UIFont(name: "RobotoMono-Bold", size:8)!
+        text.append(NSAttributedString(string: appIconDescription, attributes: attributes))
+
         creditTextView.attributedText = text
     }
 }
