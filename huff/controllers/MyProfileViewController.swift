@@ -16,6 +16,8 @@ class MyProfileViewController: UIViewController {
     var profile: Profile?
     var runAddHandle: FIRDatabaseHandle?
     var runRemoveHandle: FIRDatabaseHandle?
+    var bestPaceHandle: FIRDatabaseHandle?
+    var bestDistanceHandle: FIRDatabaseHandle?
 
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
@@ -34,6 +36,8 @@ class MyProfileViewController: UIViewController {
     deinit {
         FirebaseService.sharedInstance().removeObserver(handler: runAddHandle)
         FirebaseService.sharedInstance().removeObserver(handler: runRemoveHandle)
+        FirebaseService.sharedInstance().removeObserver(handler: bestPaceHandle)
+        FirebaseService.sharedInstance().removeObserver(handler: bestDistanceHandle)
     }
 
     // MARK: - lifecycle
@@ -41,11 +45,11 @@ class MyProfileViewController: UIViewController {
         super.viewDidLoad()
 
         let firebaseUser = FirebaseService.getCurrentUser()
-        self.profile = Profile(user: firebaseUser, photo: nil, status: nil, dateJoined: nil)
+        profile = Profile(user: firebaseUser, photo: nil, status: nil, dateJoined: nil)
         
         fetchProfileData {
-            self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL) { ()->Void in
-                FirebaseService.sharedInstance().fetchBestPace() { (localSnapshot)->Void in
+             self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL) { ()->Void in
+                self.bestPaceHandle = FirebaseService.sharedInstance().fetchBestPace() { (localSnapshot)->Void in
                     guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else {
                         print("Best pace not available")
                         return
@@ -56,7 +60,7 @@ class MyProfileViewController: UIViewController {
                     self.bestPaceLabel.text = "\(pace) min/mile"
                 }
                 
-                FirebaseService.sharedInstance().fetchBestDistance(completionHandler: { (localSnapshot) in
+                self.bestDistanceHandle = FirebaseService.sharedInstance().fetchBestDistance(completionHandler: { (localSnapshot) in
                     guard let bestDistance = localSnapshot.value as? Double else {
                         print("Best pace not available")
                         return
@@ -72,24 +76,14 @@ class MyProfileViewController: UIViewController {
     // MARK: - action
     @IBAction func logout(_ sender: Any) {
         giveWarning(title: "Logout", message: "Are you sure you'd like to log off?") { (action) -> Void in
-            do {
-                try FIRAuth.auth()?.signOut()
-            } catch let error {
-                print("there was an error signing this user out: \(error.localizedDescription)")
-            }
-            
-            // it seems that googles sdk remembers the users and logs in automatically with their oauth token
-            // revokes the current google login
-            GIDSignIn.sharedInstance().disconnect()
+            FirebaseService.sharedInstance().logout(completion: { (error) in
+                FirebaseService.destroy()
+                
+                // it seems that googles sdk remembers the users and logs in automatically with their oauth token
+                // revokes the current google login
+                GIDSignIn.sharedInstance().disconnect()
+            })
         }
-    }
-
-    // MARK: - helper methods
-    func giveWarning(title: String, message: String, yesAction: @escaping (UIAlertAction)->Void) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        alertVC.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: yesAction))
-        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alertVC, animated: true, completion: nil)
     }
     
     func showOptions(gesture: UILongPressGestureRecognizer) {

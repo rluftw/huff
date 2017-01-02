@@ -67,7 +67,6 @@ class HomeViewController: UIViewController {
             }
         }
         topRecordHandle = FirebaseService.sharedInstance().fetchGlobalHSDistance { (localSnapshot) in
-            
             self.handleTopRecords(localSnapshot: localSnapshot)
         }
     }

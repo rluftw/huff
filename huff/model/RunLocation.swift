@@ -35,11 +35,11 @@ class RunLocation: CustomStringConvertible {
     func toDict() -> [String: Any] {
         var dict = [String: Any]()
         
-        if let runPlaceName = self.placeName { dict[Key.PlaceName] = runPlaceName }
-        if let runAddress1 = self.address1 { dict[Key.Address1] = runAddress1 }
-        if let runCity = self.city { dict[Key.City] = runCity }
-        if let runState = self.state { dict[Key.State] = runState }
-        if let runZip = self.zip { dict[Key.Postal] = runZip }
+        if let runPlaceName = placeName { dict[Key.PlaceName] = runPlaceName }
+        if let runAddress1 = address1 { dict[Key.Address1] = runAddress1 }
+        if let runCity = city { dict[Key.City] = runCity }
+        if let runState = state { dict[Key.State] = runState }
+        if let runZip = zip { dict[Key.Postal] = runZip }
         
         return dict
     }

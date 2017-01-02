@@ -29,8 +29,17 @@ extension FirebaseService {
     }
 
     func deleteAccount(completion: @escaping (Error?)->Void) {
-        FirebaseService.enablePersistence(enabled: false)
         FirebaseService.getCurrentUser().delete { (error) in
+            completion(error)
+        }
+    }
+
+    func logout(completion: @escaping (Error?)->Void) {
+        do {
+            try FIRAuth.auth()?.signOut()
+            completion(nil)
+        } catch let error {
+            print("there was an error signing this user out: \(error.localizedDescription)")
             completion(error)
         }
     }

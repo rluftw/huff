@@ -51,8 +51,8 @@ class ActiveRun: CustomStringConvertible {
         
         self.organization = organization
         self.location = location
-        self.name = result[Key.Name] as? String
-        self.logoURL = result[Key.LogoURL] as? String
+        name = result[Key.Name] as? String
+        logoURL = result[Key.LogoURL] as? String
         
         // extract the dates
         let formatter = DateFormatter()
@@ -70,21 +70,21 @@ class ActiveRun: CustomStringConvertible {
             registrationDeadlineDate = formatter.date(from: rawRegistrationDeadline)
         }
         
-        self.assetID = result[Key.AssetUID] as! String
+        assetID = result[Key.AssetUID] as! String
         
         if let descriptionArray = result[Key.AssetDescriptionDict] as? [AnyObject] {
             for descriptionDict in descriptionArray {
                 let htmlDescription = descriptionDict[Key.AssetDescription] as? String
-                let description = self.htmlToAttributedString(htmlString: htmlDescription)?.string
+                let description = htmlToAttributedString(htmlString: htmlDescription)?.string
                 if let trimmedDescription = description?.trimmingCharacters(in: .whitespacesAndNewlines) {
-                    self.runDescription = trimmedDescription
+                    runDescription = trimmedDescription
                 }
             }
         } else {
-            self.runDescription = result[Key.AssetDescription] as? String
+            runDescription = result[Key.AssetDescription] as? String
         }
         
-        self.registrationURL = result["urlAdr"] as? String
+        registrationURL = result["urlAdr"] as? String
     }
 
     
@@ -103,8 +103,8 @@ class ActiveRun: CustomStringConvertible {
     func toDict() -> [String: Any] {
         var dict = [String: Any]()
         
-        let locationDict = self.location.toDict()
-        let organizationDict = self.organization.toDict()
+        let locationDict = location.toDict()
+        let organizationDict = organization.toDict()
         
         if let runName = name { dict[Key.Name] = runName }
         if let logoLink = logoURL { dict[Key.LogoURL] = logoLink }
@@ -132,11 +132,11 @@ extension ActiveRun: Equatable {
     }
     
     static func ==(lhs: ActiveRun, rhs: [String: Any]) -> Bool {
-        return self.compareRuns(lhs: lhs, rhs: rhs)
+        return compareRuns(lhs: lhs, rhs: rhs)
     }
     
     static func ==(lhs: [String: Any], rhs: ActiveRun) -> Bool {
-        return self.compareRuns(lhs: rhs, rhs: lhs)
+        return compareRuns(lhs: rhs, rhs: lhs)
     }
     
     static func compareRuns(lhs: ActiveRun, rhs: [String: Any]) -> Bool {

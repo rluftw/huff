@@ -47,12 +47,10 @@ class FirebaseService {
     
     class func destroy() {
         fbService = nil
-        print("service destroyed")
     }
 
     // MARK: - initialization
     init() {
-        FirebaseService.enablePersistence(enabled: true)
         databaseRef = FIRDatabase.database().reference()
         
         let components = Calendar.current.dateComponents([.weekOfYear, .year], from: Date())
@@ -75,16 +73,16 @@ class FirebaseService {
             })
     }
     
-    func fetchBestPace(completionHandler: @escaping (FIRDataSnapshot)->Void) {
-        userNodeDatabaseRef.child("personal_runs/best_pace")
-            .observeSingleEvent(of: .value, with: { (localSnapshot) in
+    func fetchBestPace(completionHandler: @escaping (FIRDataSnapshot)->Void) -> FIRDatabaseHandle{
+        return userNodeDatabaseRef.child("personal_runs/best_pace")
+            .observe(.value, with: { (localSnapshot) in
                 completionHandler(localSnapshot)
             })
     }
     
-    func fetchBestDistance(completionHandler: @escaping (FIRDataSnapshot)->Void) {
-        userNodeDatabaseRef.child("personal_runs/best_distance")
-            .observeSingleEvent(of: .value, with: { (localSnapshot) in
+    func fetchBestDistance(completionHandler: @escaping (FIRDataSnapshot)->Void) -> FIRDatabaseHandle{
+        return userNodeDatabaseRef.child("personal_runs/best_distance")
+            .observe(.value, with: { (localSnapshot) in
                 completionHandler(localSnapshot)
             })
     }
@@ -150,8 +148,8 @@ extension FirebaseService {
     // MARK: - utility methods
     
     func removeObserver(handler: UInt?) {
-//        guard let handler = handler else { return }
-        databaseRef.removeObserver(withHandle: handler!)
+        guard let handler = handler else { return }
+        databaseRef.removeObserver(withHandle: handler)
     }
     
     static func getCurrentUser() -> FIRUser {

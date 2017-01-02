@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     // MARK: - actions
     
     @IBAction func facebookLogin(_ sender: Any) {
-        self.userInteraction(halt: true)
+        userInteraction(halt: true)
         let loginManager = FBSDKLoginManager()
         loginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             guard error == nil, let accessToken = result?.token else {
@@ -60,12 +60,12 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     }
     
     @IBAction func googleLogin(_ sender: Any) {
-        self.userInteraction(halt: true)
+        userInteraction(halt: true)
         GIDSignIn.sharedInstance().signIn()
     }
 
     @IBAction func emailLogin(_ sender: Any) {
-        self.view.addSubview(loginOverlay)
+        view.addSubview(loginOverlay)
         
         loginOverlay.addAnchorsTo(topAnchor: self.view.topAnchor, rightAnchor: self.view.rightAnchor, bottomAnchor: self.view.bottomAnchor, leftAnchor: self.view.leftAnchor, topConstant: 0, rightConstant: 0, bottomConstant: 0, leftConstant: 0)
         
@@ -78,13 +78,13 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     }
     
     func login(email: String?, password: String?) {
-        self.userInteraction(halt: true)
+        userInteraction(halt: true)
         guard let email = email else {
-            self.giveWarning(title: "Login", message: "That's a funny looking email you have there")
+            giveWarning(title: "Login", message: "That's a funny looking email you have there")
             return
         }
         guard let password = password else {
-            self.giveWarning(title: "Login", message: "You're going to need a password")
+            giveWarning(title: "Login", message: "You're going to need a password")
             return
         }
         
@@ -109,15 +109,15 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
     
     func userInteraction(halt: Bool) {
         halt ? activityIndicator.startAnimating():  self.activityIndicator.stopAnimating()
-        self.view.isUserInteractionEnabled = !halt
+        view.isUserInteractionEnabled = !halt
     }
 }
 
 extension LoginViewController: GIDSignInUIDelegate, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         guard error == nil else {
-            self.giveWarning(title: "Login", message: "Uh-oh, looks like there was an error logging in with your Google account")
-            self.userInteraction(halt: false)
+            giveWarning(title: "Login", message: "Uh-oh, looks like there was an error logging in with your Google account")
+            userInteraction(halt: false)
             return
         }
         

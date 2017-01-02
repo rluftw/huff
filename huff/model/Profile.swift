@@ -21,12 +21,12 @@ class Profile {
     
     init(user: FIRUser, photo: UIImage?, status: String?, dateJoined: TimeInterval?) {
         self.photo = photo
-        self.displayName = user.displayName ?? user.email?.components(separatedBy: "@")[0] ?? user.uid
-        self.accountStatus = user.isEmailVerified
-        self.uid = user.uid
-        self.email = user.email
+        displayName = user.displayName ?? user.email?.components(separatedBy: "@")[0] ?? user.uid
+        accountStatus = user.isEmailVerified
+        uid = user.uid
+        email = user.email
      
         self.status = status
-        self.accountCreationDate = dateJoined
+        accountCreationDate = dateJoined
     }
 }

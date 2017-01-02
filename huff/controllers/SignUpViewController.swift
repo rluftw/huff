@@ -21,22 +21,22 @@ class SignUpViewController: UIViewController {
     var readyToContinue: Bool {
         // check if they all have values
         guard let email = self.email.text, let password = self.password.text, let confirmPassword = self.confirmPassword.text else {
-            self.giveWarning(title: "Sign Up", message: "It looks like one or more fields are empty")
+            giveWarning(title: "Sign Up", message: "It looks like one or more fields are empty")
             return false
         }
         // verify the email
         guard isValidEmail(testStr: email) else {
-            self.giveWarning(title: "Sign Up", message: "That's a funny looking email you have there")
+            giveWarning(title: "Sign Up", message: "That's a funny looking email you have there")
             return false
         }
         // verify that the password is at least 8 characters long
         guard password.characters.count >= 8 else {
-            self.giveWarning(title: "Sign Up", message: "Think of a better password, one that's 8 characters or longer")
+            giveWarning(title: "Sign Up", message: "Think of a better password, one that's 8 characters or longer")
             return false
         }
         // verify that the passwords match
         guard password == confirmPassword else {
-            self.giveWarning(title: "Sign Up", message: "Make sure your passwords match")
+            giveWarning(title: "Sign Up", message: "Make sure your passwords match")
             return false
         }
         return true
@@ -95,11 +95,11 @@ class SignUpViewController: UIViewController {
     
     func userInteraction(halt: Bool) {
         halt ? self.activityIndicator.startAnimating(): self.activityIndicator.stopAnimating()
-        self.textfieldContainerStack.isUserInteractionEnabled = !halt
+        textfieldContainerStack.isUserInteractionEnabled = !halt
     }
     
     func dismissKeyboard() {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
 
     

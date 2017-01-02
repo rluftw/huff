@@ -28,8 +28,13 @@ class TweetPhotosViewController: UIViewController {
     }
     
     // MARK: - lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard Reachability.isConnectedToNetwork() else {
+            operationQueue.cancelAllOperations()
+            presentAlert(title: "Please check your connection", message: "")
+            return
+        }
     }
 
     // MARK: - actions

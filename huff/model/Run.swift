@@ -35,18 +35,18 @@ class Run {
     }
     
     init(dict: [String: Any]) {
-        self.duration = dict[Key.Duration] as! Double
-        self.distance = dict[Key.Distance] as! Double
-        self.timestamp = dict[Key.Timestamp] as! TimeInterval
-        self.userUID = dict[Key.UID] as! String
+        duration = dict[Key.Duration] as! Double
+        distance = dict[Key.Distance] as! Double
+        timestamp = dict[Key.Timestamp] as! TimeInterval
+        userUID = dict[Key.UID] as! String
     }
     
     func toDict()->[String: Any] {
         return [
-            Key.Distance: self.distance,
-            Key.Duration: self.duration,
-            Key.Timestamp: self.timestamp,
-            Key.UID: self.userUID
+            Key.Distance: distance,
+            Key.Duration: duration,
+            Key.Timestamp: timestamp,
+            Key.UID: userUID
         ]
     }
 }

@@ -45,7 +45,7 @@ class TwitterService: Service {
         if !UserDefaults.standard.bool(forKey: StorageKeys.IsBearerStored) {
             print("No bearer token stored - attempting to request for one.")
             
-            self.getBearerToken { (resultDict, error) in
+            getBearerToken { (resultDict, error) in
                 guard let results = resultDict else {
                     return
                 }
@@ -60,7 +60,7 @@ class TwitterService: Service {
             }
         } else {
             bearerToken = MyKeychainWrapper.myObject(forKey: kSecValueData) as? String
-            self.performSearch(bearerToken: bearerToken, completionHandler: completionHandler)
+            performSearch(bearerToken: bearerToken, completionHandler: completionHandler)
         }
         
     }

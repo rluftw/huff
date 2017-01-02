@@ -56,7 +56,7 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
         // this request for location use
         locationManager.requestWhenInUseAuthorization()
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "pixel_background")!)
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "pixel_background")!)
         
         // fetch the best pace and distance values
         fetchPaceandDistance()
@@ -64,12 +64,12 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.stopUpdatingLocation()
+        stopUpdatingLocation()
     }
     
     // MARK: - actions
     @IBAction func stopRun(_ sender: Any) {
-        self.stopUpdatingLocation()
+        stopUpdatingLocation()
         
         endRunWithWarning(title: "Stop Run", message: "Are you sure you'd like to end this run?") {
             (action) in
@@ -79,12 +79,7 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func pauseRun(_ sender: Any) {
-        paused = !paused
-        if paused {
-            self.stopUpdatingLocation()
-        } else {
-            self.startUpdatingLocation()
-        }
+        paused ? stopUpdatingLocation(): startUpdatingLocation()
     
         pauseButton.setTitle(paused ? "RESUME": "PAUSE", for: .normal)
         pauseButton.backgroundColor = paused ? UIColor(red: 0, green: 153/255.0, blue: 0, alpha: 1.0): UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)
@@ -164,16 +159,18 @@ extension CurrentRunViewController {
     // MARK: - firebase connections
     func fetchPaceandDistance() {
         // fetch best pace - the pace node just stores a run
-        FirebaseService.sharedInstance().fetchBestPace { (localSnapshot) in
+        let bestPaceHandle = FirebaseService.sharedInstance().fetchBestPace { (localSnapshot) in
             guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else { return }
             self.runCollection.bestPace = Run(dict: bestPaceRunDict)
         }
-        
         // fetch best distance - stored as a distance
-        FirebaseService.sharedInstance().fetchBestDistance { (localSnapshot) in
+        let bestDistanceHandle = FirebaseService.sharedInstance().fetchBestDistance { (localSnapshot) in
             guard let bestDistance = localSnapshot.value as? Double else { return }
             self.runCollection.bestDistance = bestDistance
         }
+        
+        FirebaseService.sharedInstance().removeObserver(handler: bestPaceHandle)
+        FirebaseService.sharedInstance().removeObserver(handler: bestDistanceHandle)
     }
 }
 

@@ -20,7 +20,7 @@ class FiveKRunsViewController: UIViewController {
         }
     }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     lazy var noResultBackgroundView: NoResultsTableViewBackground = {
         var bgv = NoResultsTableViewBackground(frame: self.fiveKTable.bounds)
         bgv.title = "No Five 5ks Available"
@@ -34,6 +34,17 @@ class FiveKRunsViewController: UIViewController {
         lm.delegate = self
         return lm
     }()
+    
+    // MARK: - actions
+    @IBAction func refresh(_ sender: Any) {
+        guard Reachability.isConnectedToNetwork() else {
+            presentAlert(title: "Please check your connection", message: "")
+            self.handleSearch(stop: true)
+            return
+        }
+        activeRuns.removeAll(keepingCapacity: false)
+        handleSearch(stop: false)
+    }
         
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -44,34 +55,52 @@ class FiveKRunsViewController: UIViewController {
 
     // MARK: - helper methods
     func search(radius: Int, location: CLLocation) {
+        guard Reachability.isConnectedToNetwork() else {
+            presentAlert(title: "Please check your connection", message: "")
+            self.handleSearch(stop: true)
+            return
+        }
         ActiveService.sharedInstance().search(radius: radius, location: location, completionHandler: { (result, error) in
-            guard let results = result?["results"] as? [[String: AnyObject]] else {
-                print("there was a problem with the active service results")
-                return
-            }
-            for result in results {
-                // check registration status - only include runs that are still open for registration.
-                guard let registrationStatus = result["salesStatus"] as? String, registrationStatus == "registration-open" else {
-                    continue
+                guard let results = result?["results"] as? [[String: AnyObject]] else {
+                    print("there was a problem with the active service results")
+                    return
                 }
-                
-                // create the array of runs available
-                if let run = ActiveRun(result: result) {
-                    self.activeRuns.append(run)
-                    DispatchQueue.main.async {
-                        // use this instead of reload table to balance out ui update
-                        self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .automatic)
+                for result in results {
+                    // check registration status - only include runs that are still open for registration.
+                    guard let registrationStatus = result["salesStatus"] as? String, registrationStatus == "registration-open" else {
+                        continue
+                    }
+                    
+                    // create the array of runs available
+                    if let run = ActiveRun(result: result) {
+                        self.activeRuns.append(run)
+                        DispatchQueue.main.async {
+                            // use this instead of reload table to balance out ui update
+                            self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .automatic)
+                        }
                     }
                 }
-            }
-            DispatchQueue.main.async {
-                // display no results for background view
+                self.handleSearch(stop: true)
+            })
+    }
+    
+    
+    // MARK: - helper methods
+    fileprivate func handleSearch(stop: Bool) {
+        DispatchQueue.main.async {
+            // display no results for background view
+            if stop {
                 self.fiveKTable.backgroundView = self.activeRuns.count < 1 ? self.noResultBackgroundView: nil
-                
-                self.activityIndicator.stopAnimating()
-                self.fiveKTable.isUserInteractionEnabled = true
+            } else {
+                self.fiveKTable.backgroundView = nil
+                self.locationManager.delegate = self
+                self.locationManager.requestLocation()
             }
-        })
+            
+            self.refreshButton.isEnabled = stop
+            stop ? self.activityIndicator.stopAnimating(): self.activityIndicator.startAnimating()
+            self.fiveKTable.isUserInteractionEnabled = stop
+        }
     }
 }
 

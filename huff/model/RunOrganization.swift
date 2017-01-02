@@ -42,7 +42,7 @@ class RunOrganization: CustomStringConvertible {
         
         if let name = self.name { dict[Key.OrganizationName] = name }
         if let address1 = self.address1 { dict[Key.Address1] = address1 }
-        if let contact = self.primaryContact { dict[Key.ContactName] = contact }
+        if let contact = primaryContact { dict[Key.ContactName] = contact }
         if let city = self.city { dict[Key.City] = city }
         if let state = self.state { dict[Key.State] = state }
         if let phone = self.phone { dict[Key.Phone] = phone }
