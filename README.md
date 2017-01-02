@@ -5,6 +5,8 @@ huff is a simply a running app that focuses on getting a user to run in a commun
         1. Twitter Consumer Key and Secret
         2. Twitter Account to post a tweet with #huffrunapp 
         3. An Active.com search API Key 
+	4. A Google Firebase server with its plist file
+	5. The values from Facebook Login SDK for info.plist
 
 ![profile](screenshots/profile.PNG)
 ![home](screenshots/home.PNG)
