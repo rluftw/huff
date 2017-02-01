@@ -8,14 +8,10 @@
 
 import UIKit
 
-class CreditViewController: UIViewController {
+class CreditViewController: TextViewController {
 
     // MARK: - properties
     var creditDict = [String: Any]()
-    
-    // MARK: - outlets
-    @IBOutlet weak var creditTextView: UITextView!
-    
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -23,11 +19,11 @@ class CreditViewController: UIViewController {
 
         // hide the tool bar
         presentingViewController?.tabBarController?.tabBar.isHidden = true
-
+        
         loadCreditFromPlist()
         loadTextView()
     }
-
+    
     // MARK: - actions
     
     @IBAction func close(_ sender: Any) {
@@ -43,29 +39,34 @@ class CreditViewController: UIViewController {
     }
     
     func loadTextView() {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        var attributes = [
-            NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:24)!,
+        let attributes = [
+            NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:12)!,
             NSForegroundColorAttributeName: UIColor.white,
-            NSParagraphStyleAttributeName: paragraphStyle
         ]
-        let text = NSMutableAttributedString(string: "Credits", attributes: attributes)
-        attributes[NSParagraphStyleAttributeName] = nil
-        attributes[NSFontAttributeName] = UIFont(name: "RobotoMono-Bold", size:16)!
-        let iconSubtitle = "\n\nICONS\n-----"
-        text.append(NSAttributedString(string: iconSubtitle, attributes: attributes))
-        attributes[NSFontAttributeName] = UIFont(name: "RobotoMono-Bold", size:8)!
+        var text = NSMutableAttributedString(string: "THE FOLLOWING SETS FORTH ATTRIBUTION NOTICES FOR THIRD PARTY SOFTWARE/ASSETS THAT MAY BE CONTAINED IN PORTIONS OF THE HUFF PRODUCT\n\n", attributes: attributes)
+        
+        addIconAttributes(text: &text, attributes: attributes)
+        
+        textView.attributedText = text
+    }
+    
+    func addIconAttributes(text: inout NSMutableAttributedString, attributes: [String: Any])  {
+        text.append(NSAttributedString(string: "ICON ASSETS", attributes: attributes))
         for (key, value) in creditDict {
-            text.append(NSAttributedString(string: "\n- \(key) made by \(value) from www.flaticon.com", attributes: attributes))
+            let iconText = NSMutableAttributedString(string: "\n\(key) made by \(value) from www.flaticon.com", attributes: attributes)
+            text.append(iconText)
         }
-        let appIconSubtitle = "\n\nAPP ICON\n---------"
-        attributes[NSFontAttributeName] = UIFont(name: "RobotoMono-Bold", size:16)!
-        text.append(NSAttributedString(string: appIconSubtitle, attributes: attributes))
-        let appIconDescription = "\nThe app icon named Fitness App Logo is from a user named Ramotion on www.dribbble.com"
-        attributes[NSFontAttributeName] = UIFont(name: "RobotoMono-Bold", size:8)!
-        text.append(NSAttributedString(string: appIconDescription, attributes: attributes))
+    }
+}
 
-        creditTextView.attributedText = text
+extension NSMutableAttributedString {
+    
+    public func setAsLink(textToFind:String, linkURL:String) -> Bool {
+        let foundRange = self.mutableString.range(of: textToFind)
+        if foundRange.location != NSNotFound {
+            self.addAttribute(NSLinkAttributeName, value: linkURL, range: foundRange)
+            return true
+        }
+        return false
     }
 }

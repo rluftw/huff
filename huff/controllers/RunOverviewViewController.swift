@@ -71,7 +71,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
     // MARK: - actions
     @IBAction func done(_ sender: Any) {
         guard runCollection.currentRun.shouldSave else {
-            presentAlert(message: "Run will not be saved due - less than 5 meters ran")
+            presentAlert(message: "Run will not be saved - less than 5 meters ran")
             return
         }
         

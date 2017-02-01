@@ -70,6 +70,10 @@ class MyProfileViewController: UIViewController {
             }
         }
         fetchFavoritedRuns()
+        
+        // set back button for upcoming vc
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
     }
 
     
@@ -189,6 +193,9 @@ class MyProfileViewController: UIViewController {
             let cell = sender as? ActiveRunTableViewCell
             let detailVC = segue.destination as! ActiveRunDetailViewController
             detailVC.run = cell?.run
+        } else if segue.identifier == "ShowAttributions" {
+            let creditVC = segue.destination as! CreditViewController
+            creditVC.title = sender as? String
         }
     }
 }
@@ -197,13 +204,25 @@ extension MyProfileViewController {
     // MARK: - setting options
     
     @IBAction func settings(_ sender: Any) {
-        let alertVC = UIAlertController(title: "Settings", message: "Here are some options you can take", preferredStyle: .actionSheet)
-        alertVC.addAction(UIAlertAction(title: "3rd Party Attributions", style: .default, handler: { (action) in
-            self.performSegue(withIdentifier: "ShowAttributions", sender: self)
+        let alertVC = UIAlertController(title: "Settings", message: "", preferredStyle: .actionSheet)
+        
+        // add privacy policy option
+        alertVC.addAction(UIAlertAction(title: "Privacy Policy", style: .default, handler: { (action) in
+            let privacyPolicyVC = self.storyboard?.instantiateViewController(withIdentifier: "privacyPolicyVC") as! TextViewController
+            self.navigationController?.pushViewController(privacyPolicyVC, animated: true)
+        }))
+        
+        alertVC.addAction(UIAlertAction(title: "Terms of Service", style: .default, handler: { (action) in
+            let privacyPolicyVC = self.storyboard?.instantiateViewController(withIdentifier: "TOS") as! TextViewController
+            self.navigationController?.pushViewController(privacyPolicyVC, animated: true)
+        }))
+        
+        // add attribution option
+        alertVC.addAction(UIAlertAction(title: "Third Party Notices", style: .default, handler: { (action) in
+            self.performSegue(withIdentifier: "ShowAttributions", sender: "Third Party Notices")
         }))
         
         alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
         present(alertVC, animated: true, completion: nil)
     }
     

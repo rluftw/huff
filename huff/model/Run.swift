@@ -22,7 +22,7 @@ class Run {
     
     // MARK: - computed properties
     var shouldSave: Bool {
-        return distance != 0
+        return distance < 5
     }
     
     

@@ -79,8 +79,10 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func pauseRun(_ sender: Any) {
+        paused = !paused
+        
         paused ? stopUpdatingLocation(): startUpdatingLocation()
-    
+        
         pauseButton.setTitle(paused ? "RESUME": "PAUSE", for: .normal)
         pauseButton.backgroundColor = paused ? UIColor(red: 0, green: 153/255.0, blue: 0, alpha: 1.0): UIColor(red: 1, green: 193/255.0, blue: 0, alpha: 1.0)
     }

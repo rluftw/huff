@@ -15,13 +15,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>***REMOVED***</string>
+				<string>fb1238911346154410</string>
 			</array>
 		</dict>
 		<dict>
@@ -29,14 +29,14 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>***REMOVED***</string>
+				<string>com.googleusercontent.apps.193873805220-slbv5hdc4cc6vjbbhbi6mgje8qo46vad</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
-	<string>***REMOVED***</string>
+	<string>1238911346154410</string>
 	<key>FacebookDisplayName</key>
 	<string>huff</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -48,13 +48,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location used for tracking movement</string>
+	<string>Location used for tracking runs</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoMono-Bold.ttf</string>
@@ -63,7 +58,7 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>location</string>
+		<string>App registers for location updates for when the phone goes on standby or user wants to switch apps (multitask)</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -72,6 +67,7 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>gps</string>
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>

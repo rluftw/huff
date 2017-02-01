@@ -92,6 +92,7 @@ class FiveKRunsViewController: UIViewController {
             if stop {
                 self.fiveKTable.backgroundView = self.activeRuns.count < 1 ? self.noResultBackgroundView: nil
             } else {
+                self.fiveKTable.reloadData()
                 self.fiveKTable.backgroundView = nil
                 self.locationManager.delegate = self
                 self.locationManager.requestLocation()

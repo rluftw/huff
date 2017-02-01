@@ -90,7 +90,7 @@ extension TwitterService {
     fileprivate struct Constants {
         static let Scheme = "https"
         static let Host = "api.twitter.com"
-        static let SearchQuery = "#huffrunapp"
+        static let SearchQuery = "#huffapp"
     }
     
     fileprivate struct NetworkConstants {
@@ -115,8 +115,7 @@ extension TwitterService {
     }
     
     struct PrivateKeys {
-
-        static let ConsumerKey = "***REMOVED***"
-        static let ConsumerSecret = "***REMOVED***"
+        static let ConsumerKey = "OsF3Th6PARnq5wzF3AjfLtXxY"
+        static let ConsumerSecret = "JFyzhmOKWTWQmIJnd9SQRezzZF2vVQSx5KzK94NpBfFSIdaatU"
     }
 }
