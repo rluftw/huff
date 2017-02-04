@@ -55,33 +55,35 @@ class FiveKRunsViewController: UIViewController {
 
     // MARK: - helper methods
     func search(radius: Int, location: CLLocation) {
-        guard Reachability.isConnectedToNetwork() else {
-            presentAlert(title: "Please check your connection", message: "")
-            self.handleSearch(stop: true)
-            return
-        }
         ActiveService.sharedInstance().search(radius: radius, location: location, completionHandler: { (result, error) in
-                guard let results = result?["results"] as? [[String: AnyObject]] else {
-                    print("there was a problem with the active service results")
-                    return
-                }
-                for result in results {
-                    // check registration status - only include runs that are still open for registration.
-                    guard let registrationStatus = result["salesStatus"] as? String, registrationStatus == "registration-open" else {
-                        continue
-                    }
-                    
-                    // create the array of runs available
-                    if let run = ActiveRun(result: result) {
-                        self.activeRuns.append(run)
-                        DispatchQueue.main.async {
-                            // use this instead of reload table to balance out ui update
-                            self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .automatic)
-                        }
-                    }
-                }
+            guard error == nil else {
+                self.presentAlert(title: "Please check your connection", message: "")
                 self.handleSearch(stop: true)
-            })
+                return
+            }
+            
+            
+            guard let results = result?["results"] as? [[String: AnyObject]] else {
+                print("there was a problem with the active service results")
+                return
+            }
+            for result in results {
+                // check registration status - only include runs that are still open for registration.
+                guard let registrationStatus = result["salesStatus"] as? String, registrationStatus == "registration-open" else {
+                    continue
+                }
+                
+                // create the array of runs available
+                if let run = ActiveRun(result: result) {
+                    self.activeRuns.append(run)
+                    DispatchQueue.main.async {
+                        // use this instead of reload table to balance out ui update
+                        self.fiveKTable.insertRows(at: [IndexPath(item: self.activeRuns.count-1, section: 0)], with: .automatic)
+                    }
+                }
+            }
+            self.handleSearch(stop: true)
+        })
     }
     
     

@@ -27,16 +27,6 @@ class TweetPhotosViewController: UIViewController {
         }
     }
     
-    // MARK: - lifecycle
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard Reachability.isConnectedToNetwork() else {
-            operationQueue.cancelAllOperations()
-            presentAlert(title: "Please check your connection", message: "")
-            return
-        }
-    }
-
     // MARK: - actions
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -64,6 +54,8 @@ extension TweetPhotosViewController: UICollectionViewDelegate, UICollectionViewD
                 let request = URLRequest(url: URL(string: urlString + ":large")!)
                 _ = NetworkOperation.sharedInstance().request(request, completionHandler: { (data, error) in
                     guard error == nil, let data = data else {
+                        self.operationQueue.cancelAllOperations()
+                        self.presentAlert(title: "Please check your connection", message: "")
                         return
                     }
                     if let image = UIImage(data: data) {

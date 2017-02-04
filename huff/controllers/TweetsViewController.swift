@@ -51,13 +51,13 @@ class TweetsViewController: UIViewController {
     // MARK: - helper methods
     
     fileprivate func performSearch() {
-        guard Reachability.isConnectedToNetwork() else {
-            presentAlert(title: "Please check your connection", message: "")
-            handleStopSearch()
-            return
-        }
-        
         TwitterService.sharedInstance().search { (result, error) in
+            guard error == nil else {
+                self.presentAlert(title: "Please check your connection", message: "")
+                self.handleStopSearch()
+                return
+            }
+            
             guard let result = result else {
                 self.handleStopSearch()
                 return

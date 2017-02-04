@@ -46,7 +46,6 @@
 		37714A0D1DE883F0002ACB3A /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A0C1DE883F0002ACB3A /* TweetsViewController.swift */; };
 		37714A111DE89020002ACB3A /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37714A101DE89020002ACB3A /* Tweet.swift */; };
 		3775204A1DFB9C5300027D89 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377520491DFB9C5300027D89 /* FBSDKLoginKit.framework */; };
-		37762E441E3520120093087A /* Privacy Policy in Resources */ = {isa = PBXBuildFile; fileRef = 37762E431E3520120093087A /* Privacy Policy */; };
 		37762E461E358C320093087A /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37762E451E358C320093087A /* TextViewController.swift */; };
 		3782605E1DEDABDF003C5F13 /* UIViewAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */; };
 		37B249ED1DF279F80052E5BA /* RunOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B249EC1DF279F80052E5BA /* RunOrganization.swift */; };
@@ -136,7 +135,6 @@
 		37714A0C1DE883F0002ACB3A /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetsViewController.swift; path = controllers/TweetsViewController.swift; sourceTree = "<group>"; };
 		37714A101DE89020002ACB3A /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = model/Tweet.swift; sourceTree = "<group>"; };
 		377520491DFB9C5300027D89 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		37762E431E3520120093087A /* Privacy Policy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Privacy Policy"; path = "supporting files/Privacy Policy"; sourceTree = "<group>"; };
 		37762E451E358C320093087A /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextViewController.swift; path = controllers/TextViewController.swift; sourceTree = "<group>"; };
 		3782605D1DEDABDF003C5F13 /* UIViewAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewAnchor.swift; path = views/UIViewAnchor.swift; sourceTree = "<group>"; };
 		37B249EC1DF279F80052E5BA /* RunOrganization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunOrganization.swift; path = model/RunOrganization.swift; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 				371F5D071DF7B51C00680A48 /* GoogleService-Info.plist */,
 				37E1F8F31E18144500ED4F2D /* Keychain */,
 				370677961DEA7F1A007EC3FD /* huff-Bridging-Header.h */,
-				37762E431E3520120093087A /* Privacy Policy */,
 			);
 			name = "supporting files";
 			sourceTree = "<group>";
@@ -525,7 +522,6 @@
 				372BF9331E1370210014E657 /* Credits.plist in Resources */,
 				375686EF1DE4FC82004F2951 /* Main.storyboard in Resources */,
 				371F5D081DF7B51C00680A48 /* GoogleService-Info.plist in Resources */,
-				37762E441E3520120093087A /* Privacy Policy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
