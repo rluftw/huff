@@ -15,10 +15,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var quoteAuthor: UILabel!
     
-    @IBOutlet weak var topDistanceTable: UITableView!
+//    @IBOutlet weak var topDistanceTable: UITableView!
     
     // MARK: - properties
-    var topRecordHandle: FIRDatabaseHandle?
+    var topRecordHandle: DatabaseHandle?
     var topRecords = [TopRunRecord]()
     
     // MARK: - life cycle
@@ -71,14 +71,14 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func handleTopRecords(localSnapshot: FIRDataSnapshot) {
+    func handleTopRecords(localSnapshot: DataSnapshot) {
         guard let snapshot = localSnapshot.value as? [String: Any] else {
             print("invalid snapshot format")
             return
         }
         let record = TopRunRecord(dict: snapshot)
         self.topRecords.insertOrdered(record)
-        self.topDistanceTable.reloadData()
+//        self.topDistanceTable.reloadData()
     }
 }
 

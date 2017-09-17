@@ -30,7 +30,7 @@ class NetworkOperation {
     }
     
     // MARK: - helper methods
-    fileprivate func createTask(urlRequest: URLRequest, completionHandler: @escaping (Data?,Error?)->Void) -> URLSessionTask {
+    private func createTask(urlRequest: URLRequest, completionHandler: @escaping (Data?,Error?)->Void) -> URLSessionTask {
         let task = urlSession.dataTask(with: urlRequest) { (data, response, error) -> Void in
             // check if there are any errors in the results
             guard error == nil else {

@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-fileprivate let metersInMiles = 1609.344
+private let metersInMiles = 1609.344
 
 class Run {
     // MARK: - properties

@@ -88,7 +88,7 @@ class FiveKRunsViewController: UIViewController {
     
     
     // MARK: - helper methods
-    fileprivate func handleSearch(stop: Bool) {
+    private func handleSearch(stop: Bool) {
         DispatchQueue.main.async {
             // display no results for background view
             if stop {

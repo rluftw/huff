@@ -18,20 +18,20 @@ enum ActiveRunAction {
 }
 
 class FirebaseService {
-    var databaseRef: FIRDatabaseReference!
-    var addPersonalRunHandler: FIRDatabaseHandle?
-    var remoteConfig: FIRRemoteConfig!
+    var databaseRef: DatabaseReference!
+    var addPersonalRunHandler: DatabaseHandle?
+    var remoteConfig: RemoteConfig!
     
     let weekOfYear: Int!
     let year: Int!
-    lazy var userNodeDatabaseRef: FIRDatabaseReference! = {
-        let userNodeRef = FIRDatabase.database().reference().child("users/\(FirebaseService.getCurrentUser().uid)")
+    lazy var userNodeDatabaseRef: DatabaseReference! = {
+        let userNodeRef = Database.database().reference().child("users/\(FirebaseService.getCurrentUser().uid)")
         userNodeRef.keepSynced(true)
         return userNodeRef
     }()
     
-    lazy var globalNodeDatabaseRef: FIRDatabaseReference! = {
-        let globalNodeRef = FIRDatabase.database().reference().child("global_runs/week\(self.weekOfYear ?? 1)-\(self.year ?? 2017)")
+    lazy var globalNodeDatabaseRef: DatabaseReference! = {
+        let globalNodeRef = Database.database().reference().child("global_runs/week\(self.weekOfYear ?? 1)-\(self.year ?? 2017)")
         globalNodeRef.keepSynced(false)
         return globalNodeRef
     }()
@@ -51,21 +51,21 @@ class FirebaseService {
 
     // MARK: - initialization
     init() {
-        databaseRef = FIRDatabase.database().reference()
+        databaseRef = Database.database().reference()
         
         let components = Calendar.current.dateComponents([.weekOfYear, .year], from: Date())
         weekOfYear = components.weekOfYear!
         year = components.year!
         
         // set up remote configurations
-        let settings = FIRRemoteConfigSettings(developerModeEnabled: true)
-        remoteConfig = FIRRemoteConfig.remoteConfig()
+        let settings = RemoteConfigSettings(developerModeEnabled: true)
+        remoteConfig = RemoteConfig.remoteConfig()
         remoteConfig.configSettings = settings!
     }
     
     // MARK: - database operations
     
-    func fetchPersonalRuns(completionHandler: @escaping (FIRDataSnapshot)->Void) -> FIRDatabaseHandle {
+    func fetchPersonalRuns(completionHandler: @escaping (DataSnapshot)->Void) -> DatabaseHandle {
         return userNodeDatabaseRef!.child("personal_runs")
             .queryOrdered(byChild: "timestamp")
             .observe(.childAdded, with: { (localSnapshot) in
@@ -73,28 +73,28 @@ class FirebaseService {
             })
     }
     
-    func fetchBestPace(completionHandler: @escaping (FIRDataSnapshot)->Void) -> FIRDatabaseHandle{
+    func fetchBestPace(completionHandler: @escaping (DataSnapshot)->Void) -> DatabaseHandle{
         return userNodeDatabaseRef.child("personal_runs/best_pace")
             .observe(.value, with: { (localSnapshot) in
                 completionHandler(localSnapshot)
             })
     }
     
-    func fetchBestDistance(completionHandler: @escaping (FIRDataSnapshot)->Void) -> FIRDatabaseHandle{
+    func fetchBestDistance(completionHandler: @escaping (DataSnapshot)->Void) -> DatabaseHandle{
         return userNodeDatabaseRef.child("personal_runs/best_distance")
             .observe(.value, with: { (localSnapshot) in
                 completionHandler(localSnapshot)
             })
     }
     
-    func fetchAccountNode(completionhandler: @escaping (FIRDataSnapshot)->Void) {
+    func fetchAccountNode(completionhandler: @escaping (DataSnapshot)->Void) {
         userNodeDatabaseRef.observeSingleEvent(of: .value) { (localSnapshot) in
             completionhandler(localSnapshot)
         }
     }
     
     
-    func observeLikedRuns(eventType: FIRDataEventType, completionHandler: @escaping (FIRDataSnapshot)->Void) -> FIRDatabaseHandle {
+    func observeLikedRuns(eventType: DataEventType, completionHandler: @escaping (DataSnapshot)->Void) -> DatabaseHandle {
         return userNodeDatabaseRef.child("liked_runs").observe(eventType, with: { (localSnapshot) in
             completionHandler(localSnapshot)
         })
@@ -105,7 +105,7 @@ class FirebaseService {
         completionHandler?()
     }
     
-    func fetchGlobalHSDistance(completionHandler: @escaping (FIRDataSnapshot)->Void) -> FIRDatabaseHandle {
+    func fetchGlobalHSDistance(completionHandler: @escaping (DataSnapshot)->Void) -> DatabaseHandle {
         return globalNodeDatabaseRef
             .queryLimited(toFirst: 20)
             .observe(.childAdded, with: { (localSnapshot) in
@@ -132,12 +132,14 @@ class FirebaseService {
                     totalDistance += distance
                 }
             }
+                
+                let dataToSet: [String: Any] = [
+                "distance": totalDistance,
+                "username": Auth.auth().currentUser!.email?.components(separatedBy: "@")[0] ?? Auth.auth().currentUser!.displayName!
+            ]
             self.globalNodeDatabaseRef
                 .child("\(FirebaseService.getCurrentUser().uid)")
-                .setValue([
-                    "distance": totalDistance,
-                    "username": FIRAuth.auth()!.currentUser!.email?.components(separatedBy: "@")[0] ?? FIRAuth.auth()!.currentUser!.displayName!
-                    ], andPriority: totalDistance)
+                .setValue(dataToSet, andPriority: totalDistance)
         })
     }
     
@@ -152,11 +154,11 @@ extension FirebaseService {
         databaseRef.removeObserver(withHandle: handler)
     }
     
-    static func getCurrentUser() -> FIRUser {
-        return FIRAuth.auth()!.currentUser!
+    static func getCurrentUser() -> User {
+        return Auth.auth().currentUser!
     }
     
-    func fetchActiveRunLikeStatus(completionHandler: @escaping (FIRDataSnapshot)->Void) {
+    func fetchActiveRunLikeStatus(completionHandler: @escaping (DataSnapshot)->Void) {
         let assetsReference = userNodeDatabaseRef.child("liked_runs")
         
         assetsReference.observeSingleEvent(of: .value, with: { (localSnapshot) in
@@ -194,6 +196,6 @@ extension FirebaseService {
     }
     
     static func enablePersistence(enabled: Bool) {
-        FIRDatabase.database().persistenceEnabled = enabled
+        Database.database().isPersistenceEnabled = enabled
     }
 }

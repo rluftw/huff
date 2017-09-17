@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
- * Delegate method called when the database reference at an index has 
+ * Delegate method called when the database reference at an index has
  * finished loading its contents.
  * @param array The array containing the reference.
  * @param ref The reference that was loaded.
@@ -117,6 +117,12 @@ didFailLoadWithError:(NSError *)error;
  * empty array if no contents have loaded yet.
  */
 @property(nonatomic, copy, readonly) NSArray<FIRDataSnapshot *> *items;
+
+/**
+ * An immutable copy of the loaded indexes in the array. Returns an empty
+ * array if no indexes have loaded.
+ */
+@property(nonatomic, copy, readonly) NSArray<FIRDataSnapshot *> *indexes;
 
 /**
  * The delegate that this array should forward events to.

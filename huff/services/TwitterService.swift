@@ -18,7 +18,7 @@ class TwitterService: Service {
         return Singleton.service
     }
     
-    fileprivate func getBearerToken(completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
+    func getBearerToken(completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
         let requestTokenURL = getCompleteURL(parameters: [URLKeys.GrantType: "client_credentials"], scheme: Constants.Scheme, host: Constants.Host, method: MethodPath.ObtainToken)
         var urlRequest = URLRequest(url: requestTokenURL)
         urlRequest.httpMethod = "POST"
@@ -65,7 +65,7 @@ class TwitterService: Service {
         
     }
     
-    fileprivate func performSearch(bearerToken: String?, searchQuery: String = Constants.SearchQuery, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
+    private func performSearch(bearerToken: String?, searchQuery: String = Constants.SearchQuery, completionHandler: @escaping ([String: AnyObject]?,Error?)->Void) {
         
         let searchURL = getCompleteURL(parameters: [URLKeys.Query: Constants.SearchQuery], scheme: Constants.Scheme, host: Constants.Host, method: MethodPath.Search)
         var urlRequest = URLRequest(url: searchURL)
@@ -83,23 +83,23 @@ class TwitterService: Service {
 }
 
 extension TwitterService {
-    fileprivate struct StorageKeys {
+    struct StorageKeys {
         static let IsBearerStored = "isBearerStored"
     }
     
-    fileprivate struct Constants {
+    struct Constants {
         static let Scheme = "https"
         static let Host = "api.twitter.com"
         static let SearchQuery = "#huffapp"
     }
     
-    fileprivate struct NetworkConstants {
+    struct NetworkConstants {
         static let ContentType = "Content-Type"
         static let Authorization = "Authorization"
         static let GrantType = "grant_type"
     }
     
-    fileprivate struct URLKeys {
+    struct URLKeys {
         static let Query = "q"
         static let GrantType = "grant_type"
     }
@@ -109,7 +109,7 @@ extension TwitterService {
         static let TokenType = "token_type"
     }
     
-    fileprivate struct MethodPath {
+    struct MethodPath {
         static let ObtainToken = "/oauth2/token"
         static let Search = "/1.1/search/tweets.json"
     }

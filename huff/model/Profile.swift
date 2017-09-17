@@ -19,7 +19,7 @@ class Profile {
     var status: String?
     var favoriteActiveRuns = [ActiveRun]()
     
-    init(user: FIRUser, photo: UIImage?, status: String?, dateJoined: TimeInterval?) {
+    init(user: User, photo: UIImage?, status: String?, dateJoined: TimeInterval?) {
         self.photo = photo
         displayName = user.displayName ?? user.email?.components(separatedBy: "@")[0] ?? user.uid
         accountStatus = user.isEmailVerified

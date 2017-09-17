@@ -94,7 +94,7 @@ class SignUpViewController: UIViewController {
     }
     
     func userInteraction(halt: Bool) {
-        halt ? self.activityIndicator.startAnimating(): self.activityIndicator.stopAnimating()
+        halt ? activityIndicator.startAnimating(): activityIndicator.stopAnimating()
         textfieldContainerStack.isUserInteractionEnabled = !halt
     }
     

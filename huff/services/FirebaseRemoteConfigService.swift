@@ -13,7 +13,7 @@ extension FirebaseService {
     // MARK: - remote configuration
     
     func fetchQuotes(completionHandler: @escaping (String?, String?)->Void) {
-        remoteConfig.fetch(withExpirationDuration: 0) { (status: FIRRemoteConfigFetchStatus, error: Error?) in
+        remoteConfig.fetch(withExpirationDuration: 0) { (status: RemoteConfigFetchStatus, error: Error?) in
             if status == .success {
                 print("remote fetch successful")
                 

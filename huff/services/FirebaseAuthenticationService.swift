@@ -12,20 +12,20 @@ import Firebase
 extension FirebaseService {
     // MARK: - user authentication
     
-    func createAccount(email: String, password: String, completionHandler: @escaping (FIRUser?, Error?)->Void) {
-        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: completionHandler)
+    func createAccount(email: String, password: String, completionHandler: @escaping (User?, Error?)->Void) {
+        Auth.auth().createUser(withEmail: email, password: password, completion: completionHandler)
     }
     
     func setupUser(userDict: [String: Any]) {
         userNodeDatabaseRef.setValue(userDict)
     }
     
-    func signInWithSocialNetwork(credentials: FIRAuthCredential, completionHandler: @escaping (FIRUser?, Error?)->Void) {
-        FIRAuth.auth()?.signIn(with: credentials, completion: completionHandler)
+    func signInWithSocialNetwork(credentials: AuthCredential, completionHandler: @escaping (User?, Error?)->Void) {
+        Auth.auth().signIn(with: credentials, completion: completionHandler)
     }
     
-    func signInWithEmail(email: String, password: String, completionHandler: @escaping (FIRUser?, Error?)->Void) {
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: completionHandler)
+    func signInWithEmail(email: String, password: String, completionHandler: @escaping (User?, Error?)->Void) {
+        Auth.auth().signIn(withEmail: email, password: password, completion: completionHandler)
     }
 
     func deleteAccount(completion: @escaping (Error?)->Void) {
@@ -36,7 +36,7 @@ extension FirebaseService {
 
     func logout(completion: @escaping (Error?)->Void) {
         do {
-            try FIRAuth.auth()?.signOut()
+            try Auth.auth().signOut()
             completion(nil)
         } catch let error {
             print("there was an error signing this user out: \(error.localizedDescription)")

@@ -50,13 +50,13 @@ class ActiveService: Service {
 }
 
 extension ActiveService {
-    fileprivate struct Constants {
+    struct Constants {
         static let Scheme = "https"
         static let Host = "api.amp.active.com"
         static let Method = "/v2/search/"
     }
     
-    fileprivate struct ParameterKeys {
+    struct ParameterKeys {
         static let Location = "lat_lon"
         static let Radius = "radius"
         static let Query = "query"
@@ -69,7 +69,7 @@ extension ActiveService {
         static let Topic = "topic"
     }
     
-    fileprivate struct ParameterValues {
+    struct ParameterValues {
         static let APIKey = "g59tmf6wc6dfy28cz6mggcge"
     }
 }

@@ -16,7 +16,7 @@ class PastRunViewController: UIViewController {
 
     // MARK: - properties
     var runs = [Run]()
-    var personalRunHandle: FIRDatabaseHandle?
+    var personalRunHandle: DatabaseHandle?
     
     // MARK: - lifecycle
     override func viewDidLoad() {

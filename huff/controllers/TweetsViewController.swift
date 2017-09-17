@@ -50,7 +50,7 @@ class TweetsViewController: UIViewController {
 
     // MARK: - helper methods
     
-    fileprivate func performSearch() {
+    private func performSearch() {
         TwitterService.sharedInstance().search { (result, error) in
             guard error == nil else {
                 self.presentAlert(title: "Please check your connection", message: "")
@@ -72,7 +72,7 @@ class TweetsViewController: UIViewController {
         }
     }
     
-    fileprivate func handleStopSearch() {
+    private func handleStopSearch() {
         DispatchQueue.main.async {
             // display no results for background view
             self.tweetsTable.backgroundView = self.tweets.count < 1 ? self.noResultBackgroundView: nil

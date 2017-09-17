@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ahp-HS-GpJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ahp-HS-GpJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,7 +43,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="TxG-IG-2MM">
-                                <rect key="frame" x="63" y="32" width="250" height="142.5"/>
+                                <rect key="frame" x="63" y="130.5" width="250" height="142.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hLw-fD-b8l">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="125"/>
@@ -119,103 +119,20 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Top 20 Distance Runners" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="DM5-NO-jDb">
-                                <rect key="frame" x="24" y="198.5" width="327" height="44"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="DZ1-Xa-b2g"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="RobotoMono-Bold" family="Roboto Mono" pointSize="15"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="15" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-cA-uwd">
-                                <rect key="frame" x="24" y="242.5" width="327" height="230.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="ch8-xG-fID">
-                                    <rect key="frame" x="0.0" y="38" width="327" height="10"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.0" green="0.40000000000000002" blue="0.80000000000000004" alpha="0.5" colorSpace="calibratedRGB"/>
-                                </view>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="topListCell" rowHeight="10" id="YqI-mv-D4x" customClass="TopListCell" customModule="huff" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="327" height="10"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YqI-mv-D4x" id="XtX-ZB-Clh">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="10"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-Wl-UOi">
-                                                    <rect key="frame" x="8" y="0.0" width="311" height="10"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FoK-eT-G5s">
-                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="40" id="RSX-3a-0p8"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7S-cZ-fIl">
-                                                            <rect key="frame" x="40" y="0.0" width="138" height="10"/>
-                                                            <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R71-1b-hxk">
-                                                            <rect key="frame" x="178" y="0.0" width="133" height="10"/>
-                                                            <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </stackView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="7ve-Wl-UOi" firstAttribute="leading" secondItem="XtX-ZB-Clh" secondAttribute="leading" constant="8" id="GMG-jg-WCT"/>
-                                                <constraint firstAttribute="trailing" secondItem="7ve-Wl-UOi" secondAttribute="trailing" constant="8" id="Pke-hg-PLI"/>
-                                                <constraint firstAttribute="bottom" secondItem="7ve-Wl-UOi" secondAttribute="bottom" id="Teu-dL-aYW"/>
-                                                <constraint firstItem="7ve-Wl-UOi" firstAttribute="top" secondItem="XtX-ZB-Clh" secondAttribute="top" id="mEE-xl-JCU"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.40000000000000002" blue="0.80000000000000004" alpha="0.5" colorSpace="calibratedRGB"/>
-                                        <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="rankLabel" destination="FoK-eT-G5s" id="Bd9-co-4ri"/>
-                                            <outlet property="userLabel" destination="P7S-cZ-fIl" id="RNa-44-cDS"/>
-                                            <outlet property="valueLabel" destination="R71-1b-hxk" id="loq-3c-d4F"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="iY9-gZ-UIQ" id="IAJ-ob-r8J"/>
-                                    <outlet property="delegate" destination="iY9-gZ-UIQ" id="GvN-p9-L39"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.15686274510000001" green="0.16862745100000001" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JhI-pp-ziQ" firstAttribute="top" secondItem="XuC-Lb-5d0" secondAttribute="top" id="0KG-5d-9Xw"/>
                             <constraint firstAttribute="trailing" secondItem="ZGs-1b-KqH" secondAttribute="trailing" id="2e7-rm-7eJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="B0S-cA-uwd" secondAttribute="trailing" constant="8" id="67f-eQ-akb"/>
-                            <constraint firstItem="DM5-NO-jDb" firstAttribute="leading" secondItem="XuC-Lb-5d0" secondAttribute="leadingMargin" constant="8" id="CWo-B1-sEl"/>
                             <constraint firstItem="TxG-IG-2MM" firstAttribute="centerX" secondItem="XuC-Lb-5d0" secondAttribute="centerX" id="GM6-3M-mDD"/>
-                            <constraint firstItem="jcX-7t-fUn" firstAttribute="top" secondItem="B0S-cA-uwd" secondAttribute="bottom" constant="16" id="IVp-lf-x1H"/>
-                            <constraint firstItem="B0S-cA-uwd" firstAttribute="top" secondItem="DM5-NO-jDb" secondAttribute="bottom" id="Jgb-64-Wda"/>
                             <constraint firstItem="ZGs-1b-KqH" firstAttribute="leading" secondItem="XuC-Lb-5d0" secondAttribute="leading" id="O6b-V8-2m5"/>
                             <constraint firstItem="Y4k-j2-RdS" firstAttribute="top" secondItem="jcX-7t-fUn" secondAttribute="bottom" constant="8" id="Prv-wY-OhJ"/>
                             <constraint firstAttribute="bottom" secondItem="ZGs-1b-KqH" secondAttribute="bottom" id="YNf-6S-Kx0"/>
-                            <constraint firstItem="DM5-NO-jDb" firstAttribute="top" secondItem="TxG-IG-2MM" secondAttribute="bottom" constant="24" id="YXT-kl-UiE"/>
                             <constraint firstAttribute="trailing" secondItem="JhI-pp-ziQ" secondAttribute="trailing" id="ZaX-Yn-zbQ"/>
                             <constraint firstAttribute="trailing" secondItem="jcX-7t-fUn" secondAttribute="trailing" constant="16" id="brk-vD-XCn"/>
-                            <constraint firstItem="TxG-IG-2MM" firstAttribute="top" secondItem="Y6u-gj-PTI" secondAttribute="bottom" constant="32" id="jHl-hR-cwQ"/>
+                            <constraint firstItem="TxG-IG-2MM" firstAttribute="centerY" secondItem="XuC-Lb-5d0" secondAttribute="centerY" constant="-100" id="gJ8-fR-C8v"/>
                             <constraint firstItem="ZGs-1b-KqH" firstAttribute="top" secondItem="XuC-Lb-5d0" secondAttribute="top" id="kVh-hr-m2G"/>
                             <constraint firstItem="JhI-pp-ziQ" firstAttribute="leading" secondItem="XuC-Lb-5d0" secondAttribute="leading" id="lYN-tp-qbO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DM5-NO-jDb" secondAttribute="trailing" constant="8" id="sdm-vr-Rwe"/>
-                            <constraint firstItem="B0S-cA-uwd" firstAttribute="leading" secondItem="XuC-Lb-5d0" secondAttribute="leadingMargin" constant="8" id="tbB-Xf-pYP"/>
                             <constraint firstItem="jcX-7t-fUn" firstAttribute="leading" secondItem="XuC-Lb-5d0" secondAttribute="leading" constant="16" id="xYa-Mi-CYn"/>
                             <constraint firstItem="Y4k-j2-RdS" firstAttribute="top" secondItem="JhI-pp-ziQ" secondAttribute="bottom" id="zyf-oR-VaL"/>
                         </constraints>
@@ -224,7 +141,6 @@
                     <connections>
                         <outlet property="quoteAuthor" destination="srv-lW-K7F" id="WKq-G3-Wwm"/>
                         <outlet property="quoteLabel" destination="Vx5-Id-9Bt" id="89c-Bf-cuM"/>
-                        <outlet property="topDistanceTable" destination="B0S-cA-uwd" id="kLa-tn-vgf"/>
                         <segue destination="lut-jO-LnX" kind="presentation" identifier="beginRun" id="gFr-Lr-2ja"/>
                         <segue destination="tx2-Qu-VRc" kind="presentation" identifier="showPastRuns" id="FJd-pz-Qft"/>
                     </connections>
@@ -264,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrZ-1O-zJZ">
-                                <rect key="frame" x="65" y="300.5" width="245" height="67.5"/>
+                                <rect key="frame" x="65.5" y="300.5" width="245" height="67.5"/>
                                 <fontDescription key="fontDescription" name="RobotoMono-Bold" family="Roboto Mono" pointSize="51"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -353,7 +269,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0wj-h2-R9B">
-                                <rect key="frame" x="114.5" y="243" width="147.5" height="20"/>
+                                <rect key="frame" x="114" y="243" width="147.5" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fL7-gJ-XSc">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -810,26 +726,26 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZd-k7-93Q">
-                                                            <rect key="frame" x="8" y="37" width="343" height="42"/>
+                                                            <rect key="frame" x="8" y="37" width="343" height="63.5"/>
                                                             <string key="text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</string>
                                                             <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hFb-cD-S6S">
-                                                            <rect key="frame" x="8" y="131" width="343" height="14"/>
+                                                            <rect key="frame" x="8" y="129" width="343" height="16"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrw-5M-3fF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="16"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap for photos" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bm3-bM-OgV">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="171.5" height="14"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="171.5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="9"/>
                                                                             <color key="textColor" red="1" green="0.75686274509999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5XC-zD-sit">
-                                                                            <rect key="frame" x="171.5" y="0.0" width="171.5" height="14"/>
+                                                                            <rect key="frame" x="171.5" y="0.0" width="171.5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
@@ -1672,19 +1588,19 @@
                                 <color key="color" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qye-i5-HOL">
-                                <rect key="frame" x="95.5" y="555" width="186" height="34"/>
+                                <rect key="frame" x="70" y="553" width="236.5" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up, you agree to the " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekf-hw-XEh">
-                                        <rect key="frame" x="0.0" y="0.0" width="186" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="236.5" height="16"/>
                                         <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                         <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dKw-He-50f">
-                                        <rect key="frame" x="0.0" y="14" width="186" height="20"/>
+                                        <rect key="frame" x="0.0" y="16" width="236.5" height="20"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfl-84-fco">
-                                                <rect key="frame" x="0.0" y="0.0" width="76" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="101" height="20"/>
                                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Privacy Policy">
@@ -1695,13 +1611,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&amp;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEa-7f-8Ao">
-                                                <rect key="frame" x="82" y="0.0" width="8" height="20"/>
+                                                <rect key="frame" x="107" y="0.0" width="7.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                 <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRO-mO-WhL">
-                                                <rect key="frame" x="96" y="0.0" width="90" height="20"/>
+                                                <rect key="frame" x="120.5" y="0.0" width="116" height="20"/>
                                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Terms of Service">
@@ -2092,21 +2008,11 @@
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">PURPOSE
+This privacy policy governs your use of the software application huff (“Application”) for mobile devices that was created by Xing Hui Lu. The Application is a running community oriented software that utilizes the users GPS to trace a given run.
 </string>
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">This privacy policy governs your use of the software application huff (“Application”) for mobile devices that was created by Xing Hui Lu. The Application is a running community oriented software that utilizes the users GPS to trace a given run.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
@@ -2126,17 +2032,7 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">CONSENT
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">The Application may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile devices unique device ID, the IP address of your mobile device, your mobile operating system, and information about the way you use the Application.             
+The Application may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile devices unique device ID, the IP address of your mobile device, your mobile operating system, and information about the way you use the Application.             
 
 When you visit the mobile application, use of GPS technology (or other similar technology) may be triggered to determine your current location in order to determine the city you are located within and display a location map with relevant advertisements. huff will not share your current location with other users or partners.
 
@@ -2144,7 +2040,7 @@ If you do not want huff to use your location for the purposes set forth above, y
 </string>
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
@@ -2164,21 +2060,11 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">SECURITY
+Safeguarding the confidentiality of your information is a high priority for huff. huff places restrictions for other users to access personal data, but may use personal runs for the global high score chart.
 </string>
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">Safeguarding the confidentiality of your information is a high priority for huff. huff places restrictions for other users to access personal data, but may use personal runs for the global high score chart.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
@@ -2198,21 +2084,11 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">CONTACT
+If you have any questions regarding privacy while using the Application, or have questions about my practices, please contact me via email at huffapp@gmail.com.
 </string>
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">If you have any questions regarding privacy while using the Application, or have questions about my practices, please contact me via email at huffapp@gmail.com.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
@@ -2263,7 +2139,7 @@ This document governs your use of the software application huff (“Application�
 </string>
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
@@ -2275,7 +2151,7 @@ CQo
 </string>
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
                                                 <tabStops>
                                                     <textTab alignment="left" location="175.69999694824219">
@@ -2288,295 +2164,65 @@ CQo
                                     <fragment>
                                         <string key="content">1. Intellectual Property Rights
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">The Application and its original content, features, and functionality are owned by Xing Hui Lu and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws. You agree not to attempt to reverse engineer, translate, create derivative works from, or obtain source code for the Application in anyway unless given permission in writing by the Company. If you believe that your intellectual property rights have been infringed upon by us, please contact us at huffapp@gmail.com.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+The Application and its original content, features, and functionality are owned by Xing Hui Lu and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws. You agree not to attempt to reverse engineer, translate, create derivative works from, or obtain source code for the Application in anyway unless given permission in writing by the Company. If you believe that your intellectual property rights have been infringed upon by us, please contact us at huffapp@gmail.com.
+
 2. Data and Privacy
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">Our Privacy Policy covers the terms of our data collection and retention and your privacy. The Privacy Policy is accessible inside the Application.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+Our Privacy Policy covers the terms of our data collection and retention and your privacy. The Privacy Policy is accessible inside the Application.
+
 3. Termination
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">I may terminate your access to the application, without cause or notice, which may result in the forfeiture and destruction of your backed up data and license information. If your access is terminated while you own an active license, you will not be refunded, but future scheduled payments will be canceled. All provisions of this Agreement that, by their nature, should survive termination shall survive termination.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+I may terminate your access to the application, without cause or notice, which may result in the forfeiture and destruction of your backed up data and license information. If your access is terminated while you own an active license, you will not be refunded, but future scheduled payments will be canceled. All provisions of this Agreement that, by their nature, should survive termination shall survive termination.
+
 6. Use of Internet and Cellular Network
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">a. huff directly communicates with a third party server for the purpose of validating free trials and licenses and for data backup. In addition, the Application uses services which may require use of internet to function, including, but not limited to speech software, Google Wallet In-App Billing, and analytics software. You understand and accept that the Application may use your cellular network's data if Wi-Fi is not available and that this may incur fees from your cellular network provider. huff not responsible for the incursion or payment of these fees.
+a. huff directly communicates with a third party server for the purpose of validating free trials and licenses and for data backup. In addition, the Application uses services which may require use of internet to function, including, but not limited to speech software, Google Wallet In-App Billing, and analytics software. You understand and accept that the Application may use your cellular network's data if Wi-Fi is not available and that this may incur fees from your cellular network provider. huff not responsible for the incursion or payment of these fees.
 
 b. huff receives and sends text messages (SMS). Standard cellular network messaging rates may apply to these messages. huff is not responsible for any and all messages received or sent by your mobile device nor is huff responsible for the incursion or payment of the associated fees. In addition, you understand and accept that you are solely responsible for any and all text messages (SMS) sent from your mobile device.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+
 7. Correctness of Product
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">huff is an ongoing product and is susceptible to bugs and other imperfections. The Company makes no promises that it will fix or attempt to fix any bugs or other imperfections. You may send bug and crash reports to huffapp@gmail.com.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+huff is an ongoing product and is susceptible to bugs and other imperfections. The Company makes no promises that it will fix or attempt to fix any bugs or other imperfections. You may send bug and crash reports to huffapp@gmail.com.
+
 8. Indemnity
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">You agree to hold harmless the Company, its affiliates, and their respective officers and employees from any and all legal proceedings and any and all losses, liabilities, damages, and expenses incurred from your use of the Application, including downloading, installing, uninstalling, and using the application, or your violation of this Agreement.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+You agree to hold harmless the Company, its affiliates, and their respective officers and employees from any and all legal proceedings and any and all losses, liabilities, damages, and expenses incurred from your use of the Application, including downloading, installing, uninstalling, and using the application, or your violation of this Agreement.
+
 9. DISCLAIMER OF WARRANTIES
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">I HAVE PROVIDED THIS APPLICATION AS IS WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES. THE COMPANY DOES NOT MAKE ANY PROMISES ABOUT THE APPLICATION, INCLUDING, BUT NOT LIMITED TO, ITS CONTENT, FUNCTIONS, RELIABILITY, OR ABILITY TO MEET YOUR NEEDS.
+I HAVE PROVIDED THIS APPLICATION AS IS WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES. THE COMPANY DOES NOT MAKE ANY PROMISES ABOUT THE APPLICATION, INCLUDING, BUT NOT LIMITED TO, ITS CONTENT, FUNCTIONS, RELIABILITY, OR ABILITY TO MEET YOUR NEEDS.
 
 YOU UNDERSTAND AND AGREE THAT YOUR USE OF THE APPLICATION IS AT YOUR SOLE DISCRETION AND RISK.
 
 THIS APPLICATION IS NOT INTENDED FOR USE IN EMERGENCY SITUATIONS. EXERCISE EXTREME CAUTION WHEN USING THE APPLICATION WHILE OPERATING ANY VEHICLE OR MACHINERY. ANY ON-SCREEN CONTENT PROVIDED BY THE APPLICATION IS NOT INTENDED FOR USE WHILE OPERATING ANY OF THE ABOVE.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+
 10. LIMITATION OF LIABILITY
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">YOU UNDERSTAND AND AGREE THAT THE COMPANY AND ITS AFFILIATES ARE NOT LIABLE FOR ANY DIRECT OR INDIRECT DAMAGE, LIABILITY, INJURY, OR DEATH THAT MAY OCCUR DURING OR BECAUSE OF YOUR USE OF THE APPLICATION, INCLUDING LOSS OF DATA OR DAMAGE TO YOUR MOBILE DEVICE, WHETHER OR NOT THE COMPANY HAS BEEN MADE AWARE OF OR SHOULD HAVE BEEN AWARE OF THE POSSIBILITY OF SUCH OCCURRING.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+YOU UNDERSTAND AND AGREE THAT THE COMPANY AND ITS AFFILIATES ARE NOT LIABLE FOR ANY DIRECT OR INDIRECT DAMAGE, LIABILITY, INJURY, OR DEATH THAT MAY OCCUR DURING OR BECAUSE OF YOUR USE OF THE APPLICATION, INCLUDING LOSS OF DATA OR DAMAGE TO YOUR MOBILE DEVICE, WHETHER OR NOT THE COMPANY HAS BEEN MADE AWARE OF OR SHOULD HAVE BEEN AWARE OF THE POSSIBILITY OF SUCH OCCURRING.
+
 11. Choice of Forum
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">This Agreement shall be governed in all respects by the laws of the state of Colorado and any dispute not settled by private negotiation or by mediation shall be finally resolved by a court located in Kings County, New York.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+This Agreement shall be governed in all respects by the laws of the state of Colorado and any dispute not settled by private negotiation or by mediation shall be finally resolved by a court located in Kings County, New York.
+
 12. Notification of Changes
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">Xing Hui reserves the right to change these terms from time to time as it sees fit and your continued use of the Application will constitute your acceptance of any adjustment to these terms. If there are changes to either these terms or the Privacy Policy you will receive an in-app message notifying you of such changes. Changes to either document will be posted online at least 14 days before taking effect and your in-app message will arrive the first time you open the Application's settings following the changes. You are therefore advised to re-read this statement on a regular basis.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+Xing Hui reserves the right to change these terms from time to time as it sees fit and your continued use of the Application will constitute your acceptance of any adjustment to these terms. If there are changes to either these terms or the Privacy Policy you will receive an in-app message notifying you of such changes. Changes to either document will be posted online at least 14 days before taking effect and your in-app message will arrive the first time you open the Application's settings following the changes. You are therefore advised to re-read this statement on a regular basis.
+
 13. Miscellaneous
 
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">a. These Terms of Use constitute the entire Agreement between you and Xing Hui relating to and governing your use of huff, and completely replace any prior agreements between you and the Company relating to the Application.
+a. These Terms of Use constitute the entire Agreement between you and Xing Hui relating to and governing your use of huff, and completely replace any prior agreements between you and the Company relating to the Application.
 
 b. The failure of the Company to exercise or enforce any right or provision of this Agreement does not constitute a waiver of such. All rights and provisions will still be available to the Company at any time.
 
 c. If any court of law, having the jurisdiction to do so, rules that any part of these Terms of Use is invalid, it will be removed from the Terms of Use without affecting the rest of the Agreement. The remaining parts will continue to be valid and enforceable.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
+
 14. Date Effective
 
+This document is effective as of 1 January, 2017.
 </string>
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">This document is effective as of 1 January, 2017.
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="RobotoMono-Regular"/>
+                                            <font key="NSFont" metaFont="cellTitle"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="28" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>

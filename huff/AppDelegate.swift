@@ -17,8 +17,8 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var authHandle: FIRAuthStateDidChangeListenerHandle!
-    var user: FIRUser?
+    var authHandle: AuthStateDidChangeListenerHandle!
+    var user: User?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         
         // configure firebase
-        FIRApp.configure()
+        FirebaseApp.configure()
         
         FirebaseService.enablePersistence(enabled: true)
         
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         // configure google login
-        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
         return true
     }
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
-        FIRAuth.auth()?.removeStateDidChangeListener(authHandle)
+        Auth.auth().removeStateDidChangeListener(authHandle)
     }
 }
 
@@ -84,7 +84,7 @@ extension AppDelegate {
     // MARK: - firebase account state listener
     
     func configureAuth() {
-        self.authHandle = FIRAuth.auth()?.addStateDidChangeListener({ (auth: FIRAuth, user: FIRUser?) in
+        self.authHandle = Auth.auth().addStateDidChangeListener({ (auth: Auth, user: User?) in
             // check if there's a user
             if let activeUser = user {
                 if self.user != activeUser {

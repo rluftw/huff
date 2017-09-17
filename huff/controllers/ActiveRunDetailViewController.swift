@@ -104,7 +104,7 @@ class ActiveRunDetailViewController: UIViewController {
     }
     
     // updates firebase db when user wants to either like or unlike a run
-    fileprivate func toggleLike() {
+    private func toggleLike() {
         FirebaseService.sharedInstance().fetchActiveRunLikeStatus { (localSnapshot) in
             // true if snapshot contains the child
             let hasChild = localSnapshot.hasChild(self.run.assetID)

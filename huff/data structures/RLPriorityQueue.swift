@@ -9,7 +9,7 @@
 import Foundation
 
 struct RLPriorityQueue<T: Comparable>: CustomStringConvertible {
-    fileprivate var heap = [T]()
+    private var heap = [T]()
     
     var description: String {
         return "\(heap)"
@@ -43,20 +43,20 @@ struct RLPriorityQueue<T: Comparable>: CustomStringConvertible {
     
     // MARK: - helper methods
     
-    fileprivate mutating func swim(k: Int) {
+    private mutating func swim(k: Int) {
         guard k > 0 && less(parent: (k-1)/2, child: k) else { return }
         swap(&heap[(k-1)/2], &heap[k])
         swim(k: (k-1)/2)
     }
     
-    fileprivate mutating func sink(k: Int) {
+    private mutating func sink(k: Int) {
         guard 2*k+1 < size && less(parent: k, child: 2*k+1) else { return }
         swap(&heap[2*k+1], &heap[k])
         sink(k: 2*k+1)
     }
     
     // if the parent is less than the child - true
-    fileprivate func less(parent: Int, child: Int) -> Bool {
+    private func less(parent: Int, child: Int) -> Bool {
         return heap[parent] < heap[child]
     }
 }

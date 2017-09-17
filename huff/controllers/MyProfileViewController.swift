@@ -14,10 +14,10 @@ import Firebase
 class MyProfileViewController: UIViewController {
     
     var profile: Profile?
-    var runAddHandle: FIRDatabaseHandle?
-    var runRemoveHandle: FIRDatabaseHandle?
-    var bestPaceHandle: FIRDatabaseHandle?
-    var bestDistanceHandle: FIRDatabaseHandle?
+    var runAddHandle: DatabaseHandle?
+    var runRemoveHandle: DatabaseHandle?
+    var bestPaceHandle: DatabaseHandle?
+    var bestDistanceHandle: DatabaseHandle?
 
     // MARK: - outlets
     @IBOutlet weak var profileInfoHeader: ProfileHeaderView!
@@ -48,7 +48,7 @@ class MyProfileViewController: UIViewController {
         profile = Profile(user: firebaseUser, photo: nil, status: nil, dateJoined: nil)
         
         fetchProfileData {
-             self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL) { ()->Void in
+             self.fetchProfilePhoto(profilePhotoUrl: firebaseUser.photoURL) {
                 self.bestPaceHandle = FirebaseService.sharedInstance().fetchBestPace() { (localSnapshot)->Void in
                     guard let bestPaceRunDict = localSnapshot.value as? [String: Any] else {
                         print("Best pace not available")
@@ -180,7 +180,7 @@ class MyProfileViewController: UIViewController {
         }
     }
     
-    fileprivate func updateProfile() {
+    private func updateProfile() {
         DispatchQueue.main.async(execute: {
             // step 3: assign the profile header view a new profile object
             self.profileInfoHeader.profile = self.profile

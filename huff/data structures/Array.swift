@@ -13,7 +13,7 @@ import Foundation
 // This method allows the use of O(logn) insertion while maintaining a sorted array
 // The underlying logic is a binary search
 extension Array where Element:Comparable {
-    fileprivate func findIndexToInsert(item: Element, lo: Int, hi: Int) -> Int {
+    private func findIndexToInsert(item: Element, lo: Int, hi: Int) -> Int {
         let mid = (hi+lo)/2
         // low must be less to hi
         guard lo <= hi else {

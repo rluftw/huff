@@ -58,9 +58,16 @@ didFailLoadAtIndex:(NSUInteger)index
 @interface FUIIndexTableViewDataSource : NSObject <UITableViewDataSource>
 
 /**
- * The delegate that will receive events from this data source.
+ * The delegate that should receive updates from this data source. Implement this delegate
+ * to handle load errors and successes.
  */
 @property (nonatomic, readwrite, weak, nullable) id<FUIIndexTableViewDataSourceDelegate> delegate;
+
+/**
+ * The indexes that have finished loading in the data source. Returns an empty array if no indexes
+ * have loaded.
+ */
+@property (nonatomic, readonly, copy) NSArray<FIRDataSnapshot *> *indexes;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -84,6 +91,14 @@ didFailLoadAtIndex:(NSUInteger)index
                                                     NSIndexPath *indexPath,
                                                     FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Returns the snapshot at the given index, if it has loaded.
+ * Raises a fatal error if the index is out of bounds.
+ * @param index The index of the requested snapshot.
+ * @return A snapshot, or nil if one has not yet been loaded.
+ */
+- (nullable FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
+
 @end
 
 @interface UITableView (FUIIndexTableViewDataSource)
@@ -92,7 +107,7 @@ didFailLoadAtIndex:(NSUInteger)index
  * Creates a data source, attaches it to the table view, and returns it.
  * The returned data source is not retained by the table view and must be
  * retained or it will be deallocated while still in use by the table view.
- * @param query A Firebase database query to bind the table view to.
+ * @param index A Firebase database query to bind the table view to.
  * @param data  The reference whose children correspond to the contents of the
  *   index query. This reference's children's contents are served as the contents
  *   of the table view.
@@ -104,11 +119,11 @@ didFailLoadAtIndex:(NSUInteger)index
  *   view is in use.
  */
 - (FUIIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
-                                                    data:(FIRDatabaseReference *)data
-                                                delegate:(id<FUIIndexTableViewDataSourceDelegate>)delegate
-                                            populateCell:(UITableViewCell *(^)(UITableView *view,
-                                                                               NSIndexPath *indexPath,
-                                                                               FIRDataSnapshot *_Nullable snap))populateCell;
+                                               data:(FIRDatabaseReference *)data
+                                           delegate:(id<FUIIndexTableViewDataSourceDelegate>)delegate
+                                       populateCell:(UITableViewCell *(^)(UITableView *view,
+                                                                          NSIndexPath *indexPath,
+                                                                          FIRDataSnapshot *_Nullable snap))populateCell __attribute__((warn_unused_result));
 
 @end
 

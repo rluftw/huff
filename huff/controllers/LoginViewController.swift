@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, LoginOverlayViewDelegate {
             }
  
             // use the token to log in with firebase
-            let facebookCredentials = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            let facebookCredentials = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
             FirebaseService.sharedInstance().signInWithSocialNetwork(credentials: facebookCredentials, completionHandler: { (user, error) in
                 guard error == nil else {
                     self.giveWarning(title: "Facebook Login", message: "Snaps! looks like there was an error logging in with your Facebook account")
@@ -125,7 +125,7 @@ extension LoginViewController: GIDSignInUIDelegate, GIDSignInDelegate {
         let idToken = authentication?.idToken ?? ""
         let accessToken = authentication?.accessToken ?? ""
         
-        let googleCredentials = FIRGoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+        let googleCredentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
         FirebaseService.sharedInstance().signInWithSocialNetwork(credentials: googleCredentials) { (user, error) in
             guard error == nil else {
                 self.giveWarning(title: "Login", message: "Snaps! looks like there was an error logging in with your Google account")

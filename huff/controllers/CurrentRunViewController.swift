@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-fileprivate let metersInMiles = 1609.344
+private let metersInMiles = 1609.344
 
 class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - outlets
