@@ -52,6 +52,7 @@
 		37B371BB1DF3D38200EB719F /* ActiveRunDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B371BA1DF3D38200EB719F /* ActiveRunDetailViewController.swift */; };
 		37C323AF1DF31841002A93B6 /* RunLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C323AE1DF31841002A93B6 /* RunLocation.swift */; };
 		37C323B11DF33007002A93B6 /* ActiveRunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */; };
+		37C3CAF41F6F0258005098B0 /* RankingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3CAF31F6F0258005098B0 /* RankingsViewController.swift */; };
 		37CEB4261DF65BCA00CF4446 /* RobotoMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37CEB4251DF65BBB00CF4446 /* RobotoMono-Bold.ttf */; };
 		37CEB4281DF6604200CF4446 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB4271DF6604200CF4446 /* ProfileHeaderView.swift */; };
 		37CEB42C1DF6670A00CF4446 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */; };
@@ -141,6 +142,7 @@
 		37B371BA1DF3D38200EB719F /* ActiveRunDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActiveRunDetailViewController.swift; path = controllers/ActiveRunDetailViewController.swift; sourceTree = "<group>"; };
 		37C323AE1DF31841002A93B6 /* RunLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunLocation.swift; path = model/RunLocation.swift; sourceTree = "<group>"; };
 		37C323B01DF33007002A93B6 /* ActiveRunTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActiveRunTableViewCell.swift; path = views/ActiveRunTableViewCell.swift; sourceTree = "<group>"; };
+		37C3CAF31F6F0258005098B0 /* RankingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankingsViewController.swift; path = controllers/RankingsViewController.swift; sourceTree = "<group>"; };
 		37CEB4251DF65BBB00CF4446 /* RobotoMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoMono-Bold.ttf"; path = "other/RobotoMono-Bold.ttf"; sourceTree = "<group>"; };
 		37CEB4271DF6604200CF4446 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileHeaderView.swift; path = views/ProfileHeaderView.swift; sourceTree = "<group>"; };
 		37CEB42B1DF6670A00CF4446 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyProfileViewController.swift; path = controllers/MyProfileViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				372BF9361E149F3C0014E657 /* CreditViewController.swift */,
 				37E1F8F11E1813E400ED4F2D /* UIViewController.swift */,
 				37762E451E358C320093087A /* TextViewController.swift */,
+				37C3CAF31F6F0258005098B0 /* RankingsViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				37F20F131E0CCF98003CB556 /* RunCollection.swift in Sources */,
 				372BF9351E1481490014E657 /* Array.swift in Sources */,
 				37B249ED1DF279F80052E5BA /* RunOrganization.swift in Sources */,
+				37C3CAF41F6F0258005098B0 /* RankingsViewController.swift in Sources */,
 				37D881211E11DC110087334E /* FirebaseAuthenticationService.swift in Sources */,
 				3782605E1DEDABDF003C5F13 /* UIViewAnchor.swift in Sources */,
 				375687271DE5059E004F2951 /* Run.swift in Sources */,
