@@ -119,7 +119,7 @@ class CurrentRunViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // MARK: - selectors
-    func eachSecond() {
+    @objc func eachSecond() {
         run.duration += 1
         let durationValues = run.determineDuration()
         timerLabel.text = "\(durationValues.hour):\(durationValues.min):\(durationValues.sec)"

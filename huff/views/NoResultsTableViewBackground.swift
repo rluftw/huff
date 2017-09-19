@@ -11,9 +11,9 @@ import UIKit
 class NoResultsTableViewBackground: UIView {
     var title: String! {
         didSet {
-            let attributes: [String: Any] = [
-                NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:17)!,
-                NSForegroundColorAttributeName: UIColor.white
+            let attributes: [NSAttributedStringKey: Any] = [
+                NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): UIFont(name: "RobotoMono-Bold", size:17)!,
+                NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor.white
             ]
             titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
         }

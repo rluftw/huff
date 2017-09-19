@@ -103,12 +103,12 @@ class LoginOverlayView: UIView {
         tfStackView.addAnchorsTo(topAnchor: nil, rightAnchor: containerView.rightAnchor, bottomAnchor: loginButton.topAnchor, leftAnchor: containerView.leftAnchor, topConstant: 0, rightConstant: -16, bottomConstant: -16, leftConstant: 16)
     }
     
-    func cancelLogin() {
+    @objc func cancelLogin() {
         delegate?.showNavigationBar()
         self.removeFromSuperview()
     }
     
-    func login() {
+    @objc func login() {
         print("Attempting to log in")
         delegate?.login(email: emailTF.text, password: passwordTF.text)
     }

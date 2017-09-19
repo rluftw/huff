@@ -40,8 +40,8 @@ class CreditViewController: TextViewController {
     
     func loadTextView() {
         let attributes = [
-            NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:12)!,
-            NSForegroundColorAttributeName: UIColor.white,
+            NSAttributedStringKey.font: UIFont(name: "RobotoMono-Bold", size:12)!,
+            NSAttributedStringKey.foregroundColor: UIColor.white,
         ]
         var text = NSMutableAttributedString(string: "THE FOLLOWING SETS FORTH ATTRIBUTION NOTICES FOR THIRD PARTY SOFTWARE/ASSETS THAT MAY BE CONTAINED IN PORTIONS OF THE HUFF PRODUCT\n\n", attributes: attributes)
         
@@ -50,7 +50,7 @@ class CreditViewController: TextViewController {
         textView.attributedText = text
     }
     
-    func addIconAttributes(text: inout NSMutableAttributedString, attributes: [String: Any])  {
+    func addIconAttributes(text: inout NSMutableAttributedString, attributes: [NSAttributedStringKey: Any])  {
         text.append(NSAttributedString(string: "ICON ASSETS", attributes: attributes))
         for (key, value) in creditDict {
             let iconText = NSMutableAttributedString(string: "\n\(key) made by \(value) from www.flaticon.com", attributes: attributes)
@@ -64,7 +64,7 @@ extension NSMutableAttributedString {
     public func setAsLink(textToFind:String, linkURL:String) -> Bool {
         let foundRange = self.mutableString.range(of: textToFind)
         if foundRange.location != NSNotFound {
-            self.addAttribute(NSLinkAttributeName, value: linkURL, range: foundRange)
+            self.addAttribute(NSAttributedStringKey.link, value: linkURL, range: foundRange)
             return true
         }
         return false

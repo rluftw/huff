@@ -30,7 +30,7 @@ struct RLPriorityQueue<T: Comparable>: CustomStringConvertible {
         if heap.count == 1 { return heap.removeFirst() }
         if heap.count == 0 { return nil }
         
-        swap(&heap[0], &heap[size-1])
+        heap.swapAt(0, size-1)
         let maxPriorityElement = heap.removeLast()
         sink(k: 0)
         return maxPriorityElement
@@ -45,13 +45,13 @@ struct RLPriorityQueue<T: Comparable>: CustomStringConvertible {
     
     private mutating func swim(k: Int) {
         guard k > 0 && less(parent: (k-1)/2, child: k) else { return }
-        swap(&heap[(k-1)/2], &heap[k])
+        heap.swapAt((k-1)/2, k)
         swim(k: (k-1)/2)
     }
     
     private mutating func sink(k: Int) {
         guard 2*k+1 < size && less(parent: k, child: 2*k+1) else { return }
-        swap(&heap[2*k+1], &heap[k])
+        heap.swapAt(2*k+1, k)
         sink(k: 2*k+1)
     }
     

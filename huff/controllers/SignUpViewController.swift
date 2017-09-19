@@ -98,7 +98,7 @@ class SignUpViewController: UIViewController {
         textfieldContainerStack.isUserInteractionEnabled = !halt
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 

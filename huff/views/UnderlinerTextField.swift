@@ -34,7 +34,7 @@ class UnderlinerTextField: UITextField {
         self.layer.addSublayer(bottomBorder)
         
         // change the color of the placeholder text color
-        attributedPlaceholder = NSMutableAttributedString(string: placeholder ?? "", attributes: [NSForegroundColorAttributeName: placeholderColor])
+        attributedPlaceholder = NSMutableAttributedString(string: placeholder ?? "", attributes: [NSAttributedStringKey.foregroundColor: placeholderColor])
     }
     
     // MARK: - overriding the default look

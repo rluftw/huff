@@ -84,7 +84,7 @@ class TweetsViewController: UIViewController {
         }
     }
     
-    func handleRefresh(_ refresh: UIRefreshControl) {
+    @objc func handleRefresh(_ refresh: UIRefreshControl) {
         self.view.isUserInteractionEnabled = false
         self.tweets.removeAll(keepingCapacity: false)
         self.tweetsTable.reloadData()

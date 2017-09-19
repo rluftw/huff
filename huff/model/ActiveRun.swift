@@ -93,7 +93,10 @@ class ActiveRun: CustomStringConvertible {
         guard let htmlString = htmlString else { return nil }
         guard let data = htmlString.data(using: .utf8) else { return nil }
         do {
-            return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return try NSAttributedString(data: data, options: [
+                .documentType: NSAttributedString.DocumentType.html,
+                .characterEncoding: String.Encoding.utf8.rawValue
+            ], documentAttributes: nil)
         } catch let error {
             print(error.localizedDescription)
             return nil

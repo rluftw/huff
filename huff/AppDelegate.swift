@@ -23,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // assign global appearance options
-        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Regular", size:10)!], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "RobotoMono-Bold", size:17)!,
-                                                             NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "RobotoMono-Regular", size:10)!], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "RobotoMono-Bold", size:17)!,
+                                                             NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         UIApplication.shared.statusBarStyle = .lightContent
         
         // configure firebase

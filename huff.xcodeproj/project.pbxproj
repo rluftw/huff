@@ -34,8 +34,6 @@
 		375686EF1DE4FC82004F2951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375686ED1DE4FC82004F2951 /* Main.storyboard */; };
 		375686F41DE4FC82004F2951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 375686F31DE4FC82004F2951 /* Assets.xcassets */; };
 		375686F71DE4FC82004F2951 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375686F51DE4FC82004F2951 /* LaunchScreen.storyboard */; };
-		375687021DE4FC83004F2951 /* huffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375687011DE4FC83004F2951 /* huffTests.swift */; };
-		3756870D1DE4FC83004F2951 /* huffUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756870C1DE4FC83004F2951 /* huffUITests.swift */; };
 		375687201DE4FD35004F2951 /* CurrentRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756871F1DE4FD35004F2951 /* CurrentRunViewController.swift */; };
 		375687241DE4FE44004F2951 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 375687221DE4FDFD004F2951 /* Roboto-Regular.ttf */; };
 		375687251DE4FE44004F2951 /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 375687231DE4FDFD004F2951 /* RobotoMono-Regular.ttf */; };
@@ -121,11 +119,7 @@
 		375686F61DE4FC82004F2951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		375686F81DE4FC82004F2951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		375686FD1DE4FC83004F2951 /* huffTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huffTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		375687011DE4FC83004F2951 /* huffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = huffTests.swift; sourceTree = "<group>"; };
-		375687031DE4FC83004F2951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		375687081DE4FC83004F2951 /* huffUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huffUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3756870C1DE4FC83004F2951 /* huffUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = huffUITests.swift; sourceTree = "<group>"; };
-		3756870E1DE4FC83004F2951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3756871F1DE4FD35004F2951 /* CurrentRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentRunViewController.swift; path = controllers/CurrentRunViewController.swift; sourceTree = "<group>"; };
 		375687221DE4FDFD004F2951 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "other/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		375687231DE4FDFD004F2951 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoMono-Regular.ttf"; path = "other/RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -223,8 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				375686E81DE4FC82004F2951 /* huff */,
-				375687001DE4FC83004F2951 /* huffTests */,
-				3756870B1DE4FC83004F2951 /* huffUITests */,
 				375686E71DE4FC82004F2951 /* Products */,
 				37FE51761DEA8A3B00152D35 /* Frameworks */,
 				EB4A3D6E0C1574749675699A /* Pods */,
@@ -257,24 +249,6 @@
 				3756871A1DE4FC89004F2951 /* supporting files */,
 			);
 			path = huff;
-			sourceTree = "<group>";
-		};
-		375687001DE4FC83004F2951 /* huffTests */ = {
-			isa = PBXGroup;
-			children = (
-				375687011DE4FC83004F2951 /* huffTests.swift */,
-				375687031DE4FC83004F2951 /* Info.plist */,
-			);
-			path = huffTests;
-			sourceTree = "<group>";
-		};
-		3756870B1DE4FC83004F2951 /* huffUITests */ = {
-			isa = PBXGroup;
-			children = (
-				3756870C1DE4FC83004F2951 /* huffUITests.swift */,
-				3756870E1DE4FC83004F2951 /* Info.plist */,
-			);
-			path = huffUITests;
 			sourceTree = "<group>";
 		};
 		3756871A1DE4FC89004F2951 /* supporting files */ = {
@@ -463,13 +437,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Xing Hui Lu";
 				TargetAttributes = {
 					375686E51DE4FC82004F2951 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 462GCHQH93;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -482,11 +456,13 @@
 					};
 					375686FC1DE4FC83004F2951 = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 375686E51DE4FC82004F2951;
 					};
 					375687071DE4FC83004F2951 = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 375686E51DE4FC82004F2951;
 					};
@@ -651,7 +627,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				375687021DE4FC83004F2951 /* huffTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,7 +634,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3756870D1DE4FC83004F2951 /* huffUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,7 +681,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -715,7 +691,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -757,7 +737,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -765,7 +747,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -810,7 +796,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "huff/huff-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -832,7 +819,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.huff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "huff/huff-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -845,7 +833,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/huff.app/huff";
 			};
 			name = Debug;
@@ -859,7 +848,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/huff.app/huff";
 			};
 			name = Release;
@@ -872,7 +862,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huffUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = huff;
 			};
 			name = Debug;
@@ -885,7 +876,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huffUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = huff;
 			};
 			name = Release;

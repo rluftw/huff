@@ -11,7 +11,7 @@ import FirebaseAuth
 import GoogleSignIn
 import Firebase
 
-class MyProfileViewController: UIViewController {
+@objc class MyProfileViewController: UIViewController {
     
     var profile: Profile?
     var runAddHandle: DatabaseHandle?
@@ -90,7 +90,7 @@ class MyProfileViewController: UIViewController {
         }
     }
     
-    func showOptions(gesture: UILongPressGestureRecognizer) {
+    @objc func showOptions(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
             // 1. extract the cell and object associated
