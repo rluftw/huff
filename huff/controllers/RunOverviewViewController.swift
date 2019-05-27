@@ -85,7 +85,7 @@ class RunOverviewViewController: UIViewController, MKMapViewDelegate {
         
         if self.runCollection.currentRun.locations.count > 0 {
             mapView.region = mapRegion!
-            mapView.add(polyLine!)
+            mapView.addOverlay(polyLine!)
         }
     }
     

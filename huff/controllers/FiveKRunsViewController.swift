@@ -15,7 +15,7 @@ class FiveKRunsViewController: UIViewController {
         didSet {
             fiveKTable.delegate = self
             fiveKTable.dataSource = self
-            fiveKTable.rowHeight = UITableViewAutomaticDimension
+            fiveKTable.rowHeight = UITableView.automaticDimension
             fiveKTable.estimatedRowHeight = 150
         }
     }

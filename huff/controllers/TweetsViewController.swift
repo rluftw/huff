@@ -28,7 +28,7 @@ class TweetsViewController: UIViewController {
         didSet {
             tweetsTable.dataSource = self
             tweetsTable.delegate = self
-            tweetsTable.rowHeight = UITableViewAutomaticDimension
+            tweetsTable.rowHeight = UITableView.automaticDimension
             tweetsTable.estimatedRowHeight = 150
         }
     }

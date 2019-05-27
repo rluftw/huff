@@ -30,7 +30,7 @@ class SignUpViewController: UIViewController {
             return false
         }
         // verify that the password is at least 8 characters long
-        guard password.characters.count >= 8 else {
+        guard password.count >= 8 else {
             giveWarning(title: "Sign Up", message: "Think of a better password, one that's 8 characters or longer")
             return false
         }

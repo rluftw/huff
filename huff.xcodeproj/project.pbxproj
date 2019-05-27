@@ -67,23 +67,6 @@
 		F8DF945FB864627E096D82DC /* Pods_huff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5D1E3936C8DB0FCF1E3A56 /* Pods_huff.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		375686FE1DE4FC83004F2951 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 375686DE1DE4FC82004F2951 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 375686E51DE4FC82004F2951;
-			remoteInfo = huff;
-		};
-		375687091DE4FC83004F2951 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 375686DE1DE4FC82004F2951 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 375686E51DE4FC82004F2951;
-			remoteInfo = huff;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		370358161E12ADD20098593B /* MyProfileViewControllerTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyProfileViewControllerTableDelegate.swift; path = controllers/MyProfileViewControllerTableDelegate.swift; sourceTree = "<group>"; };
 		3703581A1E12B4530098593B /* NoResultsTableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoResultsTableViewBackground.swift; path = views/NoResultsTableViewBackground.swift; sourceTree = "<group>"; };
@@ -118,8 +101,6 @@
 		375686F31DE4FC82004F2951 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		375686F61DE4FC82004F2951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		375686F81DE4FC82004F2951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		375686FD1DE4FC83004F2951 /* huffTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huffTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		375687081DE4FC83004F2951 /* huffUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huffUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3756871F1DE4FD35004F2951 /* CurrentRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentRunViewController.swift; path = controllers/CurrentRunViewController.swift; sourceTree = "<group>"; };
 		375687221DE4FDFD004F2951 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "other/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		375687231DE4FDFD004F2951 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoMono-Regular.ttf"; path = "other/RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -164,20 +145,6 @@
 				37FE51781DEA8A3B00152D35 /* Security.framework in Frameworks */,
 				F8DF945FB864627E096D82DC /* Pods_huff.framework in Frameworks */,
 				3775204A1DFB9C5300027D89 /* FBSDKLoginKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		375686FA1DE4FC83004F2951 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		375687051DE4FC83004F2951 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,8 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				375686E61DE4FC82004F2951 /* huff.app */,
-				375686FD1DE4FC83004F2951 /* huffTests.xctest */,
-				375687081DE4FC83004F2951 /* huffUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -394,42 +359,6 @@
 			productReference = 375686E61DE4FC82004F2951 /* huff.app */;
 			productType = "com.apple.product-type.application";
 		};
-		375686FC1DE4FC83004F2951 /* huffTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 375687141DE4FC83004F2951 /* Build configuration list for PBXNativeTarget "huffTests" */;
-			buildPhases = (
-				375686F91DE4FC83004F2951 /* Sources */,
-				375686FA1DE4FC83004F2951 /* Frameworks */,
-				375686FB1DE4FC83004F2951 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				375686FF1DE4FC83004F2951 /* PBXTargetDependency */,
-			);
-			name = huffTests;
-			productName = huffTests;
-			productReference = 375686FD1DE4FC83004F2951 /* huffTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		375687071DE4FC83004F2951 /* huffUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 375687171DE4FC83004F2951 /* Build configuration list for PBXNativeTarget "huffUITests" */;
-			buildPhases = (
-				375687041DE4FC83004F2951 /* Sources */,
-				375687051DE4FC83004F2951 /* Frameworks */,
-				375687061DE4FC83004F2951 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3756870A1DE4FC83004F2951 /* PBXTargetDependency */,
-			);
-			name = huffUITests;
-			productName = huffUITests;
-			productReference = 375687081DE4FC83004F2951 /* huffUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -454,23 +383,11 @@
 							};
 						};
 					};
-					375686FC1DE4FC83004F2951 = {
-						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 375686E51DE4FC82004F2951;
-					};
-					375687071DE4FC83004F2951 = {
-						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 375686E51DE4FC82004F2951;
-					};
 				};
 			};
 			buildConfigurationList = 375686E11DE4FC82004F2951 /* Build configuration list for PBXProject "huff" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -482,8 +399,6 @@
 			projectRoot = "";
 			targets = (
 				375686E51DE4FC82004F2951 /* huff */,
-				375686FC1DE4FC83004F2951 /* huffTests */,
-				375687071DE4FC83004F2951 /* huffUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -504,20 +419,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		375686FB1DE4FC83004F2951 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		375687061DE4FC83004F2951 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -527,7 +428,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-huff/Pods-huff-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-huff/Pods-huff-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -554,7 +455,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-huff/Pods-huff-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-huff/Pods-huff-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		37305D75FE1FA524B08ACFA8 /* [CP] Check Pods Manifest.lock */ = {
@@ -581,7 +482,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-huff/Pods-huff-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-huff/Pods-huff-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
@@ -602,7 +503,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-huff/Pods-huff-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-huff/Pods-huff-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -662,34 +563,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		375686F91DE4FC83004F2951 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		375687041DE4FC83004F2951 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		375686FF1DE4FC83004F2951 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 375686E51DE4FC82004F2951 /* huff */;
-			targetProxy = 375686FE1DE4FC83004F2951 /* PBXContainerItemProxy */;
-		};
-		3756870A1DE4FC83004F2951 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 375686E51DE4FC82004F2951 /* huff */;
-			targetProxy = 375687091DE4FC83004F2951 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		375686ED1DE4FC82004F2951 /* Main.storyboard */ = {
@@ -766,6 +640,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -816,6 +691,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -840,7 +716,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "huff/huff-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -863,65 +739,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "huff/huff-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-		375687151DE4FC83004F2951 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = huffTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huffTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/huff.app/huff";
-			};
-			name = Debug;
-		};
-		375687161DE4FC83004F2951 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = huffTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huffTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/huff.app/huff";
-			};
-			name = Release;
-		};
-		375687181DE4FC83004F2951 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = huffUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huffUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = huff;
-			};
-			name = Debug;
-		};
-		375687191DE4FC83004F2951 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = huffUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.richurd.com.huffUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = huff;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -942,24 +760,6 @@
 			buildConfigurations = (
 				375687121DE4FC83004F2951 /* Debug */,
 				375687131DE4FC83004F2951 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		375687141DE4FC83004F2951 /* Build configuration list for PBXNativeTarget "huffTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				375687151DE4FC83004F2951 /* Debug */,
-				375687161DE4FC83004F2951 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		375687171DE4FC83004F2951 /* Build configuration list for PBXNativeTarget "huffUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				375687181DE4FC83004F2951 /* Debug */,
-				375687191DE4FC83004F2951 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

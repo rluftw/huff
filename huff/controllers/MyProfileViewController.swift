@@ -27,7 +27,7 @@ import Firebase
         didSet {
             favoritedActiveRuns.delegate = self
             favoritedActiveRuns.dataSource = self
-            favoritedActiveRuns.rowHeight = UITableViewAutomaticDimension
+            favoritedActiveRuns.rowHeight = UITableView.automaticDimension
             favoritedActiveRuns.estimatedRowHeight = 150
         }
     }
