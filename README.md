@@ -1,5 +1,7 @@
 # huff
 
+**All keys have been deactivated for the sake of security.**
+
 huff is a simply a running app that focuses on getting a user to run in a community. The app has several features that enables the user to take actions such as register for 5K events. In order to run the app, you'll need the following:
 
         1. Twitter Consumer Key and Secret
